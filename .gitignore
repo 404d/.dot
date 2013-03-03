@@ -1,0 +1,6 @@
+.DS_Store
+.netrwhist
+*.log
+*.stackdump
+*.swp
+away.log
