@@ -19,6 +19,9 @@ nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
 source ~/.dot/.vim/eevee.vim
 
+set norelativenumber
+set number
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
