@@ -16,6 +16,8 @@ source $HOME/.zsh/nowplaying/shell.zsh
 source $HOME/.zsh/git-prompt/zshrc.sh
 source $HOME/.zsh/virtualenv.zsh
 
+source $HOME/.dot/.sh/minecraft.sh
+
 source $HOME/.dot/.dot/updater.zsh
 
 export GITWS="/Git/Workspace"
