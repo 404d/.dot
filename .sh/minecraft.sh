@@ -37,7 +37,7 @@ function minecraft {
         if [[ "$2" != "" ]]; then
             source="$2"
         fi
-        rm "$source/META-INF/MOJANG_C.*"
+        rm $source/META-INF/MOJANG_C.*
         jar uf "$MCPATH/bin/minecraft.jar" "$source"
     fi
 }
