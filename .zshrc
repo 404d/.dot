@@ -20,7 +20,7 @@ source $HOME/.dot/.sh/minecraft.sh
 
 source $HOME/.dot/.dot/updater.zsh
 
-export GITWS="$HOME/Development/Git"
+export GITWS="$HOME/Development/Git/Workspace"
 export ZSH_THEME_GIT_PROMPT_NOCACHE="1"
 alias tmux='tmux -2'
 
