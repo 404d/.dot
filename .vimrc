@@ -16,6 +16,9 @@ source ~/.dot/.vim/eevee.vim
 set norelativenumber
 set number
 
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%>80v.\+/
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
