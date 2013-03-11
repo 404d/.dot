@@ -1,7 +1,7 @@
 #!/bin/sh
 cd $HOME/.dot
 git submodule init
-git submodule update
+git submodule update --recursive
 cd $HOME
 function confirm {
     echo "File or folder already exists: $HOME/$1"
