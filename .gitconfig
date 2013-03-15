@@ -37,6 +37,7 @@
     co = checkout
     df = diff
     lg = log --oneline --graph --decorate
+    yoink = pull
 
 [push]
     default = current
