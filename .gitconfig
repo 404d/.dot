@@ -38,6 +38,7 @@
     df = diff
     lg = log --oneline --graph --decorate
     yoink = pull
+    pusj = pusj
 
 [push]
     default = current
