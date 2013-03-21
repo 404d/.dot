@@ -46,8 +46,8 @@ chatnets = {
     max_msgs = "3";
     max_whois = "1";
     nick = "_404`d";
-    username = "404d";
-    realname = "YOU'LL NEVER KNOW";
+    username = "r26s54";
+    realname = "Simen Lybekk";
   };
   Undernet = {
     type = "IRC";
