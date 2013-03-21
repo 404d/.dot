@@ -24,6 +24,7 @@ export GITWS="$HOME/Development/Git/Workspace"
 export ZSH_THEME_GIT_PROMPT_NOCACHE="1"
 alias tmux='tmux -2'
 alias yoink='git pull'
+alias pusj='git push'       
 
 PROMPT='%{%(!.$fg_bold[red].$fg[178])%}%n@%m%{$reset_color%} %{$fg[202]%}${${PWD/#$GITWS/±}/#$HOME/~}%{$reset_color%}$(git_super_status) %(!.#.$) '
 
