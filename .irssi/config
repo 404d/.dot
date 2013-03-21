@@ -285,6 +285,8 @@ settings = {
     autolog = "yes";
     autolog_path = "~/irclogs/$tag/$0.%y-%m-%d.log";
     theme = "powerline";
+    bell_beeps = "yes";
+    beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
   };
   "perl/core/scripts" = { usercount_show_ircops = "yes"; };
 };
