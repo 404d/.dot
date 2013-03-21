@@ -13,7 +13,7 @@ function .dot() {
 function dotdot-usage() {
 echo "    .dot manager
     ……………………………………………………………………………
-    upgrade     updates and reloads your dotfiles
+    update     updates and reloads your dotfiles
     ……………………………………………………………………………
       .dot © Simen Lybekk 2013"
 }
