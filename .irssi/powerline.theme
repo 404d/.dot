@@ -274,7 +274,8 @@ abstracts = {
   prompt = "$* ⮁ ";
 
   sb = "$*%N";
-  sbmode = " ⮁ "; #"(%c+%n$*)";
+  sbmode = " ⮁ ";
+  #"(%c+%n$*)";
   sbaway = "%GzZzZ%n ⮁ ";
   sbservertag = ":$0 (^X)";
   sbnickmode = "%n$0";
