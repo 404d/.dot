@@ -160,6 +160,9 @@ aliases = {
   ATAG = "WINDOW SERVER";
   UNSET = "set -clear";
   RESET = "set -default";
+  close = "wc $*";
+  window_close = "wc $*";
+  close_window = "wc $*";
 };
 
 statusbar = {
