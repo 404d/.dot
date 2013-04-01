@@ -291,6 +291,11 @@ settings = {
     bell_beeps = "yes";
     beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
   };
-  "perl/core/scripts" = { usercount_show_ircops = "yes"; };
+  "perl/core/scripts" = {
+    usercount_show_ircops = "yes";
+    neat_colorize = "yes";
+    neat_right_mode = "no";
+    neat_allow_shrinking = "yes";
+  };
 };
 logs = { };
