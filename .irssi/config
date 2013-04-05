@@ -29,6 +29,15 @@ servers = (
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "10.0.1.161";
+    chatnet = "Gameshaft";
+    port = "6667";
+    use_ssl = "no";
+    ssl_verify = "no";
+    autoconnect = "yes";
   }
 );
 
@@ -98,13 +107,7 @@ chatnets = {
     max_whois = "30";
   };
   SILC = { type = "SILC"; };
-  "Gameshaft-BNC" = { type = "IRC"; };
-  gameshaft = {
-    type = "IRC";
-    nick = "_404`d";
-    username = "404d";
-    realname = "YOU'LL NEVER KNOW";
-  };
+  Gameshaft = { type = "IRC"; };
 };
 
 channels = (
@@ -223,10 +226,11 @@ statusbar = {
         user = { };
         window = { };
         window_empty = { };
-        lag = { priority = "-1"; };
-        act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
+        usercount = { };
+        lag = { };
+        act = { };
       };
     };
 
@@ -269,9 +273,9 @@ statusbar = {
       visible = "always";
       items = {
         topicbarstart = { priority = "100"; };
+        topicbarend = { priority = "100"; alignment = "right"; };
         topic = { };
         topic_empty = { };
-        topicbarend = { priority = "100"; alignment = "right"; };
       };
     };
   };
@@ -291,6 +295,13 @@ settings = {
     bell_beeps = "yes";
     beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
   };
-  "perl/core/scripts" = { usercount_show_ircops = "yes"; };
+  "perl/core/scripts" = {
+    usercount_show_ircops = "yes";
+    neat_colorize = "yes";
+    neat_right_mode = "yes";
+    neat_allow_shrinking = "yes";
+    twtopic_instruct = "no";
+  };
 };
 logs = { };
+hilights = ( { text = "404d"; nick = "yes"; word = "yes"; } );

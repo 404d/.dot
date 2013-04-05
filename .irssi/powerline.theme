@@ -293,3 +293,23 @@ abstracts = {
   # hilight with specified color, $0 = color, $1 = text
   sb_act_hilight_color = "$0$1-%n";
 };
+formats = {
+  "fe-common/core" = {
+    own_msg = "{ownmsgnick $2 {ownnick $[-9]0}}$1";
+    own_msg_channel = "{ownmsgnick $3 {ownnick $[-9]0}{msgchannel $1}}$2";
+    own_msg_private_query = "{ownprivmsgnick {ownprivnick $[-9]2}}$1";
+    pubmsg_me = "{pubmsgmenick $2 {menick $[-9]0}}$1";
+    pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-9]0}{msgchannel $1}}$2";
+    pubmsg_hilight = "{pubmsghinick $0 $3 $[-9]1%n}$2";
+    pubmsg_hilight_channel = "{pubmsghinick $0 $4 $[-9]1{msgchannel $2}}$3";
+    pubmsg = "{pubmsgnick $2 {pubnick %w$[-9]0}}$1";
+    pubmsg_channel = "{pubmsgnick $2 {pubnick %w$[-9]0}}$1";
+    msg_private_query = "{privmsgnick $[-9]0}$2";
+  };
+  "fe-common/irc" = {
+    own_action = "{ownaction $[-7]0} $1";
+    action_private = "{pvtaction $[-7]0}$1";
+    action_private_query = "{pvtaction_query $[-7]0} $2";
+    action_public = "{pubaction $[-7]0}$1";
+  };
+};
