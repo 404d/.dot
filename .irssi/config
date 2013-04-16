@@ -305,6 +305,3 @@ settings = {
 };
 logs = { };
 hilights = ( { text = "404d"; nick = "yes"; word = "yes"; } );
-notifies = {
-  "#agentX" = { ircnets = ( "The", "trigger", ".fml", "is", "now", "available" ); };
-};
