@@ -26,8 +26,8 @@ servers = (
   {
     address = "irc.gameshaft.net";
     chatnet = "Gameshaft";
-    port = "6667";
-    use_ssl = "no";
+    port = "6697";
+    use_ssl = "yes";
     ssl_verify = "no";
     autoconnect = "yes";
   },
@@ -305,3 +305,6 @@ settings = {
 };
 logs = { };
 hilights = ( { text = "404d"; nick = "yes"; word = "yes"; } );
+notifies = {
+  "#agentX" = { ircnets = ( "The", "trigger", ".fml", "is", "now", "available" ); };
+};
