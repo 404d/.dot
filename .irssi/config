@@ -222,7 +222,6 @@ statusbar = {
       # list of items in statusbar in the display order
       items = {
         barstart = { priority = "100"; };
-        time = { };
         user = { };
         window = { };
         window_empty = { };
@@ -298,9 +297,12 @@ settings = {
   "perl/core/scripts" = {
     usercount_show_ircops = "yes";
     neat_colorize = "yes";
-    neat_right_mode = "yes";
+    neat_right_mode = "no";
     neat_allow_shrinking = "yes";
     twtopic_instruct = "no";
+    neat_left_actions = "yes";
+    neat_left_messages = "yes";
+    neat_maxlength = "0";
   };
 };
 logs = { };
