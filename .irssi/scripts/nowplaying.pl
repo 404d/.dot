@@ -16,7 +16,7 @@ $VERSION = '0.1';
 $interval = 60;
 
 $format_base = "%(meta) \x0314{\x0315%(playtime) %(status) %(duration)\x0314 | \x0314%(progress)%\x0314}";
-$format_tvshow = "\x0314{\x0315%(showtitle) \x0314S\x0315%(season) \x0314E\x0315%(episode)\x0314} {\x0315%(episodetitle)\x0314}";
+$format_tvshow = "\x0314{\x0315%(showtitle) \x0314S\x0315%(season) \x0314E\x0315%(episode)\x0314}";# {\x0315%(episodetitle)\x0314}";
 $format_audio = "\x0311%(title) \x0310%(artist) \x0315| \x0313%(album) \x0306Track %(trackno)";
 $format_movie = "\x0311%(title)";
 $color_status_played_fg = "15";
