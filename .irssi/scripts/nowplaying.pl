@@ -13,16 +13,16 @@ $VERSION = '0.1';
     license     => 'CC 3.0 BY-NC-SA',
 );
 
-$interval = 1;
+$interval = 60;
 
-$format_base = "[ %(meta)\x0315 ] « %(status)\x03 \x0311%(progress)% - %(playtime) / %(duration)\x0315 » %(player)";
-$format_tvshow = "\x0311%(showtitle) \x0310S\x0311%(season) \x0310E\x0311%(episode)\x0315 | \x0313%(episodetitle)";
+$format_base = "%(meta) \x0314{\x0315%(playtime) %(status) %(duration)\x0314 | \x0314%(progress)%\x0314}";
+$format_tvshow = "\x0314{\x0315%(showtitle) \x0314S\x0315%(season) \x0314E\x0315%(episode)\x0314} {\x0315%(episodetitle)\x0314}";
 $format_audio = "\x0311%(title) \x0310%(artist) \x0315| \x0313%(album) \x0306Track %(trackno)";
 $format_movie = "\x0311%(title)";
-$color_status_played_fg = "11";
-$color_status_played_bg = "11";
-$color_status_unplayed_fg = "10";
-$color_status_unplayed_bg = "10";
+$color_status_played_fg = "15";
+$color_status_played_bg = "15";
+$color_status_unplayed_fg = "14";
+$color_status_unplayed_bg = "14";
 $length_status = "20";
 $char_status_played = "-";
 $char_status_unplayed = "-";
@@ -45,6 +45,7 @@ sub format_base {
 }
 
 sub formater {
+	print "checking";
     my $data = decode_json(qx'python ~/.dot/.zsh/nowplaying/nowplaying.py');
     my $currentMediaUrl;
     my $status;
@@ -84,12 +85,12 @@ sub progbar {
     my ($poop, $percent, $pieces, $playedpieces);
     $percent = $_[0];
     $pieces = ( 100 / $length_status);
-    $poop = "\x03" . $color_status_played_fg . "," . $color_status_played_bg;
+    $poop = "\x03" . $color_status_played_fg;# . "," . $color_status_played_bg;
     $playedpieces = floor( $percent / $pieces );
     for($i = 0; $i < $playedpieces; $i++) {
         $poop = $poop . $char_status_played;
     }
-    $poop = $poop . "\x03" . $color_status_unplayed_fg . "," . $color_status_unplayed_bg;
+    $poop = $poop . "\x03" . $color_status_unplayed_fg;# . "," . $color_status_unplayed_bg;
     for($i = ($length_status - $playedpieces); $i > 1; $i--) {
         $poop = $poop . $char_status_unplayed;
     }
@@ -97,7 +98,13 @@ sub progbar {
 }
 
 sub announce {
-    print $_[0];
+    my $msg = $_[0];
+    foreach(servers()) {
+        my $server = $_;
+        if ($server->{"tag"} eq "Gameshaft") {
+            $server->command('action #Gameshaft '.$msg);
+        }
+    }
 }
 
 command_bind 'np' => sub {
