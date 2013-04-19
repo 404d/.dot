@@ -45,7 +45,6 @@ sub format_base {
 }
 
 sub formater {
-	print "checking";
     my $data = decode_json(qx'python ~/.dot/.zsh/nowplaying/nowplaying.py');
     my $currentMediaUrl;
     my $status;
