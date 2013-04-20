@@ -62,6 +62,7 @@ def getData_Plex(target):
         return None
 
 targets = [
+        ("10.0.1.32", "plex"),
         ("10.0.1.7", "plex"),
         ("10.0.1.21", "plex"),
     ]
