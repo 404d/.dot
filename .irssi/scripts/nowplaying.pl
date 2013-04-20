@@ -75,7 +75,7 @@ sub formater {
         }
         $currentMediaUrl = $data->{'Filename'};
     }
-    if ( $status && $data->{'Changed'} eq "True" && $currentMediaUrl ne $lastMediaUrl ) {
+    if ( $status && $data->{'Changed'} eq "True" && $currentMediaUrl ne $lastMediaUrl && $data->{'Title'} ne "" ) {
         announce($status);
     }
 }
