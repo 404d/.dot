@@ -25,6 +25,18 @@ set number
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%>80v.\+/
 
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
+set laststatus=2
+set noshowmode
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
