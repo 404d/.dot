@@ -23,6 +23,7 @@ alias yoink='git pull'
 alias pusj='git push'       
 
 PROMPT='%{%(!.$fg_bold[red].$fg[178])%}%n@%m%{$reset_color%} %{$fg[202]%}${${PWD/#$GITWS/±}/#$HOME/~}%{$reset_color%}$(git_super_status) %(!.#.$) '
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 ### Machine-specific extras
 
 if [[ -r $HOME/.zlocal ]]; then
