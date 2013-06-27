@@ -13,9 +13,10 @@ let g:Powerline_symbols = 'fancy'
 set shiftwidth=4 tabstop=4
 nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
-if system("uname") == "Darwin\n"
-    set clipboard=unnamed
-endif
+" This doesn't work with tmux
+"if system("uname") == "Darwin\n"
+"    set clipboard=unnamed
+"endif
 
 source ~/.dot/.vim/eevee.vim
 
