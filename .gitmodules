@@ -9,4 +9,16 @@
 	url = https://github.com/tpope/vim-speeddating.git
 [submodule "powerline"]
 	path = powerline
-	url = git@github.com:Lokaltog/powerline.git
+	url = https://github.com/Lokaltog/powerline.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/tagbar.vim"]
+	path = .vim/bundle/tagbar.vim
+	url = https://github.com/majutsushi/tagbar.git
+[submodule ".vim/bundle/zencoding-vim"]
+	path = .vim/bundle/zencoding-vim
+	url = https://github.com/mattn/zencoding-vim.git

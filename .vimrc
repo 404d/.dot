@@ -4,6 +4,7 @@ set encoding=utf-8
 filetype off
 
 filetype plugin indent on 
+au BufNewFile,BufRead *.mako set filetype=mako
 
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
@@ -38,6 +39,16 @@ endif
 set laststatus=2
 set noshowmode
 
+autocmd vimenter * TagbarOpen
+let g:tagbar_autoshowtag = 1
+imap <silent> <F9> <C-[>:TagbarToggle<CR>
+nmap <silent> <F9> :TagbarToggle<CR>
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd vimenter * if !argc() | NERDTree | endif
+let NERDTreeIgnore = ['\.pyc$']
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
+
