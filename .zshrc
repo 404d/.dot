@@ -26,6 +26,8 @@ PROMPT='%{%(!.$fg_bold[red].$fg[178])%}%n@%m%{$reset_color%} %{$fg[202]%}${${PWD
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 ### Machine-specific extras
 
+VIRTUAL_ENV_DISABLE_PROMPT=true
+
 if [[ -r $HOME/.zlocal ]]; then
     source $HOME/.zlocal
 fi

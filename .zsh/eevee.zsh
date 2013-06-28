@@ -126,7 +126,7 @@ function title {
     # I don't really need to title every single one with the machine name.
     # On the other hand, if I'm not logged in as me (but, e.g., root), I'd
     # certainly like to know that!
-    if [[ $USER != 'eevee' && $USER != 'amunroe' ]]; then
+    if [[ $USER != '404d' && $USER != 'simen4000' ]]; then
         prefix="[$USER] "
     fi
     # Set screen window title
@@ -144,7 +144,7 @@ function title {
         prefix=''
     fi
     # If we're showing host and I'm not under my usual username, prepend it
-    if [[ $prefix != '' && $USER != 'eevee' && $USER != 'amunroe' ]]; then
+    if [[ $prefix != '' && $USER != '404d' && $USER != 'simen4000' ]]; then
         prefix="$USER@$prefix"
     fi
     # Wrap it in brackets
