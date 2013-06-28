@@ -15,7 +15,7 @@ $VERSION = '0.20';
 );
 
 our $timer;
-our $interval = 1;
+our $interval = 60;
 our $prevPlayData = "";
 our $forced = 0;
 our ($msgTarget,$msgServer);
