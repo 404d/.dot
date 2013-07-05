@@ -29,12 +29,12 @@ P_USER="%n"
 if [[ -n "$SSH_CONNECTION" ]]; then
     P_HOST="%m"
 fi
-P_COMP=" $P_USER"'$([ -n "$P_USER" ] && [ -n "$P_HOST" ] && echo "  ")'"$P_HOST "
+P_COMP="%{$fg[000]$bg[007]%} $P_USER"'$([ -n "$P_USER" ] && [ -n "$P_HOST" ] && echo "  ")'"$P_HOST "
 
 if [[ -z "$VIRTUAL_ENV" ]]; then
     VIRTUAL_ENV=" "
 fi
-PROMPT="$P_COMP"'$([ -n "$P_COMP" ] && echo "") $([ -n "$VIRTUAL_ENV" ] && [ "$VIRTUAL_ENV" != " " ] && [ `pwd` != $VIRTUAL_ENV ]&& echo "⑇ "$(basename "$VIRTUAL_ENV")"  ")${${${PWD/#$VIRTUAL_ENV/⑇ $(basename "$VIRTUAL_ENV")}/#$GITWS/±}/#$HOME/~}$(git_super_status)  '
+PROMPT="$P_COMP"'$([ -n "$P_COMP" ] && echo "%{$reset_color$fg[007]%} %{$reset_color$fg[000]$bg[031]%}%{$fg[117]%}") $([ -n "$VIRTUAL_ENV" ] && [ -z "e" ] && [ "$VIRTUAL_ENV" != " " ] && [ `pwd` != $VIRTUAL_ENV ]&& echo "⑇ "$(basename "$VIRTUAL_ENV")"  ")${${${PWD/#$VIRTUAL_ENV/⑇ $(basename "$VIRTUAL_ENV")}/#$GITWS/±}/#$HOME/~}$(git_super_status) %{$reset_color$fg[031]%}%{$reset_color%} '
 PS1=$PROMPT
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 ### Machine-specific extras
