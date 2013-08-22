@@ -51,6 +51,21 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd vimenter * if !argc() | NERDTree | endif
 let NERDTreeIgnore = ['\.pyc$']
 
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3',
+        \ 'l:Heading_L4',
+        \ 'm:Heading_L5',
+        \ 'n:Heading_L6'
+    \ ]
+    \ }
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
