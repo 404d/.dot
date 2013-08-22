@@ -44,6 +44,9 @@ let g:tagbar_autoshowtag = 1
 imap <silent> <F9> <C-[>:TagbarToggle<CR>
 nmap <silent> <F9> :TagbarToggle<CR>
 
+let g:gundo_right = 1
+nnoremap <F5> :GundoToggle<CR>
+
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd vimenter * if !argc() | NERDTree | endif
 let NERDTreeIgnore = ['\.pyc$']
