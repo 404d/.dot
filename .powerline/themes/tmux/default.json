@@ -4,6 +4,9 @@
 	},
 	"segments": {
 		"right": [
+            {
+                "name": "uptime"
+            },
 			{
 				"name": "date"
 			},
