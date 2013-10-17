@@ -1,7 +1,6 @@
 set laststatus=2
 set encoding=utf-8
 
-filetype off
 
 filetype plugin indent on 
 au BufNewFile,BufRead *.mako set filetype=mako
@@ -65,6 +64,14 @@ let g:tagbar_type_markdown = {
         \ 'n:Heading_L6'
     \ ]
     \ }
+""
+
+" Vim-GitGutter
+nmap gh <Plug>GitGutterNextHunk
+nmap gH <Plug>GitGutterPrevHunk
+nmap <silent> <F10> :GitGutterToggle<CR>
+let g:gitgutter_highlight_lines = 1
+""
 
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
