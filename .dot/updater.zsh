@@ -31,7 +31,7 @@ function dotdot-update() {
     if [[ $tmp == "yes" ]]; then
         git merge origin/master
         cd $HOME
-        sh $HOME/.dot/.dot/prepare.sh
+        zsh $HOME/.dot/.dot/prepare.sh
         source $HOME/.zshrc
     fi
     cd $origDir

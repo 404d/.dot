@@ -32,7 +32,7 @@ function dotdot-update() {
     if [[ $tmp == "yes" ]]; then
         git merge origin/master
         cd $HOME
-        sh $HOME/.dot/.dot/prepare.sh
+        bash $HOME/.dot/.dot/prepare.sh
         source $HOME/.bash_profile
     fi
     cd $origDir

@@ -98,10 +98,7 @@ set foldlevel=99
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
-" Pathogen; load all bundles
-filetype off  " uh, necessary
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" Simen Edit: Pathogen moved to ~/.vim/config/pre/pathogen.vim
 
 " SuperTab; use omni completion by default
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"

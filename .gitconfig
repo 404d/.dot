@@ -7,6 +7,7 @@
 
 [merge]
     conflictstyle = diff3
+	tool = vimdiff
 
 [color]
     ui = true
@@ -50,7 +51,7 @@
 	prompt = false
 
 [diff]
-	tool = Kaleidoscope
+	tool = vimdiff
 
 [mergetool]
 	keepBackup = true
