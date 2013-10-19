@@ -23,9 +23,7 @@ function dotdot-update() {
     cd $HOME/.dot
     echo "± FETCHING ±"
     git fetch
-    echo "± LOG - HEAD ±"
-    git lg HEAD..origin/master
-    echo "± LOG END - HEAD ±"
+    git lg -p HEAD..origin/master | les
     tmp=
     echo -n "Do you want to update? (yes to continue) "
     read tmp

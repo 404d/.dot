@@ -23,9 +23,7 @@ function dotdot-update() {
     cd $HOME/.dot
     echo "$fg_bold[blue]± FETCHING ±$reset_color"
     git fetch
-    echo "$fg_bold[green]± LOG - HEAD ±$reset_color"
-    git lg HEAD..origin/master
-    echo "$fg_bold[red]± LOG END - HEAD ±$reset_color"
+    git lg -p HEAD..origin/master | less
     tmp=
     vared -p "Do you want to update? (yes to continue) " tmp
     if [[ $tmp == "yes" ]]; then
