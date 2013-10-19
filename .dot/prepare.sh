@@ -2,17 +2,17 @@
 cd $HOME/.dot
 git submodule update --init --recursive
 cd $HOME
-function confirm {
+confirm() {
     echo "File or folder already exists: $HOME/$1"
     echo "Replace? (Y/n)"
     read CONFIRMATION
-    if [ $CONFIRMATION == "Y" ]; then
+    if [ $CONFIRMATION = "Y" ]; then
         echo "Replacing $1";
         rm -rf $HOME/$1
         ln -s $HOME/.dot/$1
     fi
 }
-function lnk {
+lnk() {
     if [ -h $HOME/$1 ]; then
         echo "Skipping $1";
     elif [ -s $HOME/$1 ]; then
@@ -27,7 +27,7 @@ function lnk {
     fi
 }
 
-function lnkc {
+lnkc() {
     if [ -h $2 ]; then
         echo "Skipping $2";
     elif [ -s $2 ]; then
