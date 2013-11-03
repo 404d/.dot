@@ -1,5 +1,5 @@
 " Tagbar
-autocmd vimenter * TagbarOpen
+autocmd BufEnter * nested :call tagbar#autoopen(0)
 let g:tagbar_autoshowtag = 1
 imap <silent> <F9> <C-[>:TagbarToggle<CR>
 nmap <silent> <F9> :TagbarToggle<CR>
