@@ -1,7 +1,7 @@
 " Tabs
 nnoremap tn :tabnew<CR>
-nnoremap w :tabp<CR>
-nnoremap e :tabp<CR>
+nnoremap tw :tabp<CR>
+nnoremap te :tabp<CR>
 """
 
 " Split navigation
