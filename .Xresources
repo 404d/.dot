@@ -1,0 +1,7 @@
+URxvt*scrollBar: false
+URxvt*background: rgba:0a00/2000/2c00/ac00
+URxvt*foreground: rgb:ffff/ffff/ffff
+urxvt*font: xft:Inconsolata\ for\ Powerline:pixelsize=12,xft:Arial\ Unicode\ MS:pixelsize=12,xft:Apple\ Symbols:pixelsize=12
+URxvt*depth: 32
+URxvt*internalBorder: 0
+URxvt*borderLess: false

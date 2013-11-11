@@ -45,6 +45,7 @@ lnkc() {
 lnk .bash
 lnk .bash_profile
 lnk .gitconfig
+lnk .i3
 lnk .irssi
 lnk .hgrc
 lnk .htoprc
@@ -56,3 +57,4 @@ lnk .vim
 lnk .vimrc
 lnk .zsh
 lnk .zshrc
+lnk .Xresources
