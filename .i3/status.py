@@ -298,7 +298,7 @@ while True:
 
     # Host
     elements.append({
-        "full_text": socket.getfqdn(),
+        "full_text": socket.gethostname(),
         "color": "#aaaaaa",
     })
 
