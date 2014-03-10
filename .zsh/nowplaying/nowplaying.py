@@ -10,7 +10,7 @@ def isAvailable(address, port):
     try:
         s.connect((address, port))
         return True
-    except socket.error, e:
+    except socket.error as e:
         return False
 
 def getData(target,playertype="plex"):
@@ -98,6 +98,8 @@ def getData_Mpd(target):
 
 targets = [
         (("127.0.0.1", 6600), "mpd"),
+        (("10.0.1.3", 6600), "mpd"),
+        (("10.0.1.5", 6600), "mpd"),
         ("10.0.1.16", "plex"),
         ("10.0.1.3", "plex-jsonhttprpc"),
         ("10.0.1.7", "plex"),
@@ -111,6 +113,6 @@ if __name__ == "__main__":
         if data == None:
             data = getData(target, playertype=playertype)
     if data == None:
-        print "{}"
+        print("{}")
     else:
-        print json.dumps(data)
+        print(json.dumps(data))

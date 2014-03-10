@@ -20,7 +20,7 @@ set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:DejaVu Sans Mono, Font Awesome, Arial Unicode MS, Apple Symbols 10px
+font pango:DejaVu Sans Mono, VL Gothic, Font Awesome, Arial Unicode MS, Apple Symbols 11px
 
 #font pango:Terminus 10px
 #client.
