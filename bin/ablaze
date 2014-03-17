@@ -1,0 +1,31 @@
+#!/usr/bin/python
+# -*- encoding: utf-8 -*-
+import os
+import sys
+import requests
+try:
+    import json
+    import subprocess
+except: pass
+
+public = False
+base = "meta:firestarter auto_tagged tag_me"
+tags = base
+
+
+for file in sys.argv[1:]:
+    if file == "-p":
+        public = True
+    elif file == "-s":
+        tags = "%s meta:screenshot" % base
+    else:
+        response = requests.post("http://ablaze.web/api/media/upload", files={"file": open(file, "rb")}, params={"tags": tags})
+        print response.content
+        try:
+            data = json.loads(response.content)
+            if public:
+                requests.get("http://ablaze.web/api/media/%i/public" % data["id"])
+                data["url"] = data["url"].replace("ablaze.cdn/cdn","flymr.liquidcode.net")
+            proc = subprocess.Popen(["xclip","-selection","c"], stdin=subprocess.PIPE)
+            proc.communicate(data["url"])
+        except: pass

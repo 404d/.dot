@@ -16,11 +16,18 @@
 ## Etc.
 # 135 - Kontekstmenyknap
 #
+
+set $screen_primary DVI-D-0
+set $screen_secondary HDMI-0
+set $screen_auxiliary VGA-0
+
+set $basedir /home/sl/.i3/bin
+
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:DejaVu Sans Mono, Font Awesome, Arial Unicode MS, Apple Symbols 10px
+font pango:DejaVu Sans Mono, Font Awesome, Arial Unicode MS, Apple Symbols 11px
 
 #font pango:Terminus 10px
 #client.
@@ -34,10 +41,10 @@ bindcode 192 exec mpc prev
 bindcode 193 exec mpc toggle
 bindcode 194 exec mpc next
 
-bindcode $mod+192 exec scrot -b -e "beep -l 10 && ablaze -s \$f && beep -f 400 -l 100 -n -f 500 -l 100 && mv \$f /home/sl/Pictures/Screenshots/" -q 100
-bindcode $mod+193 exec scrot -b -u -e "beep -l 10 && ablaze -s \$f && beep -f 400 -l 100 -n -f 500 -l 100 && mv \$f /home/sl/Pictures/Screenshots/" -q 100
-bindcode $mod+Shift+192 exec scrot -b -e "beep -l 10 && ablaze -s -p \$f && beep -f 400 -l 100 -n -f 500 -l 100 && mv \$f /home/sl/Pictures/Screenshots/" -q 100
-bindcode $mod+Shift+193 exec scrot -b -u -e "beep -l 10 && ablaze -s -p \$f && beep -f 400 -l 100 -n -f 500 -l 100 && mv \$f /home/sl/Pictures/Screenshots/" -q 100
+bindcode $mod+192 exec zsh $basedir/i3-screenshot.zsh 0 0
+bindcode $mod+193 exec zsh $basedir/i3-screenshot.zsh 0 -u
+bindcode $mod+shift+192 exec zsh $basedir/i3-screenshot.zsh -p 0
+bindcode $mod+shift+193 exec zsh $basedir/i3-screenshot.zsh -p -u
 #bindcode $mod+194 exec DISPLAY=:0.0 scrot -b -s -e "feh \$f"
 
 bindsym $mod+g exec groundbreaker
@@ -112,6 +119,17 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindcode $mod+d focus child
+
+workspace 1 output $screen_primary
+workspace 2 output $screen_primary
+workspace 3 output $screen_primary
+workspace 4 output $screen_primary
+workspace 5 output $screen_secondary
+workspace 6 output $screen_secondary
+workspace 7 output $screen_secondary
+workspace 8 output $screen_secondary
+workspace 9 output $screen_auxiliary
+workspace 10 output $screen_auxiliary
 
 # switch to workspace
 bindsym $mod+1 workspace 1
