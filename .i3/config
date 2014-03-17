@@ -52,11 +52,12 @@ bindsym $mod+shift+f exec pantheon-files
 bindsym $mod+b exec chromium-browser
 bindsym $mod+shift+d exec slingshot-launcher
 
-bindsym $mod+t exec i3lock -i /home/sl/.groundbreaker/lock.png -t -p default -d -n
+bindsym $mod+t exec zsh $basedir/i3-lock.zsh
 bindsym $mod+o exec xdg-open http://ablaze.web/post/`cat /home/sl/.groundbreaker/postid` &>2
 
-bindcode $mod+Shift+61 exec touch /home/sl/.groundbreaker/run.lock && rm /home/sl/.groundbreaker/bg /home/sl/.groundbreaker/lock.png && cp /home/sl/.groundbreaker/black.png /home/sl/.groundbreaker/bg && cp /home/sl/.groundbreaker/black.png /home/sl/.groundbreaker/lock.png && feh --bg-scale /home/sl/.groundbreaker/bg
-bindcode $mod+Shift+60 exec rm /home/sl/.groundbreaker/run.lock
+# Set the background to black and stop Groundbreaker
+bindcode $mod+Shift+61 exec $basedir/i3-safebg.zsh 1 # Clear and stop
+bindcode $mod+Shift+60 exec $basedir/i3-safebg.zsh 0 # Remove lock (restart)
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
@@ -233,80 +234,16 @@ bindsym Escape mode "default"
 
 bindsym $mod+r mode "resize"
 
-mode "Games" {
-    bindcode 60 workspace "Steam"; mode "default"
-    bindsym s workspace "Stepmania"; mode "default"
-    bindsym c workspace "CS:S"; mode "default"
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindcode 146 mode "default"
-}
-
 bindcode 121 exec pulseaudio-ctl mute
 bindcode 122 exec pulseaudio-ctl down
 bindcode 123 exec pulseaudio-ctl up
 
-bindcode 146 mode "Games"
-
-bindsym $mod+shift+g mode "Games"
-
-mode "Display Configuration" {
-    bindsym 1 exec exec xrandr --output LVDS1 --mode 1280x800; mode "default"
-    bindsym 3 exec exec xrandr --output VGA1 --mode 1920x1200; mode "default"
-    bindsym 2 exec exec xrandr --output LVDS1 --mode 1280x800; exec xrandr --output VGA1 --primary --mode 1920x1200 --left-of LVDS1; mode "default"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+P mode "Display Configuration"
-
 for_window [title="OpenGL Driver configuration"] floating enable
 for_window [title="Properties"] floating enable
 for_window [title="Properties"] border none
-for_window [title="Slingshot"] floating enable
-for_window [title="Slingshot"] border none
-for_window [title="slingshot-launcher"] floating enable
-for_window [title="slingshot-launcher"] border none
-#for_window [title="exe"] fullscreen
-#for_window [title="exe"] border none
-#for_window [title="exe"] move workspace "Flash"
-#for_window [title="exe"] workspace "Flash"
 
-## Gaming organization binds
-#for_window [class="Steam"] move workspace Steam
 for_window [class="Steam" title="(Steam|Friends|.+Chat)"] border none
-#for_window [class="Steam" title="[^(Steam|Friends|.+Chat)]"] floating enable
-
-for_window [class="Conky"] border 1pixel; floating enable; resize grow height 100 px or 100 ppt
-
-for_window [class="StepMania"] border none
-for_window [class="StepMania"] fullscreen off
-#for_window [class="StepMania"] move workspace "StepMania"
-
-#for_window [class="dota_linux"] border none
-#for_window [class="dota_linux"] fullscreen off
-#for_window [class="dota_linux"] move workspace "Dota 2"
-
-#for_window [class="hl2_linux" title="Counter.+"] border none
-#for_window [class="hl2_linux" title="Counter.+"] fullscreen off
-#for_window [class="hl2_linux" title="Counter.+"] move workspace "CS:S"
-######
-for_window [title=".+ - Oracle VM VirtualBox"] floating enable
-
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Pause mode "$mode_system"
+for_window [title="urxvt"] border 1pixel
 
 bindsym $mod+Shift+o exec i3-input
 
