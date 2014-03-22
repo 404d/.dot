@@ -26,8 +26,9 @@ sys.stdout.flush()
 def getBatteries():
     batteryPath = "/sys/class/power_supply/"
     batteries = []
-    for battery in os.listdir(batteryPath):
-        batteries.append(os.path.join(batteryPath, battery))
+    if os.path.exists(batteryPath):
+        for battery in os.listdir(batteryPath):
+            batteries.append(os.path.join(batteryPath, battery))
     return batteries
 
 batteries = getBatteries()
@@ -98,35 +99,37 @@ while True:
                             "full_text": "%02i" % int(data["Episode"]),
                             "color": altcolor,
                         })
-                    elif "Artist" in data:
+                    elif data["Type"] == "Audio":
                         nowPlaying.append({
                             "full_text": data["Title"],
                             "color": color,
                             "separator": False,
                             "separator_block_width": 5,
                         })
-                        nowPlaying.append({
-                            "full_text": "-",
-                            "color": color,
-                            "separator": False,
-                            "separator_block_width": 5,
-                        })
-                        nowPlaying.append({
-                            "full_text": data["Artist"],
-                            "color": color,
-                        })
+                        if "Artist" in data:
+                            nowPlaying.append({
+                                "full_text": "-",
+                                "color": color,
+                                "separator": False,
+                                "separator_block_width": 5,
+                            })
+                            nowPlaying.append({
+                                "full_text": data["Artist"],
+                                "color": color,
+                            })
                     else:
                         nowPlaying.append({
                             "full_text": data["Title"],
                             "color": color,
                         })
-                    if "Time" in data and "Percentage" in data and "Duration" in data:
+                    if "Time" in data:
                         nowPlaying.append({
                             "full_text": "%(Time)s" % data,
                             "color": altcolor,
                             "separator": False,
                             "separator_block_width": 5,
                         })
+                    if "Time" in data and "Percentage" in data and "Duration" in data:
                         totalBars = 20
                         totalpieces = int(100 / totalBars)
                         currBars = int(math.floor(int(data["Percentage"]) / totalpieces))
