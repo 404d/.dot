@@ -87,11 +87,12 @@ def getData_Mpd(target):
         result["Time"] = secondsToDuration(time)
         result["Duration"] = secondsToDuration(duration)
 
-        result["Percentage"] = "%i" % ((time / float(duration)) * 100)
+        if float(duration > 0):
+            result["Percentage"] = "%i" % ((time / float(duration)) * 100)
         playlist = client.playlistid(status["songid"])
-        result["Album"] = playlist[0]["album"]
-        result["Artist"] = playlist[0]["artist"]
-        result["Title"] = playlist[0]["title"]
+        for i in ["album", "artist", "title"]:
+            if i in playlist[0]:
+                result[i.title()] = playlist[0][i]
         result["Type"] = "Audio"
         return result
 
