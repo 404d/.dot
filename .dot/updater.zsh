@@ -23,6 +23,7 @@ function dotdot-update() {
     cd $HOME/.dot
     echo "$fg_bold[blue]± FETCHING ±$reset_color"
     git fetch
+    git lg HEAD..origin/master
     git lg -p HEAD..origin/master | less
     tmp=
     vared -p "Do you want to update? (yes to continue) " tmp

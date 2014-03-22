@@ -44,6 +44,7 @@ lnkc() {
 
 lnk .bash
 lnk .bash_profile
+lnk .conky
 lnk .gitconfig
 lnk .i3
 lnk .irssi

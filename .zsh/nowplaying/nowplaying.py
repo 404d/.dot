@@ -10,12 +10,14 @@ def isAvailable(address, port):
     try:
         s.connect((address, port))
         return True
-    except socket.error, e:
+    except socket.error as e:
         return False
 
 def getData(target,playertype="plex"):
     if playertype == "plex":
         return getData_Plex(target)
+    elif playertype == "mpd":
+        return getData_Mpd(target)
 
 rePlexParse = re.compile("^\<li\>([a-zA-Z])\:(.+)\n")
 def getData_Plex(target):
@@ -61,9 +63,47 @@ def getData_Plex(target):
     else:
         return None
 
+def getData_Mpd(target):
+    if isAvailable(*target):
+        from mpd import MPDClient
+        client = MPDClient()
+        client.timeout = 0.5
+        client.idletimeout = None
+        client.connect(*target)
+        status = client.status()
+        if status['state'] not in ["play", "pause"]:
+            return None
+        result = {}
+        def secondsToDuration(secs):
+            minutes = secs // 60
+            secs = secs % 60
+            return "%02i:%02i" % (minutes, secs)
+        time = int(status["time"].split(":")[0])
+        duration = int(status["time"].split(":")[1])
+        if status["state"] == "play":
+            result["PlayStatus"] = "Playing"
+        else:
+            result["PlayStatus"] = "Paused"
+        result["Time"] = secondsToDuration(time)
+        result["Duration"] = secondsToDuration(duration)
+
+        result["Percentage"] = "%i" % ((time / float(duration)) * 100)
+        playlist = client.playlistid(status["songid"])
+        result["Album"] = playlist[0]["album"]
+        result["Artist"] = playlist[0]["artist"]
+        result["Title"] = playlist[0]["title"]
+        result["Type"] = "Audio"
+        return result
+
+
 targets = [
-        ("10.0.1.32", "plex"),
+        (("127.0.0.1", 6600), "mpd"),
+        (("10.0.1.3", 6600), "mpd"),
+        (("10.0.1.5", 6600), "mpd"),
+        ("10.0.1.16", "plex"),
+        ("10.0.1.3", "plex-jsonhttprpc"),
         ("10.0.1.7", "plex"),
+        ("10.0.1.32", "plex"),
         ("10.0.1.21", "plex"),
     ]
 
@@ -73,6 +113,6 @@ if __name__ == "__main__":
         if data == None:
             data = getData(target, playertype=playertype)
     if data == None:
-        print "{}"
+        print("{}")
     else:
-        print json.dumps(data)
+        print(json.dumps(data))
