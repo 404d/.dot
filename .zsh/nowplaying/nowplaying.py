@@ -4,7 +4,9 @@ import json
 import re
 import socket
 
+
 clients = {}
+
 
 def isAvailable(address, port):
     # Create a TCP socket
@@ -75,6 +77,7 @@ def getData_Mpd(target):
             client.timeout = 0.5
             client.idletimeout = None
             client.connect(*target)
+            clients[target] = client
         status = client.status()
         if status['state'] not in ["play", "pause"]:
             return None
