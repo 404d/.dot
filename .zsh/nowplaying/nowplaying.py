@@ -4,6 +4,8 @@ import json
 import re
 import socket
 
+clients = {}
+
 def isAvailable(address, port):
     # Create a TCP socket
     s = socket.socket()
@@ -64,12 +66,15 @@ def getData_Plex(target):
         return None
 
 def getData_Mpd(target):
-    if isAvailable(*target):
-        from mpd import MPDClient
-        client = MPDClient()
-        client.timeout = 0.5
-        client.idletimeout = None
-        client.connect(*target)
+    if target in clients or isAvailable(*target):
+        if target in clients:
+            client = clients[target]
+        else:
+            from mpd import MPDClient
+            client = MPDClient()
+            client.timeout = 0.5
+            client.idletimeout = None
+            client.connect(*target)
         status = client.status()
         if status['state'] not in ["play", "pause"]:
             return None
