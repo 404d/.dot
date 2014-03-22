@@ -117,11 +117,6 @@ while True:
                                 "full_text": data["Artist"],
                                 "color": color,
                             })
-                    else:
-                        nowPlaying.append({
-                            "full_text": data["Title"],
-                            "color": color,
-                        })
                     if "Time" in data:
                         nowPlaying.append({
                             "full_text": "%(Time)s" % data,
@@ -129,42 +124,42 @@ while True:
                             "separator": False,
                             "separator_block_width": 5,
                         })
-                    if "Time" in data and "Percentage" in data and "Duration" in data:
-                        totalBars = 20
-                        totalpieces = int(100 / totalBars)
-                        currBars = int(math.floor(int(data["Percentage"]) / totalpieces))
-                        nowPlaying.append({
-                            "full_text": "─" * (currBars - 1),
-                            "color": altcolor,
-                            "separator": False,
-                            "separator_block_width": 0,
-                        })
-                        if currBars > 0:
+                        if "Time" in data and "Percentage" in data and "Duration" in data:
+                            totalBars = 20
+                            totalpieces = int(100 / totalBars)
+                            currBars = int(math.floor(int(data["Percentage"]) / totalpieces))
                             nowPlaying.append({
-                                "full_text": "┤​",
+                                "full_text": "─" * (currBars - 1),
                                 "color": altcolor,
                                 "separator": False,
                                 "separator_block_width": 0,
                             })
-                        nowPlaying.append({
-                            "full_text": "─" * (totalBars - currBars),
-                            "color": color,
-                            "separator": False,
-                            "separator_block_width": 5,
-                        })
-                        nowPlaying.append({
-                            "full_text": "%(Duration)s" % data,
-                            "color": color,
-                        })
-                        nowPlaying.append({
-                            "full_text": "%(Percentage)s%%" % data,
-                            "color": color,
-                            "align": "right",
-                            "min_width": 24
-                        })
-                    else:
-                        nowPlaying = []
-                        currTarget = None
+                            if currBars > 0:
+                                nowPlaying.append({
+                                    "full_text": "┤​",
+                                    "color": altcolor,
+                                    "separator": False,
+                                    "separator_block_width": 0,
+                                })
+                            nowPlaying.append({
+                                "full_text": "─" * (totalBars - currBars),
+                                "color": color,
+                                "separator": False,
+                                "separator_block_width": 5,
+                            })
+                            nowPlaying.append({
+                                "full_text": "%(Duration)s" % data,
+                                "color": color,
+                            })
+                            nowPlaying.append({
+                                "full_text": "%(Percentage)s%%" % data,
+                                "color": color,
+                                "align": "right",
+                                "min_width": 24
+                            })
+                else:
+                    nowPlaying = []
+                    currTarget = None
             except:
                 pass
             if len(nowPlaying) > 0:
