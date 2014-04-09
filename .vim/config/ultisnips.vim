@@ -1,1 +1,1 @@
-let g:UltiSnipsExpandTrigger="<F6>"
+let g:UltiSnipsExpandTrigger="<c-k>"
