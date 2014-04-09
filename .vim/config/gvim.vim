@@ -4,6 +4,9 @@ if has("gui_running")
     else
         set guifont=Inconsolata\ for\ Powerline\ 11
     endif
+
     set guioptions+=LlRrbT
     set guioptions-=LlRrbT
+
+    set transparency=5
 endif
