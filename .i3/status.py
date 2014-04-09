@@ -197,8 +197,12 @@ while True:
             data = subprocess.Popen(["pacmd","list-sinks"], stdout=subprocess.PIPE)
             out, err = data.communicate()
             tmp = out.split("* index")
-            tmp = tmp[1].split("volume: 0:")
-            tmp = tmp[1].split("% 1:")
+            tmpt = tmp[1].split("volume: 0:")
+            if len(tmpt) > 1:
+                tmp = tmpt[1].split("% 1:")
+            else:
+                tmpt = tmp[1].split("% /")
+                tmp = [tmpt[0].split("/ ")[1]]
             if "muted: yes" in out:
                 audiocolor = "#990000"
             else:
