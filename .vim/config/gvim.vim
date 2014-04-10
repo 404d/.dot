@@ -8,4 +8,6 @@ if has("gui_running")
 
     set guioptions+=LlRrbT
     set guioptions-=LlRrbT
+
+    set mousehide
 endif
