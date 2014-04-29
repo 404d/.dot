@@ -104,6 +104,17 @@ def getData_Mpd(target):
         result["Type"] = "Audio"
         return result
 
+def getData_XbmcJsonRpc(target):
+    pass
+
+def xbmcCallJson(target, method, **kwargs):
+    kwargs["jsonrpc"] = "2.0"
+    kwargs["method"] = method
+    request = json.dumps(kwargs)
+    url = "http://%s:9090/jsonrpc?request=%s" % (target, request)
+    urlbuffer = urllib.urlopen(url)
+    result = json.loads(urlbuffer.read())
+
 
 targets = [
         (("127.0.0.1", 6600), "mpd"),

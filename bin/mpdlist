@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+import copy
+import sys
+import urllib
+import plistlib
+
+itunes_library = "./lib.xml"
+itunes = plistlib.readPlist(itunes_library)
+
+tracks = {}
+
+for track_id in itunes["Tracks"]:
+    try:
+        loc = itunes["Tracks"][track_id]["Location"]
+        loc = loc.split("Media/Music/")
+        if len(loc) == 2:
+            tracks[track_id] = urllib.unquote("itunes/%s" % loc[1])
+        else:
+            sys.stdout.write(".")
+    except:
+        pass
+
+playlists = {}
+rootPlaylists = []
+playlistTree = {}
+
+for playlist in itunes["Playlists"]:
+    playlists[playlist["Playlist Persistent ID"]] = playlist
+
+    if "Parent Persistent ID" not in playlist:
+        rootPlaylists.append(playlist["Playlist Persistent ID"])
+    else:
+        if playlist["Parent Persistent ID"] not in playlistTree:
+            playlistTree[playlist["Parent Persistent ID"]] = []
+        playlistTree[playlist["Parent Persistent ID"]].append(playlist["Playlist Persistent ID"])
+
+def checkPlaylist(id, level=0, topPath=[]):
+    playlistTracks = []
+    path = copy.deepcopy(topPath)
+    path.append(playlists[id]["Name"])
+    if path[-1] in ["Musikk", "Bibliotek", "iTunes U", "Filmer", "Bøker", "Podcaster", "TV-programmer"]:
+        return []
+    print u"%s %s: %s" % (u"+"*level, id, u"／".join(path))
+
+    if "Playlist Items" in playlists[id]:
+        for trackID in playlists[id]["Playlist Items"]:
+            try:
+                track = tracks[str(trackID["Track ID"])]
+                playlistTracks.append(track)
+            except:
+                pass
+
+    def addChildTracksToSelf(childTracks):
+        for track in childTracks:
+            if track not in playlistTracks:
+                playlistTracks.append(track)
+        del childTracks
+
+    if id in playlistTree:
+        for child in playlistTree[id]:
+            addChildTracksToSelf(checkPlaylist(child, level=level+1, topPath=path))
+
+    with open(u"/home/sl/.mpd/playlists/] %s.m3u" % u"／".join(path), "w+") as file:
+
+        for track in playlistTracks:
+            file.write("%s\n" % track)
+        file.close()
+    return playlistTracks
+
+for rootPlaylist in rootPlaylists:
+    print len(checkPlaylist(rootPlaylist))

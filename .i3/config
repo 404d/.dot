@@ -37,14 +37,26 @@ font pango:DejaVu Sans Mono, VL Gothic, Font Awesome, Arial Unicode MS, Apple Sy
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Apple Keyboard
 bindcode 192 exec mpc prev
 bindcode 193 exec mpc toggle
 bindcode 194 exec mpc next
+# Logitech G710+
+bindcode 172 exec mpc toggle
+bindcode 174 exec mpc stop
+bindcode 173 exec mpc prev
+bindcode 171 exec mpc next
 
+# Apple Keyboard
 bindcode $mod+192 exec zsh $basedir/i3-screenshot.zsh 0 0
 bindcode $mod+193 exec zsh $basedir/i3-screenshot.zsh 0 -u
 bindcode $mod+shift+192 exec zsh $basedir/i3-screenshot.zsh -p 0
 bindcode $mod+shift+193 exec zsh $basedir/i3-screenshot.zsh -p -u
+# Logitech G710+
+#bindcode $mod+12 exec zsh $basedir/i3-screenshot.zsh 0 0
+#bindcode $mod+13 exec zsh $basedir/i3-screenshot.zsh 0 -u
+#bindcode $mod+shift+12 exec zsh $basedir/i3-screenshot.zsh -p 0
+#bindcode $mod+shift+13 exec zsh $basedir/i3-screenshot.zsh -p -u
 #bindcode $mod+194 exec DISPLAY=:0.0 scrot -b -s -e "feh \$f"
 
 bindsym $mod+g exec groundbreaker
@@ -234,6 +246,7 @@ bindsym Escape mode "default"
 
 bindsym $mod+r mode "resize"
 
+# Apple Keyboard
 bindcode 121 exec pulseaudio-ctl mute
 bindcode 122 exec pulseaudio-ctl down
 bindcode 123 exec pulseaudio-ctl up
