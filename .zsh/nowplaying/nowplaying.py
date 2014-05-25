@@ -135,7 +135,7 @@ def getData_XbmcJsonRpc(target):
 
                 results["Type"] = "Video"
                 if "showtitle" in info and info["showtitle"]:
-                    results["Show Title"] = info["showtitle"]
+                    results["Show Title"] = info["showtitle"].encode("utf-8")
                     results["Episode"] = info["episode"]
                     results["Season"] = info["season"]
 
@@ -143,7 +143,7 @@ def getData_XbmcJsonRpc(target):
                 info = call({"method": "Player.GetItem", "id": 1, "params": {"playerid": player["playerid"], "properties": ["track", "artist", "originaltitle"]}})["item"]
                 results["Type"] = "Audio"
                 results["SongNo"] = info["track"]
-                results["Artist"] = info["originaltitle"]
+                results["Artist"] = info["originaltitle"].encode("utf-8")
 
             if data["speed"] == 1:
                 results["PlayStatus"] = "Playing"
@@ -153,7 +153,7 @@ def getData_XbmcJsonRpc(target):
                 results["PlayStatus"] = "Fast Forward"
             elif data["speed"] < 0:
                 results["PlayStatus"] = "Rewind"
-            results["Title"] = info["label"]
+            results["Title"] = info["label"].encode("utf-8")
             results["Percentage"] = int(data["percentage"])
             time = xbmcTimeToString(data["time"], data["totaltime"])
             results["Time"] = time[0]
