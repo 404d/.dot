@@ -157,7 +157,7 @@ def getData_XbmcJsonRpc(target):
             results["Percentage"] = int(data["percentage"])
             time = xbmcTimeToString(data["time"], data["totaltime"])
             results["Time"] = time[0]
-            results["Total Time"] = time[1]
+            results["Duration"] = time[1]
             return results
         except:
             pass
