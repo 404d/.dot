@@ -133,6 +133,7 @@ def getData_XbmcJsonRpc(target):
             if data["type"] == "video":
                 info = call({"method": "Player.GetItem", "id": 1, "params": {"playerid": player["playerid"], "properties": ["showtitle", "episode", "season"]}})["item"]
 
+                results["Type"] = "Video"
                 if "showtitle" in info and info["showtitle"]:
                     results["Show Title"] = info["showtitle"]
                     results["Episode"] = info["episode"]
@@ -140,6 +141,7 @@ def getData_XbmcJsonRpc(target):
 
             elif data["type"] == "audio":
                 info = call({"method": "Player.GetItem", "id": 1, "params": {"playerid": player["playerid"], "properties": ["track", "artist", "originaltitle"]}})["item"]
+                results["Type"] = "Audio"
                 results["SongNo"] = info["track"]
                 results["Artist"] = info["originaltitle"]
 
