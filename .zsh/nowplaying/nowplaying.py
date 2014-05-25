@@ -20,6 +20,8 @@ def isAvailable(address, port):
 def getData(target,playertype="plex"):
     if playertype == "plex":
         return getData_Plex(target)
+    elif playertype == "plex-jsonhttprpc":
+        return getData_XbmcJsonRpc(target)
     elif playertype == "mpd":
         return getData_Mpd(target)
 
@@ -104,24 +106,74 @@ def getData_Mpd(target):
         result["Type"] = "Audio"
         return result
 
+def xbmcTimeToString(srcTime, srcTotal):
+    format = "{minutes:02d}:{seconds:02d}"
+    if srcTotal["hours"] > 0:
+        format = "{hours:02d}:%s" % format
+    return (format.format(**srcTime), format.format(**srcTotal))
+
 def getData_XbmcJsonRpc(target):
-    pass
+    def call(payload):
+        payload["jsonrpc"] = "2.0"
+        data = jsonRpcRequest(target, 3005, payload)
+        try:
+            return data["result"]
+        except KeyError:
+            print data
 
-def xbmcCallJson(target, method, **kwargs):
-    kwargs["jsonrpc"] = "2.0"
-    kwargs["method"] = method
-    request = json.dumps(kwargs)
-    url = "http://%s:9090/jsonrpc?request=%s" % (target, request)
-    urlbuffer = urllib.urlopen(url)
-    result = json.loads(urlbuffer.read())
+    playerlist = call({"method": "Player.GetActivePlayers", "id": 1})
+    players = {}
+    for player in playerlist:
+        try:
+            data = call({"method": "Player.GetProperties", "id": 1, "params": {"playerid": player["playerid"], "properties": ["percentage", "playlistid", "type", "time", "totaltime", "position", "speed"]}})
 
+            results = {}
+            info = {}
+
+            if data["type"] == "video":
+                info = call({"method": "Player.GetItem", "id": 1, "params": {"playerid": player["playerid"], "properties": ["showtitle", "episode", "season"]}})["item"]
+
+                if "showtitle" in info and info["showtitle"]:
+                    results["Show Title"] = info["showtitle"]
+                    results["Episode"] = info["episode"]
+                    results["Season"] = info["season"]
+
+            elif data["type"] == "audio":
+                info = call({"method": "Player.GetItem", "id": 1, "params": {"playerid": player["playerid"], "properties": ["track", "artist", "originaltitle"]}})["item"]
+                results["SongNo"] = info["track"]
+                results["Artist"] = info["originaltitle"]
+
+            if data["speed"] == 1:
+                results["PlayStatus"] = "Playing"
+            elif data["speed"] == 0:
+                results["PlayStatus"] = "Paused"
+            elif data["speed"] > 0:
+                results["PlayStatus"] = "Fast Forward"
+            elif data["speed"] < 0:
+                results["PlayStatus"] = "Rewind"
+            results["Title"] = info["label"]
+            results["Percentage"] = int(data["percentage"])
+            time = xbmcTimeToString(data["time"], data["totaltime"])
+            results["Time"] = time[0]
+            results["Total Time"] = time[1]
+            return results
+        except:
+            pass
+
+
+
+
+def jsonRpcRequest(host, port, method):
+    import requests, json
+    url = "http://%s:%s/jsonrpc" % (host, port)
+    headers = {'content-type': 'application/json'}
+    return requests.post(url, data=json.dumps(method), headers=headers).json()
 
 targets = [
         (("127.0.0.1", 6600), "mpd"),
         (("10.0.1.3", 6600), "mpd"),
         (("10.0.1.5", 6600), "mpd"),
         ("10.0.1.16", "plex"),
-        ("10.0.1.3", "plex-jsonhttprpc"),
         ("10.0.1.7", "plex"),
         ("10.0.1.32", "plex"),
         ("10.0.1.21", "plex"),

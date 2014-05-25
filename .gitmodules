@@ -37,3 +37,15 @@
 [submodule ".vim/bundle/vim-indent-guides"]
 	path = .vim/bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides
+[submodule ".vim/bundle/i3-vim-syntax"]
+	path = .vim/bundle/i3-vim-syntax
+	url = https://github.com/PotatoesMaster/i3-vim-syntax
+[submodule "ctags/bin/markdown2ctags"]
+	path = ctags/bin/markdown2ctags
+	url = https://github.com/jszakmeister/markdown2ctags
+[submodule ".vim/bundle/rainbow_parentheses.vim"]
+	path = .vim/bundle/rainbow_parentheses.vim
+	url = https://github.com/404d/rainbow_parentheses.vim
+[submodule ".vim/bundle/vim-armasm"]
+	path = .vim/bundle/vim-armasm
+	url = https://github.com/alisdair/vim-armasm
