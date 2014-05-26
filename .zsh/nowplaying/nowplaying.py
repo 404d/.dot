@@ -143,7 +143,10 @@ def getData_XbmcJsonRpc(target):
                 info = call({"method": "Player.GetItem", "id": 1, "params": {"playerid": player["playerid"], "properties": ["track", "artist", "originaltitle"]}})["item"]
                 results["Type"] = "Audio"
                 results["SongNo"] = info["track"]
-                results["Artist"] = info["originaltitle"].encode("utf-8")
+                if "originaltitle" in info:
+                    results["Artist"] = info["originaltitle"].encode("utf-8")
+                else:
+                    results["Artist"] = " ".join(info["artist"]).encode("utf-8")
 
             if data["speed"] == 1:
                 results["PlayStatus"] = "Playing"
