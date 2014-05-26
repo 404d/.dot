@@ -13,6 +13,7 @@ def isAvailable(address, port):
     s = socket.socket()
     try:
         s.connect((address, port))
+        s.settimeout(1.0)
         return True
     except socket.error as e:
         return False
@@ -121,7 +122,10 @@ def getData_XbmcJsonRpc(target):
         except KeyError:
             print data
 
-    playerlist = call({"method": "Player.GetActivePlayers", "id": 1})
+    try:
+        playerlist = call({"method": "Player.GetActivePlayers", "id": 1})
+    except Exception:
+        return None
     players = {}
     for player in playerlist:
         try:
@@ -172,9 +176,14 @@ def jsonRpcRequest(host, port, method):
     import requests, json
     url = "http://%s:%s/jsonrpc" % (host, port)
     headers = {'content-type': 'application/json'}
-    return requests.post(url, data=json.dumps(method), headers=headers).json()
+    return requests.post(url, data=json.dumps(method), headers=headers, timeout=3.0).json()
 
 targets = [
+        ("10.0.1.5", "plex-jsonhttprpc"),
+        ("10.0.1.3", "plex-jsonhttprpc"),
+        ("10.0.2.14", "plex-jsonhttprpc"),
+        ("10.0.10.12", "plex-jsonhttprpc"),
+        ("10.0.1.16", "plex-jsonhttprpc"),
         (("127.0.0.1", 6600), "mpd"),
         (("10.0.1.3", 6600), "mpd"),
         (("10.0.1.5", 6600), "mpd"),
