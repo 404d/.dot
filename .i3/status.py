@@ -31,6 +31,9 @@ def getBatteries():
             batteries.append(os.path.join(batteryPath, battery))
     return batteries
 
+bar_vertical = "▁▂▃▄▅▆▇█"
+bar_horizontal = "▏▎▍▌▋▊▉█"
+
 batteries = getBatteries()
 batteryData = []
 vol = {}
