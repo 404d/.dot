@@ -74,10 +74,9 @@ sub formater {
             $status =~ s/\%\(meta\)/$meta/;
         }
         $currentMediaUrl = $data->{'Filename'};
+        return (1, $status);
     }
-    if ( $status && $data->{'Changed'} eq "True" && $currentMediaUrl ne $lastMediaUrl && $data->{'Title'} ne "" ) {
-        announce($status);
-    }
+    return (0, "");
 }
 
 sub progbar {
@@ -107,8 +106,12 @@ sub announce {
 }
 
 command_bind 'np' => sub {
+    my ($data, $server, $target) = @_;
     $forcedUpdate = 1;
-    formater();
+    my ($changed, $msg) = formater();
+    if ($changed == 1) {
+        $server->command('action '.$target->{"name"}.' '.$msg);
+    }
 };
 
-timeout_add( $interval * 1000, \&formater, "NowPlayingTimer" );
+#timeout_add( $interval * 1000, \&formater, "NowPlayingTimer" );
