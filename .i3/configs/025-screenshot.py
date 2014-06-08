@@ -17,10 +17,10 @@ class Mapping:
         self.sym = sym
         mappings[name] = self
 
-Key(name="ablaze screen", action="exec zsh $basedir/i3-screenshot.zsh 0 0")
-Key(name="ablaze window", action="exec zsh $basedir/i3-screenshot.zsh 0 -u")
-Key(name="ablaze public screen", action="exec zsh $basedir/i3-screenshot.zsh -p 0")
-Key(name="ablaze public window", action="exec zsh $basedir/i3-screenshot.zsh -p -u")
+Key(name="ablaze screen", action="exec zsh $basedir/bin/i3-screenshot.zsh 0 0")
+Key(name="ablaze window", action="exec zsh $basedir/bin/i3-screenshot.zsh 0 -u")
+Key(name="ablaze public screen", action="exec zsh $basedir/bin/i3-screenshot.zsh -p 0")
+Key(name="ablaze public window", action="exec zsh $basedir/bin/i3-screenshot.zsh -p -u")
 
 if host == "yukiho":
     keyboard = "g710+"
