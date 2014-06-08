@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os
+import platform
 host = platform.node().lower()
 
 keys = {}
