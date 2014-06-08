@@ -1,0 +1,14 @@
+#!/usr/local/bin/zsh
+output=$2
+rm $output 2&>/dev/null
+touch $output || return false
+for file in $1/*; do
+    if [[ -x $file ]]; then
+        line=$(head -n 1 $file)
+        if [[ "${line:0:2}" == "#!" ]]; then
+            $file >> $output
+        else
+            echo >&2 "File $file does not have a shebang; this is required. Did you mean to add \`#!/bin/cat\`?"
+        fi
+    fi
+done
