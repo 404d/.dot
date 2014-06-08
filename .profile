@@ -27,6 +27,27 @@ fi
 
 setxkbmap -option 'ctrl:swapcaps'
 
+if command_exists dropbox; then
+    dropbox start &
+fi
+
+if command_exists pulseaudio; then
+    pulseaudio -D &
+fi
+
+if command_exists xscreensaver; then
+    xscreensaver &
+fi
+
+if command_exists xautolock; then
+    xautolock -locker 'zsh $basedir/bin/i3-locker.zsh' -time 10 -corners 0-00 &
+fi
+
+if command_exists compton; then
+    compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --blur-background --blur-kern '5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,' --blur-background-frame --glx-copy-from-front --glx-no-stencil --blur-background-exclude "focused" --use-ewmh-active-win &
+    export COMPOSITOR=compton
+fi
+
 if command_exists ssh-agent; then
     SSHAGENT="$(which ssh-agent)"
     SSHAGENTARGS="-s"
