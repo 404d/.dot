@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import platform
+host = platform.node().lower()
 
 keys = {}
 class Key:
