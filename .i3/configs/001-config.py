@@ -7,8 +7,8 @@ if host == "yukiho":
     print """
 # Host-specific configuration variables
 set $screen_primary DVI-D-0
-set $screen_primary HDMI-0
-set $screen_primary VGA-0
+set $screen_secondary HDMI-0
+set $screen_auxiliary VGA-0
 """
 
 print """
