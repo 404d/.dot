@@ -3,6 +3,8 @@
 set $mod Mod4
 
 floating_modifier $mod
+new_window 1pixel
+hide_edge_borders both
 
 # font for window titles. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
