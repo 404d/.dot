@@ -1,5 +1,6 @@
 command_exists() {
-    return command -v "$1" >/dev/null 2>&1
+    command -v "$1" >/dev/null 2>&1
+    return $?
 }
 
 if [ `hostname` = "Yukiho" ]; then
@@ -8,9 +9,11 @@ if [ `hostname` = "Yukiho" ]; then
     xrandr --output DVI-D-0 --primary || true
     xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
-    for file in .conky/yukiho/*; do
-        (conky -c $file &) || true
-    done
+    if command_exists conky; then
+        for file in .conky/yukiho/*; do
+            (conky -c $file &) || true
+        done
+    fi
 fi
 
 if command_exists urxvtd; then
