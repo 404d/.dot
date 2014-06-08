@@ -51,6 +51,10 @@ if command_exists compton; then
     export COMPOSITOR=compton
 fi
 
+if command_exists zsh; then
+    ($HOME/.dot/config-compile $HOME/.dot/.i3/configs $HOME/.dot/.i3/config) || true
+fi
+
 if command_exists ssh-agent; then
     SSHAGENT="$(which ssh-agent)"
     SSHAGENTARGS="-s"
