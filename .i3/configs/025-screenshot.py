@@ -1,4 +1,6 @@
 #!/usr/bin/python
+import os
+host = platform.node().lower()
 
 keys = {}
 class Key:
@@ -20,7 +22,11 @@ Key(name="ablaze window", action="exec zsh $basedir/i3-screenshot.zsh 0 -u")
 Key(name="ablaze public screen", action="exec zsh $basedir/i3-screenshot.zsh -p 0")
 Key(name="ablaze public window", action="exec zsh $basedir/i3-screenshot.zsh -p -u")
 
-keyboard = "apple"
+if host == "yukiho":
+    keyboard = "g710+"
+else:
+    keyboard = "apple"
+
 if keyboard == "apple":
     Mapping(name="ablaze screen", code="$mod+192")
     Mapping(name="ablaze window", code="$mod+193")

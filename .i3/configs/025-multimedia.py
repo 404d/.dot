@@ -23,7 +23,11 @@ Key(name="volume up", action="pulseaudio-ctl up")
 Key(name="volume down", action="pulseaudio-ctl down")
 Key(name="volume mute", action="pulseaudio-ctl mute")
 
-keyboard = "apple"
+if host == "yukiho":
+    keyboard = "g710+"
+else:
+    keyboard = "apple"
+
 if keyboard == "apple":
     Mapping(name="play", code="193")
     Mapping(name="previous", code="192")
