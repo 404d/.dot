@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh
+#!/usr/bin/env zsh
 output=$2
 rm $output 2&>/dev/null
 touch $output || return false

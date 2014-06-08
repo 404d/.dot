@@ -17,13 +17,13 @@ class Mapping:
         self.sym = sym
         mappings[name] = self
 
-Key(name="play", action="mpc toggle")
-Key(name="stop", action="mpc stop")
-Key(name="next", action="mpc next")
-Key(name="previous", action="mpc prev")
-Key(name="volume up", action="pulseaudio-ctl up")
-Key(name="volume down", action="pulseaudio-ctl down")
-Key(name="volume mute", action="pulseaudio-ctl mute")
+Key(name="play", action="exec mpc toggle")
+Key(name="stop", action="exec mpc stop")
+Key(name="next", action="exec mpc next")
+Key(name="previous", action="exec mpc prev")
+Key(name="volume up", action="exec pulseaudio-ctl up")
+Key(name="volume down", action="exec pulseaudio-ctl down")
+Key(name="volume mute", action="exec pulseaudio-ctl mute")
 
 if host == "yukiho":
     keyboard = "g710+"
