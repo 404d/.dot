@@ -3,48 +3,48 @@ command_exists() {
 }
 
 if [ `hostname` = "Yukiho" ]; then
-    xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --right-of VGA-0 --primary
-    xrandr --output HDMI-0 --right-of DVI-D-0
-    xrandr --output DVI-D-0 --primary
-    xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13
+    xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --right-of VGA-0 --primary || true
+    xrandr --output HDMI-0 --right-of DVI-D-0 || true
+    xrandr --output DVI-D-0 --primary || true
+    xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
     for file in .conky/yukiho/*; do
-        conky -c $file &
+        (conky -c $file &) || true
     done
 fi
 
 if command_exists urxvtd; then
-    urxvtd -q -f -o &
+    (urxvtd -q -f -o &) || true
     export TERMINAL=urxvtc
 fi
 
 if command_exists mpd; then
-    mpd &
+    (mpd &) || true
     if command_exists mpdscribble; then
-        mpdscribble &
+        (mpdscribble &) || true
     fi
 fi
 
-setxkbmap -option 'ctrl:swapcaps'
+setxkbmap -option 'ctrl:swapcaps' || true
 
 if command_exists dropbox; then
-    dropbox start &
+    (dropbox start &) || true
 fi
 
 if command_exists pulseaudio; then
-    pulseaudio -D &
+    (pulseaudio -D &) || true
 fi
 
 if command_exists xscreensaver; then
-    xscreensaver &
+    (xscreensaver &) || true
 fi
 
 if command_exists xautolock; then
-    xautolock -locker 'zsh $basedir/bin/i3-locker.zsh' -time 10 -corners 0-00 &
+    (xautolock -locker 'zsh $basedir/bin/i3-locker.zsh' -time 10 -corners 0-00 &) || true
 fi
 
 if command_exists compton; then
-    compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --blur-background --blur-kern '5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,' --blur-background-frame --glx-copy-from-front --glx-no-stencil --blur-background-exclude "focused" --use-ewmh-active-win &
+    (compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --blur-background --blur-kern '5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,' --blur-background-frame --glx-copy-from-front --glx-no-stencil --blur-background-exclude "focused" --use-ewmh-active-win &) || true
     export COMPOSITOR=compton
 fi
 
