@@ -42,7 +42,7 @@ bar_horizontal = u" ▏▎▍▌▋▊▉"
 batteries = getBatteries()
 batteryData = []
 vol = {}
-nowPlaying = []
+nowPlayingDataData = []
 currTarget = None
 audiocolor = "#000000"
 ablaze = None
@@ -93,56 +93,56 @@ if __name__ == "__main__":
                         else:
                             color = "#00A6B2"
                             altcolor = "#00FFFF"
-                        nowPlaying = []
+                        nowPlayingData = []
                         if "Season" in data:
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": data["Show Title"],
                                 "color": color,
                                 "separator": False,
                                 "separator_block_width": 5,
                             })
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": "S",
                                 "color": color,
                                 "separator": False,
                                 "separator_block_width": 0,
                             })
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": "%02i" % int(data["Season"]),
                                 "color": altcolor,
                                 "separator": False,
                                 "separator_block_width": 0,
                             })
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": "E",
                                 "color": color,
                                 "separator": False,
                                 "separator_block_width": 0,
                             })
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": "%02i" % int(data["Episode"]),
                                 "color": altcolor,
                             })
                         elif data["Type"] == "Audio":
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": data["Title"],
                                 "color": color,
                                 "separator": False,
                                 "separator_block_width": 5,
                             })
                             if "Artist" in data:
-                                nowPlaying.append({
+                                nowPlayingData.append({
                                     "full_text": "-",
                                     "color": color,
                                     "separator": False,
                                     "separator_block_width": 5,
                                 })
-                                nowPlaying.append({
+                                nowPlayingData.append({
                                     "full_text": data["Artist"],
                                     "color": color,
                                 })
                         if "Time" in data:
-                            nowPlaying.append({
+                            nowPlayingData.append({
                                 "full_text": "%(Time)s" % data,
                                 "color": altcolor,
                                 "separator": False,
@@ -152,42 +152,42 @@ if __name__ == "__main__":
                                 totalBars = 20
                                 totalpieces = int(100 / totalBars)
                                 currBars = int(math.floor(int(data["Percentage"]) / totalpieces))
-                                nowPlaying.append({
+                                nowPlayingData.append({
                                     "full_text": "─" * (currBars - 1),
                                     "color": altcolor,
                                     "separator": False,
                                     "separator_block_width": 0,
                                 })
                                 if currBars > 0:
-                                    nowPlaying.append({
+                                    nowPlayingData.append({
                                         "full_text": "┤​",
                                         "color": altcolor,
                                         "separator": False,
                                         "separator_block_width": 0,
                                     })
-                                nowPlaying.append({
+                                nowPlayingData.append({
                                     "full_text": "─" * (totalBars - currBars),
                                     "color": color,
                                     "separator": False,
                                     "separator_block_width": 5,
                                 })
-                                nowPlaying.append({
+                                nowPlayingData.append({
                                     "full_text": "%(Duration)s" % data,
                                     "color": color,
                                 })
-                                nowPlaying.append({
+                                nowPlayingData.append({
                                     "full_text": "%(Percentage)s%%" % data,
                                     "color": color,
                                     "align": "right",
                                     "min_width": 24
                                 })
                     else:
-                        nowPlaying = []
+                        nowPlayingData = []
                         currTarget = None
                 except:
                     pass
-                if len(nowPlaying) > 0:
-                    for el in nowPlaying:
+                if len(nowPlayingData) > 0:
+                    for el in nowPlayingData:
                         elements.append(el)
 
 
@@ -200,10 +200,14 @@ if __name__ == "__main__":
             with open("/home/sl/.groundbreaker/views", "r") as file:
                 views = file.read()
                 file.close()
+            if os.path.exists("/home/sl/.groundbreaker/run.lock"):
+                ablazeColor = "#FF00FF"
+            else:
+                ablazeColor = "#FF6600"
             ablaze = {
                 "full_text": "%s-%s" % (postid, views),
                 "short_text": "%s" % postid,
-                "color": "#FF6600"
+                "color": ablazeColor
             }
             """with open("/home/simen4000/.groundbreaker/sha1", "r") as file:
                 views = file.read()
@@ -261,14 +265,14 @@ if __name__ == "__main__":
                     try:
                         with open(os.path.join(battery, "charge_now"), "r") as charge_handle:
                             charge = int(charge_handle.read())
-                    except FileNotFoundError:
+                    except IOError:
                         with open(os.path.join(battery, "energy_now"), "r") as charge_handle:
                             charge = int(charge_handle.read())
                     max = 0
                     try:
                         with open(os.path.join(battery, "charge_full"), "r") as charge_handle:
                             max = int(charge_handle.read())
-                    except FileNotFoundError:
+                    except IOError:
                         with open(os.path.join(battery, "energy_full"), "r") as charge_handle:
                             max = int(charge_handle.read())
                     percentage = (charge/max) * 100

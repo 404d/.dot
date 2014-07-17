@@ -9,8 +9,18 @@ if [ `hostname` = "Yukiho" ]; then
     xrandr --output DVI-D-0 --primary || true
     xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
+    # Compositor config
+    export COMPOSITOR_BLURBACKGROUND='1'
+
     if command_exists conky; then
         for file in .conky/yukiho/*; do
+            (conky -c $file &) || true
+        done
+    fi
+fi
+if [ `hostname` = "Katsumi" ]; then
+    if command_exists conky; then
+        for file in .conky/katsumi/*; do
             (conky -c $file &) || true
         done
     fi
@@ -47,8 +57,15 @@ if command_exists xautolock; then
 fi
 
 if command_exists compton; then
-    (compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --blur-background --blur-kern '5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,' --blur-background-frame --glx-copy-from-front --glx-no-stencil --blur-background-exclude "focused" --use-ewmh-active-win &) || true
+    if [ "$COMPOSITOR_BLURBACKGROUND" = '1' ]; then
+        compositor_options_blur='--blur-background --blur-kern "5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1," --blur-background-frame --blur-background-exclude "focused"'
+    fi
+    (compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --glx-copy-from-front --glx-no-stencil --use-ewmh-active-win $compositor_options_blur &) || true
+    export CMD_COMPOSITOR="compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --glx-copy-from-front --glx-no-stencil --use-ewmh-active-win $compositor_options_blur &"
     export COMPOSITOR=compton
+    if command_exists compton-trans; then
+        ((sleep 60 && compton-trans --name "i3bar for output LVDS1" 78) &) || true
+    fi
 fi
 
 if command_exists zsh; then
