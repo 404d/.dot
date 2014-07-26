@@ -22,7 +22,7 @@ Key(name="ablaze window", action="exec zsh $basedir/bin/i3-screenshot.zsh 0 -u")
 Key(name="ablaze public screen", action="exec zsh $basedir/bin/i3-screenshot.zsh -p 0")
 Key(name="ablaze public window", action="exec zsh $basedir/bin/i3-screenshot.zsh -p -u")
 
-if host == "yukiho":
+if host == "yukiho" or host == "katsumi":
     keyboard = "g710+"
 else:
     keyboard = "apple"

@@ -21,6 +21,7 @@ Key(name="play", action="exec mpc toggle")
 Key(name="stop", action="exec mpc stop")
 Key(name="next", action="exec mpc next")
 Key(name="previous", action="exec mpc prev")
+Key(name="eject", action="exec eject")
 Key(name="volume up", action="exec pulseaudio-ctl up")
 Key(name="volume down", action="exec pulseaudio-ctl down")
 Key(name="volume mute", action="exec pulseaudio-ctl mute")
@@ -38,6 +39,8 @@ if keyboard == "apple":
     Mapping(name="volume up", code="123")
     Mapping(name="volume down", code="122")
     Mapping(name="volume mute", code="121")
+    
+    Mapping(name="eject", sym="XF86Eject")
 
 elif keyboard == "g710+":
     Mapping(name="play", code="172")
