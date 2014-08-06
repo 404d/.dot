@@ -13,3 +13,7 @@ Rather than using this script, you should copy the parts that you need/are going
     cd ~
     git clone https://github.com/404d/.dot.git
     bash .dot/.dot/prepare.sh
+
+## Tweaking
+### MacBook Pro Trackpad
+<http://www.chris-reilly.org/blog/technotes/macbook-trackpad-in-ubuntu/>
