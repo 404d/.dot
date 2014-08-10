@@ -17,6 +17,8 @@ class Mapping:
         self.sym = sym
         mappings[name] = self
 
+Key(name="redshift", action="exec pkill -USR1 redshift")
+
 Key(name="play", action="exec mpc toggle")
 Key(name="stop", action="exec mpc stop")
 Key(name="next", action="exec mpc next")
@@ -39,7 +41,9 @@ if keyboard == "apple":
     Mapping(name="volume up", code="123")
     Mapping(name="volume down", code="122")
     Mapping(name="volume mute", code="121")
-    
+
+    Mapping(name="redshift", code="212")
+
     Mapping(name="eject", sym="XF86Eject")
 
 elif keyboard == "g710+":

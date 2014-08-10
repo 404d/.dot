@@ -3,6 +3,10 @@ command_exists() {
     return $?
 }
 
+export COMPOSITOR_SHADOW='1'
+export COMPOSITOR_FADE='1'
+export COMPOSITOR_OPACITY='1'
+export COMPOSITOR_GLX='1'
 if [ `hostname` = "Yukiho" ]; then
     xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --right-of VGA-0 --primary || true
     xrandr --output HDMI-0 --right-of DVI-D-0 || true
@@ -24,6 +28,7 @@ if [ `hostname` = "Katsumi" ]; then
             (conky -c $file &) || true
         done
     fi
+    compositor_options_extra='--vsync opengl-mswc'
 fi
 
 if command_exists urxvtd; then
@@ -36,6 +41,13 @@ if command_exists mpd; then
     if command_exists mpdscribble; then
         (mpdscribble &) || true
     fi
+    if command_exists urxvtc && command_exists ncmpcpp; then
+        (urxvtc -title "[scratchpad] ncmpcpp" -e ncmpcpp) || true
+    fi
+fi
+
+if command_exists redshift; then
+    (redshift -t 6500K:3700K &) || true
 fi
 
 setxkbmap -option 'ctrl:swapcaps' || true
@@ -60,11 +72,49 @@ if command_exists compton; then
     if [ "$COMPOSITOR_BLURBACKGROUND" = '1' ]; then
         compositor_options_blur='--blur-background --blur-kern "5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1," --blur-background-frame --blur-background-exclude "focused"'
     fi
-    (compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --glx-copy-from-front --glx-no-stencil --use-ewmh-active-win $compositor_options_blur &) || true
-    export CMD_COMPOSITOR="compton -cCzfbi 0.8 --mark-wmwin-focused --mark-ovredir-focused --vsync opengl --glx-copy-from-front --glx-no-stencil --use-ewmh-active-win $compositor_options_blur &"
+    if [ "$COMPOSITOR_FADE" = '1' ]; then
+        compositor_options_fade='-f'
+    fi
+    if [ "$COMPOSITOR_SHADOW" = '1' ]; then
+        ## --shadow | -c
+        # Enabled client-side shadows on windows. Note desktop windows (windows with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow.
+
+        ## --no-dnd-shadow | -G
+        # Don’t draw shadows on drag-and-drop windows.
+
+        ## --clear-shadow | -z
+        # Zero the part of the shadow’s mask behind the window. Note this may not work properly on ARGB windows with fully transparent areas.
+
+        ## --no-dock-shadow | -C
+        # Avoid drawing shadows on dock/panel windows.
+
+        ## --shadow-ignore-shaped
+        #  Do not paint shadows on shaped windows. Note shaped windows here means windows setting its shape through X Shape extension. Those using ARGB background is beyond our control.
+
+        # Sett opp shadow-exclude mot blant annet Slingshot og notifyosd
+        compositor_options_shadow="--shadow --no-dnd-shadow --clear-shadow --no-dock-shadow --shadow-ignore-shaped"
+    fi
+    if [ "$COMPOSITOR_OPACITY" = '1' ]; then
+        ## --inactive-opacity=OPACITY | -i
+        # Opacity of inactive windows. (0.1 - 1.0, disabled by default)
+        compositor_options_opacity='--inactive-opacity=0.8'
+    fi
+    if [ "$COMPOSITOR_GLX" = '1' ]; then
+        ## --backend BACKEND
+        # Specify the backend to use: xrender or glx.
+
+        ## --glx-no-stencil
+        # Avoid using stencil buffer, useful if you don’t have a stencil buffer. Might cause incorrect opacity when rendering transparent content (but never practically happened) and may not work with --blur-background.
+
+        ## --glx-copy-from-front
+        # Copy unmodified regions from front buffer instead of redrawing them all.
+        compositor_options_glx='--backend glx --glx-no-stencil --glx-copy-from-front'
+    fi
+    export CMD_COMPOSITOR="compton --daemon --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
+    ($CMD_COMPOSITOR &) || true
     export COMPOSITOR=compton
     if command_exists compton-trans; then
-        ((sleep 60 && compton-trans --name "i3bar for output LVDS1" 78) &) || true
+        ((sleep 10 && compton-trans --name "i3bar for output LVDS1" 78) &) || true
     fi
 fi
 

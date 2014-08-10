@@ -3,6 +3,7 @@ bar {
     id systemline
     status_command /home/sl/dev/StatusCenter/i3bar.sh config.ini statuscenter.outputs.i3.i3 systemline
     tray_output none
+    strip_workspace_numbers yes
     colors {
         focused_workspace #285577 #285577 #ffffff
         active_workspace #444444 #444444 #dddddd

@@ -6,7 +6,7 @@ URxvt*perl-ext: default,matcher,clipboard
 URxvt*matcher.button: 1
 URxvt*url-launcher: xdg-open
 URxvt*scrollBar: false
-URxvt*scrollBar_right: true
+URxvt*scrollBar_right: false
 URxvt*urgentOnBell: true
 URxvt*visualBell: true
 URxvt*background: rgba:0a00/2000/2c00/bf00
@@ -15,6 +15,8 @@ URxvt*internalBorder: 0
 URxvt*depth: 32
 urxvt*font: xft:Inconsolata\ for\ Powerline:pixelsize=12,VL\ Gothic:pixelsize=12,xft:Arial\ Unicode\ MS:pixelsize=12,xft:Apple\ Symbols:pixelsize=12,xft:Font\ Awesome:pixelsize=12
 URxvt*borderLess: false
+urxvt*inputMethod: SCIM
+urxvt*imLocale: nb_NO.utf8
 ! URxvt*termName:           string
 ! URxvt*geometry:           geometry
 ! URxvt*chdir:              string
@@ -32,8 +34,7 @@ URxvt*borderLess: false
 ! URxvt*inheritPixmap:      boolean
 ! URxvt*transparent: false
 ! URxvt*tintColor:          color
-! URxvt*shading:            number
-! URxvt*blurRadius:         HxV
+URxvt*shading:            80
 ! URxvt*fading:             number
 ! URxvt*fadeColor:          color
 ! URxvt*utmpInhibit:        boolean

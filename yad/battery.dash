@@ -1,0 +1,17 @@
+#!/usr/bin/env dash
+battery="$1"
+i=1
+input=""
+bars=""
+if [ -e "$battery/energy_now" ]; then
+    input="$input\n$i:$(((100*$(cat "$battery/energy_now"))/$(cat "$battery/energy_full"))) "
+else
+    if [ -e "$battery/online" ]; then
+        input="$input\n$i:$((100*$(cat "$battery/online")))"
+    else
+        input="$input\n$i:0"
+    fi
+fi
+bars="$bars --bar=$(basename $battery)"
+i=$(($i + 1))
+echo $input | GTK2_RC_FILES=~/.dot/yad/.gtkrc-2.0 yad --multi-progress --vertical --mouse $bars --timeout 15 --no-buttons
