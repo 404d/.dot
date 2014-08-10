@@ -8,8 +8,8 @@ export COMPOSITOR_FADE='1'
 export COMPOSITOR_OPACITY='1'
 export COMPOSITOR_GLX='1'
 if [ `hostname` = "Yukiho" ]; then
-    xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --right-of VGA-0 --primary || true
-    xrandr --output HDMI-0 --right-of DVI-D-0 || true
+    xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --left-of VGA-0 --primary || true
+    xrandr --output HDMI-0 --left-of DVI-D-0 || true
     xrandr --output DVI-D-0 --primary || true
     xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
@@ -70,7 +70,7 @@ fi
 
 if command_exists compton; then
     if [ "$COMPOSITOR_BLURBACKGROUND" = '1' ]; then
-        compositor_options_blur='--blur-background --blur-kern "5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1," --blur-background-frame --blur-background-exclude "focused"'
+        compositor_options_blur="--blur-background --blur-kern 5,5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, --blur-background-frame --blur-background-exclude focused"
     fi
     if [ "$COMPOSITOR_FADE" = '1' ]; then
         compositor_options_fade='-f'
