@@ -45,10 +45,12 @@ elif keyboard == "apple-mbp":
     Mapping(name="ablaze public screen", code="$mod+123")
 
 elif keyboard == "g710+":
-    Mapping(name="ablaze screen", code="$mod+172")
-    Mapping(name="ablaze window", code="$mod+174")
-    Mapping(name="ablaze public screen", code="$mod+Shift+172")
-    Mapping(name="ablaze public window", code="$mod+Shift+174")
+    Mapping(name="ablaze region", code="$mod+172")
+    Mapping(name="ablaze screen", code="$mod+174")
+    Mapping(name="ablaze window", code="$mod+173")
+    Mapping(name="ablaze public region", code="$mod+Shift+172")
+    Mapping(name="ablaze public screen", code="$mod+Shift+174")
+    Mapping(name="ablaze public window", code="$mod+Shift+173")
 
 for name in mappings:
     if name in keys:
