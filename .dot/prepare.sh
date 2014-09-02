@@ -45,6 +45,7 @@ lnkc() {
 lnk .bash
 lnk .bash_profile
 lnk .conky
+lnk .compton.conf
 lnk .gitconfig
 lnk .gtkrc-2.0
 lnk .i3
