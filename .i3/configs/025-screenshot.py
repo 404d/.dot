@@ -4,9 +4,10 @@ host = platform.node().lower()
 
 keys = {}
 class Key:
-    def __init__(self, name, action):
+    def __init__(self, name, action, release=False):
         self.name = name
         self.action = action
+        self.release = release
         keys[name] = self
 
 mappings = {}
@@ -19,19 +20,29 @@ class Mapping:
 
 Key(name="ablaze screen", action="exec zsh $basedir/bin/i3-screenshot.zsh 0 0")
 Key(name="ablaze window", action="exec zsh $basedir/bin/i3-screenshot.zsh 0 -u")
+Key(name="ablaze region", release=True, action="exec zsh $basedir/bin/i3-screenshot.zsh 0 -s")
 Key(name="ablaze public screen", action="exec zsh $basedir/bin/i3-screenshot.zsh -p 0")
 Key(name="ablaze public window", action="exec zsh $basedir/bin/i3-screenshot.zsh -p -u")
+Key(name="ablaze public region", release=True, action="exec zsh $basedir/bin/i3-screenshot.zsh -p -s")
 
-if host == "yukiho" or host == "katsumi":
+if host == "yukiho":
     keyboard = "g710+"
-else:
-    keyboard = "apple"
+elif host == "katsumi":
+    keyboard = "apple-mbp"
 
 if keyboard == "apple":
     Mapping(name="ablaze screen", code="$mod+192")
     Mapping(name="ablaze window", code="$mod+193")
     Mapping(name="ablaze public screen", code="$mod+Shift+192")
     Mapping(name="ablaze public window", code="$mod+Shift+193")
+
+elif keyboard == "apple-mbp":
+    Mapping(name="ablaze region", code="Shift+121")
+    Mapping(name="ablaze window", code="Shift+122")
+    Mapping(name="ablaze screen", code="Shift+123")
+    Mapping(name="ablaze public region", code="$mod+121")
+    Mapping(name="ablaze public window", code="$mod+122")
+    Mapping(name="ablaze public screen", code="$mod+123")
 
 elif keyboard == "g710+":
     Mapping(name="ablaze screen", code="$mod+172")
@@ -43,7 +54,10 @@ for name in mappings:
     if name in keys:
         key = keys[name]
         mapping = mappings[name]
+        prefix = ""
+        if key.release:
+            prefix = " --release"
         if mapping.code:
-            print "bindcode %s %s" % (mapping.code, key.action)
+            print "bindcode%s %s %s" % (prefix, mapping.code, key.action)
         elif mapping.sym:
-            print "bindsym %s %s" % (mapping.sym, key.action)
+            print "bindsym%s %s %s" % (prefix, mapping.sym, key.action)
