@@ -1,7 +1,7 @@
 #!/bin/cat
 bar {
     id systemline
-    status_command /home/sl/dev/StatusCenter/i3bar.sh config.ini statuscenter.outputs.i3.i3 systemline
+    status_command /home/sl/dev/StatusCenter/i3bar.sh /home/sl/.dot/statuscenter.ini statuscenter.outputs.i3.i3 systemline
     tray_output none
     strip_workspace_numbers yes
     colors {
@@ -14,7 +14,7 @@ bar {
 bar {
     id statusline
     position top
-    status_command /home/sl/dev/StatusCenter/i3bar.sh config.ini statuscenter.outputs.i3.i3 statusline
+    status_command /home/sl/dev/StatusCenter/i3bar.sh /home/sl/.dot/statuscenter.ini statuscenter.outputs.i3.i3 statusline
     workspace_buttons no
     binding_mode_indicator no
     colors {
