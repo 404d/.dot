@@ -1,0 +1,11 @@
+snippet sc_block_ws
+	class ${1:Block}WSProtocol(statuscenter.protocol.StatusCenterWebSocketClientProtocol):
+		def onReceive(self, name, data):
+			${3:pass}
+	
+	class $1(statuscenter.utils.Block, statuscenter.protocol.StatusCenterWebSocketClientFactory):
+		protocol = $1WSProtocol
+
+		def __init__(self):
+			statuscenter.protocol.StatusCenterWebSocketClientFactory.__init__(self, ${2:adress})
+
