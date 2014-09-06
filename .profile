@@ -97,7 +97,9 @@ if command_exists compton; then
     if [ "$COMPOSITOR_OPACITY" = '1' ]; then
         ## --inactive-opacity=OPACITY | -i
         # Opacity of inactive windows. (0.1 - 1.0, disabled by default)
-        compositor_options_opacity='--inactive-opacity=0.8'
+
+        # --opacity-rule rules are defined in .compton.conf
+        compositor_options_opacity="--inactive-opacity=0.8"
     fi
     if [ "$COMPOSITOR_GLX" = '1' ]; then
         ## --backend BACKEND
@@ -110,12 +112,9 @@ if command_exists compton; then
         # Copy unmodified regions from front buffer instead of redrawing them all.
         compositor_options_glx='--backend glx --glx-no-stencil --glx-copy-from-front'
     fi
-    export CMD_COMPOSITOR="compton --daemon --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
-    ($CMD_COMPOSITOR &) || true
+    export CMD_COMPOSITOR="compton --config ~/.compton.conf --daemon --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
+    ((eval $CMD_COMPOSITOR) &) || true
     export COMPOSITOR=compton
-    if command_exists compton-trans; then
-        ((sleep 10 && compton-trans --name "i3bar for output LVDS1" 78) &) || true
-    fi
 fi
 
 if command_exists zsh; then

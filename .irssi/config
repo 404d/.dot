@@ -100,6 +100,7 @@ chatnets = {
   };
   SILC = { type = "SILC"; };
   Gameshaft = { type = "IRC"; };
+  "ChatNode!" = { type = "IRC"; };
 };
 
 channels = (
