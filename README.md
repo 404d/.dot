@@ -23,6 +23,7 @@ The TL;DR is that vim and MacVim links towards the wrong Python libraries in
 a Homebrew setup with brewed Python, as hinted from
 <https://github.com/Homebrew/homebrew/issues/33156>. This issue also mentions
 that YCM compiles against system Python and not Homebrew Python because of it using CMAKE.
+
 Looking through the Formula I found that the Formula uses `python-config` to get the libraries,
 and doing a quick check and verifying that it indeed gives me the Homebrew Python libraries.
 Taking a quick detour to find the path for the system Python binaries I found
@@ -47,4 +48,4 @@ index 9989b0d..f22ebae 100644
  
 ~~~
 
-This does however not resolve the problems with MacVim crashing, but gives us a workaround for that too by launching MacVim from the terminal by using the `mvim` command.
+This does not however resolve the problems with MacVim crashing, but gives us a workaround for that too by launching MacVim from the terminal by using the `mvim` command.
