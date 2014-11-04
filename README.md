@@ -47,5 +47,3 @@ index 9989b0d..f22ebae 100644
      end
  
 ~~~
-
-This does not however resolve the problems with MacVim crashing, but gives us a workaround for that too by launching MacVim from the terminal by using the `mvim` command.
