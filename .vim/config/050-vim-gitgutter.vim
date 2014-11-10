@@ -3,6 +3,6 @@ nmap gh <Plug>GitGutterNextHunk
 nmap gH <Plug>GitGutterPrevHunk
 nmap <silent> <F10> :GitGutterToggle<CR>
 let g:gitgutter_highlight_lines = 1
-hi DiffAdd ctermbg=23
-hi DiffChange ctermbg=236
+"hi DiffAdd ctermbg=23
+"hi DiffChange ctermbg=236
 ""
