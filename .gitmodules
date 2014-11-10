@@ -49,3 +49,6 @@
 [submodule ".vim/bundle/vim-armasm"]
 	path = .vim/bundle/vim-armasm
 	url = https://github.com/alisdair/vim-armasm
+[submodule ".vim/bundle/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
