@@ -47,3 +47,8 @@ index 9989b0d..f22ebae 100644
      end
  
 ~~~
+
+### Vim lagging severly
+Is `vim-fugutive` installed? Remove it, you ain't using it anywyas.
+
+<http://wilt.isaac.su/articles/vim-lagging-and-causing-network-io-when-moving-within-a-file>
