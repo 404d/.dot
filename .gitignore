@@ -6,3 +6,5 @@
 away.log
 .AppleDouble
 /.vim/bundle/taghighlight
+/.vim/undo
+/.vim/tmp

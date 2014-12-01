@@ -6,6 +6,8 @@ export LC_ALL=en_US.UTF-8
 export CLICOLOR=1
 export LSCOLORS
 
+fpath=("$HOME/.zsh/completions" $fpath)
+
 for sourcefile ($HOME/.zsh/pre/*.zsh) {
     source $sourcefile
 }

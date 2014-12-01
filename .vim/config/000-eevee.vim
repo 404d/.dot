@@ -1,7 +1,7 @@
 ""
-"   Copyright (c) 2013, Alex Munroe
-"   https://raw.github.com/eevee/rc/ef40d4b9b0dc052aa55fad8defca6477ef662209/.vimrc
-"   
+"   Copyright (c) 2014, Alex Munroe
+"   https://raw.github.com/eevee/rc/d4a39198059bd5cb909acb3f5e28ff6eeacd257e/.vimrc
+"
 "   The year specified above is the year this file was added to this repository.
 ""
 
@@ -38,7 +38,7 @@ set undodir=~/.vim/undo         " persistent undo storage
 set undofile                    " persistent undo on
 
 " user interface
-set history=50                  " keep 50 lines of command line history
+set history=1000                " remember command mode history
 set laststatus=2                " always show status line
 set lazyredraw                  " don't update screen inside macros, etc
 set matchtime=2                 " ms to show the matching paren for showmatch
@@ -48,6 +48,7 @@ set showcmd                     " display incomplete commands
 set showmatch                   " show matching brackets while typing
 set relativenumber              " line numbers spread out from 0
 set cursorline                  " highlight current line
+set display=lastline,uhex       " show last line even if too long; use <xx>
 
 " regexes
 set incsearch                   " do incremental searching
@@ -59,8 +60,10 @@ set autoindent                  " keep indenting on <CR>
 set shiftwidth=4                " one tab = four spaces (autoindent)
 set softtabstop=4               " one tab = four spaces (tab key)
 set expandtab                   " never use hard tabs
+set shiftround                  " only indent to multiples of shiftwidth
+set smarttab                    " DTRT when shiftwidth/softtabstop diverge
 set fileformats=unix,dos        " unix linebreaks in new files please
-set listchars=tab:↹·,extends:>,precedes:<,nbsp:␠,trail:␠
+set listchars=tab:↹·,extends:⇉,precedes:⇇,nbsp:␠,trail:␠,nbsp:␣
                                 " appearance of invisible characters
 
 " wrapping
@@ -73,7 +76,7 @@ set showbreak=↳\                " shown at the start of a wrapped line
 " gui stuff
 set ttymouse=xterm2             " force mouse support for screen
 set mouse=a                     " terminal mouse when possible
-set guifont=DejaVu\ Sans\ Mono\ 9
+set guifont=Source\ Code\ Pro\ 9
                                 " nice fixedwidth font
 
 " unicode
@@ -88,28 +91,27 @@ set wildmenu                    " show a menu of completions like zsh
 set wildmode=full               " complete longest common prefix first
 set wildignore+=.*.sw*,__pycache__,*.pyc
                                 " ignore junk files
+set complete-=i                 " don't try to tab-complete #included files
+set completeopt-=preview        " preview window is super annoying
 
 " miscellany
 set autoread                    " reload changed files
 set scrolloff=2                 " always have 2 lines of context on the screen
 set foldmethod=indent           " auto-fold based on indentation.  (py-friendly)
 set foldlevel=99
+set timeoutlen=1000             " wait 1s for mappings to finish
+set ttimeoutlen=100             " wait 0.1s for xterm keycodes to finish
+set nrformats-=octal            " don't try to auto-increment 'octal'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 " Simen Edit: Pathogen moved to ~/.vim/config/pre/pathogen.vim
 
-" SuperTab; use omni completion by default
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-
-" Python-mode; linting is kind of annoying, so tame it
-let g:pymode_lint_checker = "pyflakes"
-let g:pymode_lint_cwindow = 0
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bindings
+" Bindingss
+
 " Stuff that clobbers default bindings
 " Force ^U and ^W in insert mode to start a new undo group
 inoremap <c-u> <c-g>u<c-u>
@@ -130,8 +132,8 @@ noremap <C-Up> <C-W><Up>
 noremap <C-Down> <C-W><Down>
 
 " -/= to navigate tabs
-noremap - :tabprevious<CR>
-noremap = :tabnext<CR>
+nnoremap - :tabprevious<CR>
+nnoremap = :tabnext<CR>
 
 " Bind gb to toggle between the last two tabs
 map gb :exe "tabn ".g:ltv<CR>
@@ -140,10 +142,13 @@ function! Setlasttabpagevisited()
 endfunction
 
 augroup localtl
-au!
-autocmd TabLeave * call Setlasttabpagevisited()
+    autocmd!
+    autocmd TabLeave * call Setlasttabpagevisited()
 augroup END
 autocmd VimEnter * let g:ltv = 1
+
+" Abbreviation to make `:e %%/...` edit in same directory
+cabbr <expr> %% expand('%:.:h')
 
 """ For plugins
 " gundo
@@ -151,10 +156,55 @@ noremap ,u :GundoToggle<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Miscellaneous autocmds
+
+" Automatically delete swapfiles older than the actual file.
+" Look at this travesty.  vim already has this information but doesn't expose
+" it, so I have to reparse the swap file.  Ugh.
+function! s:SwapDecide()
+python << endpython
+import os
+import struct
+
+import vim
+
+# Format borrowed from:
+# https://github.com/nyarly/Vimrc/blob/master/swapfile_parse.rb
+SWAPFILE_HEADER = "=BB10sLLLL40s40s898scc"
+size = struct.calcsize(SWAPFILE_HEADER)
+with open(vim.eval('v:swapname'), 'rb') as f:
+    buf = f.read(size)
+(
+    id0, id1, vim_version, pagesize, writetime,
+    inode, pid, uid, host, filename, flags, dirty
+) = struct.unpack(SWAPFILE_HEADER, buf)
+
+try:
+    # Test whether the pid still exists.  Could get fancy and check its name
+    # or owning uid but :effort:
+    os.kill(pid, 0)
+except OSError:
+    # NUL means clean, \x55 (U) means dirty.  Yeah I don't know either.
+    if dirty == b'\x00':
+        # Appears to be from a crash, so just nuke it
+        vim.command('let v:swapchoice = "d"')
+
+endpython
+endfunction
+
+if has("python")
+    augroup eevee_swapfile
+        autocmd!
+        autocmd SwapExists * call s:SwapDecide()
+    augroup END
+endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors and syntax
 " in GUI or color console, enable coloring and search highlighting
 if &t_Co > 2 || has("gui_running")
-  syntax on
+  syntax enable
   set background=dark
   set hlsearch
 endif
@@ -180,6 +230,12 @@ endif " has("autocmd")
 hi ColorColumn ctermbg=black guibg=darkgray
 hi WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+\%#\@<!$/
+
+" molokai's diff coloring is terrible
+highlight DiffAdd    ctermbg=22
+highlight DiffDelete ctermbg=52
+highlight DiffChange ctermbg=17
+highlight DiffText   ctermbg=53
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

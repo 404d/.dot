@@ -19,10 +19,10 @@ class Mapping:
 
 Key(name="redshift", action="exec pkill -USR1 redshift")
 
-Key(name="play", action="exec mpc toggle")
-Key(name="stop", action="exec mpc stop")
-Key(name="next", action="exec mpc next")
-Key(name="previous", action="exec mpc prev")
+Key(name="play", action="exec zsh $basedir/bin/statuscenter-signal.zsh playpause")
+Key(name="stop", action="exec zsh $basedir/bin/statuscenter-signal.zsh stop")
+Key(name="next", action="exec zsh $basedir/bin/statuscenter-signal.zsh next")
+Key(name="previous", action="exec zsh $basedir/bin/statuscenter-signal.zsh previous")
 Key(name="eject", action="exec eject")
 Key(name="volume up", action="exec pulseaudio-ctl up")
 Key(name="volume down", action="exec pulseaudio-ctl down")
@@ -33,14 +33,13 @@ if host == "yukiho":
 else:
     keyboard = "apple"
 
+Mapping(name="volume up", code="123")
+Mapping(name="volume down", code="122")
+Mapping(name="volume mute", code="121")
 if keyboard == "apple":
     Mapping(name="play", code="193")
     Mapping(name="previous", code="192")
     Mapping(name="next", code="194")
-
-    Mapping(name="volume up", code="123")
-    Mapping(name="volume down", code="122")
-    Mapping(name="volume mute", code="121")
 
     Mapping(name="redshift", code="212")
 

@@ -17,3 +17,14 @@ Rather than using this script, you should copy the parts that you need/are going
 ## Tweaking
 ### MacBook Pro Trackpad
 <http://www.chris-reilly.org/blog/technotes/macbook-trackpad-in-ubuntu/>
+
+### Python under OS X
+Lemme make this brief: **DO NOT INSTALL HOMEBREW PYTHON**
+
+Download an official release from the Python homepage and install it, then use easy_install to get
+pip onto your system.
+
+### Vim lagging severly
+Is `vim-fugutive` installed? Remove it, you ain't using it anyways.
+
+<http://wilt.isaac.su/articles/vim-lagging-and-causing-network-io-when-moving-within-a-file>
