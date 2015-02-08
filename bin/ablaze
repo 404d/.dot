@@ -19,7 +19,7 @@ for file in sys.argv[1:]:
     elif file == "-s":
         tags = "%s meta:screenshot" % base
     else:
-        response = requests.post("http://ablaze.web/api/media/upload", files={"file": open(file, "rb")}, params={"tags": tags})
+        response = requests.post("http://ablaze.web/api/media/upload", files={"file": open(file, "rb").read()}, params={"tags": tags})
         print response.content
         try:
             data = json.loads(response.content)
