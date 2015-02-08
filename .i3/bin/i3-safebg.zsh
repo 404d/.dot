@@ -6,6 +6,8 @@ if [[ "$1" == "1" ]]; then
     cp $GROUNDBREAKER_DIR/black.png $GROUNDBREAKER_DIR/bg && \
     cp $GROUNDBREAKER_DIR/black.png $GROUNDBREAKER_DIR/stitch.png && \
     feh --bg-scale $GROUNDBREAKER_DIR/bg
+    pkill -9 mplayer
+    pkill -9 gifview
 elif [[ "$1" == "0" ]]; then
     rm $GROUNDBREAKER_DIR/run.lock
 fi
