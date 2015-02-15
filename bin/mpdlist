@@ -22,11 +22,10 @@ for track_id in itunes["Tracks"]:
     except:
         pass
 
-isSmartPlaylist = {}
-
 playlists = {}
 rootPlaylists = []
 playlistTree = {}
+playlistPrefix = {}
 
 for playlist in itunes["Playlists"]:
     playlists[playlist["Playlist Persistent ID"]] = playlist
@@ -42,8 +41,11 @@ def checkPlaylist(id, level=0, topPath=[]):
     playlistTracks = []
     path = copy.deepcopy(topPath)
     path.append(playlists[id]["Name"].replace("/", u"／"))
-    encodedPath = u"／".join(path)
-    isSmartPlaylist[encodedPath] = "Smart Criteria" in playlists[id]
+    playlistPrefix[id] = u"♪"
+    if "Smart Criteria" in playlists[id]:
+        playlistPrefix[id] = u"⚙"
+    if "Folder" in playlists[id]:
+        playlistPrefix[id] = u"☰"
     if path[-1] in ["Musikk", "Bibliotek", "iTunes U", "Filmer", "Bøker", "Podcaster", "TV-programmer"]:
         return []
     print u"%s %s: %s" % (u"+"*level, id, u"／".join(path))
@@ -67,7 +69,7 @@ def checkPlaylist(id, level=0, topPath=[]):
             addChildTracksToSelf(checkPlaylist(child, level=level+1, topPath=path))
 
     encodedPath = u"／".join(path)
-    with open(u"%s %s.m3u" % (u"⚙" if (encodedPath in isSmartPlaylist and isSmartPlaylist[encodedPath]) else u"♪", encodedPath), "w+") as file:
+    with open(u"%s %s.m3u" % (playlistPrefix[id], encodedPath), "w+") as file:
 
         for track in playlistTracks:
             file.write("%s\n" % track)
