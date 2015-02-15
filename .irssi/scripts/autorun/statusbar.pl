@@ -31,7 +31,7 @@ sub time {
     }
     $clock .= $timeData[0];
     $time .= $clock;
-    $time .= " %4%w⮀ ";
+    $time .= " %4%w ";
     $lastTime = $clock;
     $item->default_handler($size, $time, 1);
 }
