@@ -1,0 +1,4 @@
+#!/bin/sh
+cd /Users/sl/dev/groundbreaker
+source bin/activate
+python -m groundbreaker
