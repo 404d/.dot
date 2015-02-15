@@ -15,7 +15,7 @@ for track_id in itunes["Tracks"]:
         loc = itunes["Tracks"][track_id]["Location"]
         loc = loc.split("Media/")
         if len(loc) >= 2:
-            tracks[track_id] = urllib.unquote("itunes/%s" % loc[1])
+            tracks[track_id] = urllib.unquote("itunes/%s" % "Media/".join(loc[1:]))
         else:
             print loc
             sys.stdout.write(".")
