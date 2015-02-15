@@ -211,3 +211,8 @@ if &t_Co > 255
    hi LineNr          ctermfg=250 ctermbg=234
    hi NonText         ctermfg=250 ctermbg=234
 end
+
+hi SyntasticErrorSign   ctermfg=196 ctermbg=88 guifg=#ff0000 guibg=#870000
+hi SyntasticWarningSign ctermfg=220 ctermbg=94 guifg=#ffdf00 guibg=#875f00
+hi SyntasticErrorLine               ctermbg=88               guibg=#870000
+hi SyntasticWarningLine             ctermbg=94               guibg=#875f00
