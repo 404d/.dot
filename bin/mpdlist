@@ -39,7 +39,7 @@ for playlist in itunes["Playlists"]:
 def checkPlaylist(id, level=0, topPath=[]):
     playlistTracks = []
     path = copy.deepcopy(topPath)
-    path.append(playlists[id]["Name"])
+    path.append(playlists[id]["Name"].replace("/", u"／"))
     if path[-1] in ["Musikk", "Bibliotek", "iTunes U", "Filmer", "Bøker", "Podcaster", "TV-programmer"]:
         return []
     print u"%s %s: %s" % (u"+"*level, id, u"／".join(path))
