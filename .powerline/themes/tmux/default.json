@@ -1,28 +1,38 @@
 {
-	"default_module": "powerline.segments.common",
-	"segment_data": {
-	},
 	"segments": {
+                "left": [
+                        {
+                                "function": "powerline.segments.tmux.attached_clients"
+                        }
+                ],
 		"right": [
-            {
-                "name": "uptime"
-            },
-            {
-                "name": "system_load",
-                "priority": 50
-            },
 			{
-				"name": "date"
+				"function": "powerline.segments.common.net.network_load",
+				"priority": 50
 			},
 			{
-				"name": "date",
+				"function": "powerline.segments.common.sys.cpu_load_percent",
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.common.sys.system_load",
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.common.bat.battery",
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"name": "time",
+                                "before": "",
 				"args": {
 					"format": "%H:%M",
 					"istime": true
 				}
 			},
 			{
-				"name": "hostname"
+				"function": "powerline.segments.common.net.hostname"
 			}
 		]
 	}
