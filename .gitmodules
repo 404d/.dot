@@ -88,3 +88,6 @@
 [submodule ".vim/bundle/vaxe"]
 	path = .vim/bundle/vaxe
 	url = https://github.com/jdonaldson/vaxe
+[submodule ".vim/bundle/tern_for_vim"]
+	path = .vim/bundle/tern_for_vim
+	url = https://github.com/marijnh/tern_for_vim
