@@ -76,3 +76,15 @@
 [submodule ".vim/bundle/vim-vimlparser"]
 	path = .vim/bundle/vim-vimlparser
 	url = https://github.com/ynkdir/vim-vimlparser
+[submodule ".vim/bundle/CoffeeTags"]
+	path = .vim/bundle/CoffeeTags
+	url = https://github.com/lukaszkorecki/CoffeeTags
+[submodule ".vim/bundle/dart-vim-plugin"]
+	path = .vim/bundle/dart-vim-plugin
+	url = https://github.com/dart-lang/dart-vim-plugin
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script
+[submodule ".vim/bundle/vaxe"]
+	path = .vim/bundle/vaxe
+	url = https://github.com/jdonaldson/vaxe
