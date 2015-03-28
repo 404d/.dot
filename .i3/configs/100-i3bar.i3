@@ -15,12 +15,6 @@ bar {
     id statusline
     position top
     status_command /home/sl/dev/StatusCenter/i3bar.sh /home/sl/.dot/statuscenter.ini statuscenter.outputs.i3.i3 statusline
-    workspace_buttons yes
+    workspace_buttons no
     binding_mode_indicator no
-    colors {
-        focused_workspace #000000 #000000 #000000
-        active_workspace #000000 #000000 #000000
-        inactive_workspace #000000 #000000 #000000
-        urgent_workspace #000000 #000000 #000000
-    }
 }
