@@ -2,7 +2,12 @@
 output=$2
 rm $output 2&>/dev/null
 touch $output || return false
-for file in $1/*; do
+echo "## config-compile" >> $output
+echo "# Source: $1/**" >> $output
+echo "# Destination: $2" >> $output
+echo "# Date: $(date)" >> $output
+echo "##" >> $output
+for file in $1/**; do
     if [[ -x $file ]]; then
         line=$(head -n 1 $file)
         if [[ "${line:0:2}" == "#!" ]]; then
