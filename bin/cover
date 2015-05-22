@@ -1,0 +1,28 @@
+#!/usr/bin/python
+import os
+import subprocess
+import sys
+import mutagen
+
+MPD_PATH="/home/sl/Music"
+file = subprocess.Popen(["mpc", "--format", "%file%", "current"], stdout=subprocess.PIPE).communicate()[0]
+file = file.strip("\n")
+path = os.path.join(MPD_PATH, file)
+cover_index = 0
+
+song = mutagen.File(path)
+covers = []
+
+if isinstance(song, mutagen.mp4.MP4) and 'covr' in song.tags:
+    covers = song.tags['covr']
+
+if isinstance(song, mutagen.flac.FLAC):
+    covers = [picture.data for picture in song.pictures]
+
+
+if not covers:
+    raise SystemExit
+
+#with open("/tmp/mpd-track-cover", "w") as fp:
+#    fp.write(covers[cover_index])
+print covers[cover_index]
