@@ -1,15 +1,15 @@
 #!/bin/cat
 # vim:syntax=i3
-workspace 1 output $screen_primary
-workspace 2 output $screen_primary
-workspace 3 output $screen_primary
-workspace 4 output $screen_primary
-workspace 5 output $screen_secondary
-workspace 6 output $screen_secondary
-workspace 7 output $screen_secondary
-workspace 8 output $screen_secondary
-workspace 9 output $screen_auxiliary
-workspace 10 output $screen_auxiliary
+workspace 1:一 output $screen_primary
+workspace 2:二 output $screen_primary
+workspace 3:三 output $screen_primary
+workspace 4:四 output $screen_primary
+workspace 5:五 output $screen_secondary
+workspace 6:六 output $screen_secondary
+workspace 7:七 output $screen_secondary
+workspace 8:八 output $screen_secondary
+workspace 9:九 output $screen_auxiliary
+workspace 10:十 output $screen_auxiliary
 
 # switch to workspace
 bindsym $mod+1 workspace 1:一
