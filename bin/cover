@@ -21,6 +21,8 @@ if isinstance(song, mutagen.flac.FLAC):
 
 
 if not covers:
+    with open(os.path.expanduser("~/.dot/disc.png")) as fp:
+        print fp.read()
     raise SystemExit
 
 #with open("/tmp/mpd-track-cover", "w") as fp:
