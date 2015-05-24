@@ -2,16 +2,38 @@
 # -*- encoding: utf-8 -*-
 import copy
 import sys
+import os
 import urllib
 import plistlib
+output_path = os.path.abspath(".")
 
 itunes_library = "./lib.xml"
 itunes = plistlib.readPlist(itunes_library)
 
 tracks = {}
+genres = {}
+track_errors = {}
+current_playlists = []
+
+playlist_prefixes = u"⚙♫♪☰"
+for playlist in os.listdir(output_path):
+    if not os.path.isfile(playlist):
+        continue
+    playlist = playlist.decode("utf-8", "replace")
+    if playlist[0] in playlist_prefixes:
+        current_playlists.append(playlist)
 
 for track_id in itunes["Tracks"]:
     try:
+        if "Genre" in itunes["Tracks"][track_id] and itunes["Tracks"][track_id]["Genre"]:
+            genre = itunes["Tracks"][track_id]["Genre"]
+        else:
+            genre = ""
+        genre = genre.strip()
+        if genre not in genres:
+            genres[genre] = []
+        genres[genre].append(track_id)
+
         loc = itunes["Tracks"][track_id]["Location"]
         loc = loc.split("iTunes/")
         if len(loc) >= 2:
@@ -19,8 +41,15 @@ for track_id in itunes["Tracks"]:
         else:
             print loc
             sys.stdout.write(".")
-    except:
-        pass
+    except Exception, e:
+        print "Error processing track %s:" % track_id,
+        if "Location" not in itunes["Tracks"][track_id]:
+            print "Song is likely an online iCloud or iTunes Store song."
+            track_errors[track_id] = "No location field, likely online iCloud/iTunes Store song."
+        else:
+            track_errors[track_id] = "Unknown error, see log for details"
+            print e
+            print itunes["Tracks"][track_id]
 
 playlists = {}
 rootPlaylists = []
@@ -55,8 +84,11 @@ def checkPlaylist(id, level=0, topPath=[]):
             try:
                 track = tracks[str(trackID["Track ID"])]
                 playlistTracks.append(track)
-            except:
-                pass
+            except KeyError:
+                msg = "# Unknown track ID %s" % trackID["Track ID"]
+                if trackID["Track ID"] in track_errors:
+                    msg += ": %s" % track_errors[trackID["Track ID"]]
+                playlistTracks.append(msg)
 
     def addChildTracksToSelf(childTracks):
         for track in childTracks:
@@ -69,12 +101,51 @@ def checkPlaylist(id, level=0, topPath=[]):
             addChildTracksToSelf(checkPlaylist(child, level=level+1, topPath=path))
 
     encodedPath = u"／".join(path)
-    with open(u"%s %s.m3u" % (playlistPrefix[id], encodedPath), "w+") as file:
-
+    playlist_path = u"%s %s.m3u" % (playlistPrefix[id], encodedPath)
+    with open(playlist_path, "w+") as file:
         for track in playlistTracks:
             file.write("%s\n" % track)
         file.close()
+    if playlist_path in current_playlists:
+        current_playlists.remove(playlist_path)
+    if os.path.getsize(playlist_path) < 1:
+        print "Deleting file %s: File is empty" % playlist_path
+        os.unlink(os.path.join(output_path, playlist_path))
     return playlistTracks
 
 for rootPlaylist in rootPlaylists:
     print len(checkPlaylist(rootPlaylist))
+
+
+for genre in genres:
+    genre_name = genre.replace("/", u"／")
+    if not genre_name:
+        genre_name = "No Genre"
+    if len(genres[genre]) < 1:
+        continue
+
+    track_count = 0
+    playlist_path = u"♫ Genre／%s.m3u" % genre_name
+    with open(playlist_path, "w+") as file:
+        for track in genres[genre]:
+            if track not in tracks:
+                file.write("# Unknown track ID %s" % track)
+                if track in track_errors:
+                    file.write(": %s" % track_errors[track])
+                file.write("\n")
+                continue
+            file.write("%s\n" % tracks[track])
+            track_count += 1
+        file.close()
+    if playlist_path in current_playlists:
+        current_playlists.remove(playlist_path)
+    if os.path.getsize(playlist_path) < 1:
+        print "Deleting file %s: File is empty" % playlist_path
+        os.unlink(os.path.join(output_path, playlist_path))
+
+print current_playlists
+for playlist_path in current_playlists:
+    if not playlist_path or not playlist_path.strip():
+        continue
+    print "Deleting file %s: No references found" % playlist_path
+    os.unlink(os.path.join(output_path, playlist_path))
