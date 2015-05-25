@@ -103,6 +103,8 @@ def checkPlaylist(id, level=0, topPath=[]):
     encodedPath = u"／".join(path)
     playlist_path = u"%s %s.m3u" % (playlistPrefix[id], encodedPath)
     with open(playlist_path, "w+") as file:
+        if playlistPrefix[id] != u"♪":
+            playlistTracks.sort()
         for track in playlistTracks:
             file.write("%s\n" % track)
         file.close()
@@ -127,15 +129,19 @@ for genre in genres:
     track_count = 0
     playlist_path = u"♫ Genre／%s.m3u" % genre_name
     with open(playlist_path, "w+") as file:
+        output = ""
         for track in genres[genre]:
             if track not in tracks:
-                file.write("# Unknown track ID %s" % track)
+                output += "# Unknown track ID %s" % track
                 if track in track_errors:
-                    file.write(": %s" % track_errors[track])
-                file.write("\n")
+                    output += ": %s" % track_errors[track]
+                output += "\n"
                 continue
-            file.write("%s\n" % tracks[track])
+            output += "%s\n" % tracks[track]
             track_count += 1
+        output = output.split("\n")
+        output = "\n".join(sorted(output))
+        file.write(output)
         file.close()
     if playlist_path in current_playlists:
         current_playlists.remove(playlist_path)
