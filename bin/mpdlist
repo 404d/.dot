@@ -86,8 +86,8 @@ def checkPlaylist(id, level=0, topPath=[]):
                 playlistTracks.append(track)
             except KeyError:
                 msg = "# Unknown track ID %s" % trackID["Track ID"]
-                if trackID["Track ID"] in track_errors:
-                    msg += ": %s" % track_errors[trackID["Track ID"]]
+                if str(trackID["Track ID"]) in track_errors:
+                    msg += ": %s" % track_errors[str(trackID["Track ID"])]
                 playlistTracks.append(msg)
 
     def addChildTracksToSelf(childTracks):
@@ -115,9 +115,6 @@ def checkPlaylist(id, level=0, topPath=[]):
         os.unlink(os.path.join(output_path, playlist_path))
     return playlistTracks
 
-for rootPlaylist in rootPlaylists:
-    print len(checkPlaylist(rootPlaylist))
-
 
 for genre in genres:
     genre_name = genre.replace("/", u"／")
@@ -128,6 +125,7 @@ for genre in genres:
 
     track_count = 0
     playlist_path = u"♫ Genre／%s.m3u" % genre_name
+    print "Creating %s" % playlist_path
     with open(playlist_path, "w+") as file:
         output = ""
         for track in genres[genre]:
@@ -140,7 +138,7 @@ for genre in genres:
             output += "%s\n" % tracks[track]
             track_count += 1
         output = output.split("\n")
-        output = "\n".join(sorted(output))
+        output = "\n".join(sorted([line for line in output if line]))
         file.write(output)
         file.close()
     if playlist_path in current_playlists:
@@ -149,7 +147,11 @@ for genre in genres:
         print "Deleting file %s: File is empty" % playlist_path
         os.unlink(os.path.join(output_path, playlist_path))
 
-print current_playlists
+
+for rootPlaylist in rootPlaylists:
+    print len(checkPlaylist(rootPlaylist))
+
+
 for playlist_path in current_playlists:
     if not playlist_path or not playlist_path.strip():
         continue
