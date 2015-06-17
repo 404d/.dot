@@ -1,0 +1,8 @@
+[Unit]
+Description=Background Changer Script
+
+[Service]
+ExecStart=/home/sl/.dot/bin/groundbreaker
+
+[Install]
+WantedBy=groundbreaker.timer
