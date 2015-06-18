@@ -18,6 +18,11 @@ set $screen_secondary LVDS1
 set $screen_auxiliary LVDS1
 """)
 
+if host == "maou":
+    print("""
+set $backlight_screen_path /sys/class/backlight/intel_backlight
+""")
+
 print("""
 set $basedir %s
 """ % os.path.join(os.path.expanduser("~"), ".i3"))
