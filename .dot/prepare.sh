@@ -9,26 +9,26 @@ confirm() {
     [ "$CONFIRMATION" = "Y" ]
 }
 lnk() {
-    if [ -h $HOME/$1 ]; then
+    if [ -h "$HOME/$1" ]; then
         echo "Skipping $1";
         return
     elif ([ -s "$HOME/$1" ] || [ -d "$HOME/$1" ]); then
         confirm $HOME/$1 || return
     fi
     echo "Linking $1"
-    ln -s $HOME/.dot/$1
+    ln -s "$HOME/.dot/$1"
 }
 
 lnkc() {
-    if [ -h $2 ]; then
+    if [ -h "$2" ]; then
         echo "Skipping $2";
         return
-    elif ([ -s $2 ] || [ -d $2 ]); then
-        confirm $2 || return
+    elif ([ -s "$2" ] || [ -d "$2" ]); then
+        confirm "$2" || return
     fi
     echo "Linking $2"
-    mkdir -p $(dirname $2)
-    ln -s $1 $2
+    mkdir -p "$(dirname $2)"
+    ln -s "$1" "$2"
 }
 
 lnk .bash
