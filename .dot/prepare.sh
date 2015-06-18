@@ -3,43 +3,32 @@ cd $HOME/.dot
 git submodule update --init --recursive
 cd $HOME
 confirm() {
-    echo "File or folder already exists: $HOME/$1"
+    echo "File or folder already exists: $1"
     echo "Replace? (Y/n)"
     read CONFIRMATION
-    if [ $CONFIRMATION = "Y" ]; then
-        echo "Replacing $1";
-        rm -rf $HOME/$1
-        ln -s $HOME/.dot/$1
-    fi
+    [ "$CONFIRMATION" = "Y" ]
 }
 lnk() {
     if [ -h $HOME/$1 ]; then
         echo "Skipping $1";
-    elif [ -s $HOME/$1 ]; then
-        confirm $1
-    else
-        if [ -d $HOME/$1 ]; then
-            confirm $1
-        else
-            echo "Linked $1"
-            ln -s $HOME/.dot/$1
-        fi
+        return
+    elif ([ -s "$HOME/$1" ] || [ -d "$HOME/$1" ]); then
+        confirm $HOME/$1 || return
     fi
+    echo "Linking $1"
+    ln -s $HOME/.dot/$1
 }
 
 lnkc() {
     if [ -h $2 ]; then
         echo "Skipping $2";
-    elif [ -s $2 ]; then
-        confirm $2
-    else
-        if [ -d $2 ]; then
-            confirm $2
-        else
-            echo "Linked $2"
-            ln -s $1 $2
-        fi
+        return
+    elif ([ -s $2 ] || [ -d $2 ]); then
+        confirm $2 || return
     fi
+    echo "Linking $2"
+    mkdir -p $(dirname $2)
+    ln -s $1 $2
 }
 
 lnk .bash
@@ -56,6 +45,7 @@ lnk .tmux
 lnk .tmux.conf
 lnk .powerline
 lnkc $HOME/.powerline $HOME/.config/powerline
+lnkc $HOME/.dot/systemd-user $HOME/.config/systemd/user
 lnk .vim
 lnk .vimrc
 lnk .zsh
