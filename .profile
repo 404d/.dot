@@ -47,7 +47,8 @@ init_compositor() {
             # Copy unmodified regions from front buffer instead of redrawing them all.
             compositor_options_glx='--backend glx --glx-no-stencil --glx-copy-from-front'
         fi
-        export CMD_COMPOSITOR="compton --config ~/.compton.conf --daemon --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
+        # -b -- Daemonize
+        export CMD_COMPOSITOR="compton --config ~/.compton.conf -b --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
         ((eval $CMD_COMPOSITOR) &) || true
         export COMPOSITOR=compton
     fi
@@ -84,7 +85,7 @@ if [ `hostname` = "Katsumi" ]; then
     compositor_options_extra='--vsync opengl-mswc'
 fi
 
-if [ $COMPOSITOR_STARTED != 1 ]; then
+if [ -z $COMPOSITOR_STARTED ]; then
     init_compositor
 fi
 
