@@ -10,7 +10,7 @@ set $screen_primary DVI-D-0
 set $screen_secondary HDMI-0
 set $screen_auxiliary VGA-0
 """)
-elif host == "katsumi":
+elif host in ["katsumi", "maou"]:
     print("""
 # Host-specific configuration variables
 set $screen_primary LVDS1

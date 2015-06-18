@@ -29,6 +29,8 @@ if host == "yukiho":
     keyboard = "g710+"
 elif host == "katsumi":
     keyboard = "apple-mbp"
+elif host == "maou":
+    keyboard = "hp-probook"
 
 if keyboard == "apple":
     Mapping(name="ablaze screen", code="$mod+192")
@@ -51,6 +53,14 @@ elif keyboard == "g710+":
     Mapping(name="ablaze public region", code="$mod+Shift+172")
     Mapping(name="ablaze public window", code="$mod+Shift+174")
     Mapping(name="ablaze public screen", code="$mod+Shift+173")
+
+elif keyboard == "hp-probook":
+    Mapping(name="ablaze region", code="$mod+173")
+    Mapping(name="ablaze window", code="$mod+172")
+    Mapping(name="ablaze screen", code="$mod+171")
+    Mapping(name="ablaze public region", code="$mod+Shift+173")
+    Mapping(name="ablaze public window", code="$mod+Shift+172")
+    Mapping(name="ablaze public screen", code="$mod+Shift+171")
 
 for name in mappings:
     if name in keys:
