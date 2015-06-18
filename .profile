@@ -84,6 +84,10 @@ if [ `hostname` = "Katsumi" ]; then
     fi
     compositor_options_extra='--vsync opengl-mswc'
 fi
+if [ `hostname` = "Maou" ]; then
+    COMPOSITOR_SHADOW='0'
+    COMPOSITOR_FADE='0'
+fi
 
 if [ -z $COMPOSITOR_STARTED ]; then
     init_compositor
