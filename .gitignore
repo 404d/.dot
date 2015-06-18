@@ -8,3 +8,4 @@ away.log
 /.vim/bundle/taghighlight
 /.vim/undo
 /.vim/tmp
+/.i3/config
