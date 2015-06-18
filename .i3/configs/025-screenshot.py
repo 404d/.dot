@@ -3,7 +3,7 @@ import platform
 host = platform.node().lower()
 
 keys = {}
-class Key:
+class Key(object):
     def __init__(self, name, action, release=False):
         self.name = name
         self.action = action
@@ -11,7 +11,7 @@ class Key:
         keys[name] = self
 
 mappings = {}
-class Mapping:
+class Mapping(object):
     def __init__(self, name, code=None, sym=None):
         self.name = name
         self.code = code
@@ -60,6 +60,6 @@ for name in mappings:
         if key.release:
             prefix = " --release"
         if mapping.code:
-            print "bindcode%s %s %s" % (prefix, mapping.code, key.action)
+            print("bindcode%s %s %s" % (prefix, mapping.code, key.action))
         elif mapping.sym:
-            print "bindsym%s %s %s" % (prefix, mapping.sym, key.action)
+            print("bindsym%s %s %s" % (prefix, mapping.sym, key.action))
