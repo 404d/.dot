@@ -20,12 +20,13 @@ for file in sys.argv[1:]:
         tags = "%s meta:screenshot" % base
     else:
         response = requests.post("http://ablaze.web/api/media/upload", files={"file": open(file, "rb").read()}, params={"tags": tags})
-        print response.content
+        content = response.content.decode("utf-8")
+        print(content)
         try:
-            data = json.loads(response.content)
+            data = json.loads(content)
             if public:
                 requests.get("http://ablaze.web/api/media/%i/public" % data["id"])
                 data["url"] = data["url"].replace("ablaze.cdn/cdn","flymr.liquidcode.net")
             proc = subprocess.Popen(["xclip","-selection","c"], stdin=subprocess.PIPE)
-            proc.communicate(data["url"])
+            proc.communicate(data["url"].encode("utf-8"))
         except: pass
