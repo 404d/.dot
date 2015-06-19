@@ -116,7 +116,7 @@ if command_exists redshift; then
     (redshift -t 6500K:3700K &) || true
 fi
 
-setxkbmap -option 'ctrl:swapcaps' || true
+setxkbmap -option 'ctrl:nocaps' || true
 
 if command_exists dropbox; then
     (dropbox start &) || true
