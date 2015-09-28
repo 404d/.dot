@@ -210,7 +210,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 set t_Co=256  " force 256 colors
-colorscheme molokai
+"colorscheme molokai
 
 if has("autocmd")
   " Filetypes and indenting settings
