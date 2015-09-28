@@ -216,3 +216,9 @@ hi SyntasticErrorSign   ctermfg=196 ctermbg=88 guifg=#ff0000 guibg=#870000
 hi SyntasticWarningSign ctermfg=220 ctermbg=94 guifg=#ffdf00 guibg=#875f00
 hi SyntasticErrorLine               ctermbg=88               guibg=#870000
 hi SyntasticWarningLine             ctermbg=94               guibg=#875f00
+
+" CtrlSpace:
+hi CtrlSpaceSelected term=bold cterm=bold gui=bold
+hi CtrlSpaceNormal ctermfg=15 guibg=#252625
+hi CtrlSpaceSearch term=bold ctermfg=166 gui=bold guifg=#ef5939
+hi CtrlSpaceStatus ctermfg=81 ctermbg=15 guifg=#66D9EF guibg=White

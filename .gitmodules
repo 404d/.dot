@@ -94,3 +94,18 @@
 [submodule ".vim/bundle/vim-easymotion"]
 	path = .vim/bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion
+[submodule ".vim/bundle/vim-ctrlspace"]
+	path = .vim/bundle/vim-ctrlspace
+	url = https://github.com/szw/vim-ctrlspace
+[submodule ".vim/bundle/vim-go"]
+	path = .vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go
+[submodule ".vim/bundle/vim-hy"]
+	path = .vim/bundle/vim-hy
+	url = https://github.com/hylang/vim-hy
+[submodule ".vim/bundle/vim-latex-vim-latex"]
+	path = .vim/bundle/vim-latex-vim-latex
+	url = git://git.code.sf.net/p/vim-latex/vim-latex
+[submodule ".vim/bundle/paredit.vim"]
+	path = .vim/bundle/paredit.vim
+	url = https://github.com/vim-scripts/paredit.vim
