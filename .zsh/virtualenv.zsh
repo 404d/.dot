@@ -33,5 +33,12 @@ function denv {
     return $r
 }
 
+function renv {
+    if [ -n "${${VIRTUAL_ENV}// /}" ]; then
+        denv
+    fi
+    venv
+}
+
 # check for virtualenv at launch
 venv
