@@ -110,7 +110,7 @@ hi WildMenu        guifg=#66D9EF guibg=#000000
 
 if s:molokai_original == 1
    hi Normal          guifg=#F8F8F2 guibg=#272822
-   hi Comment         guifg=#75715E
+   hi Comment         guifg=#75715E guibg=#121212
    hi CursorLine                    guibg=#3E3D32
    hi CursorColumn                  guibg=#3E3D32
    hi LineNr          guifg=#BCBCBC guibg=#3B3A32
@@ -205,17 +205,21 @@ if &t_Co > 255
    hi WildMenu        ctermfg=81  ctermbg=16
 
    hi Normal          ctermfg=252
-   hi Comment         ctermfg=59
+   hi Comment         ctermfg=246 ctermbg=236
    hi CursorLine                  ctermbg=234   cterm=none
    hi CursorColumn                ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234
    hi NonText         ctermfg=250 ctermbg=234
 end
 
+hi SyntasticError                   ctermbg=88               guibg=#870000
+hi SyntasticWarning                 ctermbg=94               guibg=#875f00
+hi SyntasticErrorLine               ctermbg=52               guibg=#5f0000
+hi SyntasticWarningLine             ctermbg=58               guibg=#5f5f00
 hi SyntasticErrorSign   ctermfg=196 ctermbg=88 guifg=#ff0000 guibg=#870000
 hi SyntasticWarningSign ctermfg=220 ctermbg=94 guifg=#ffdf00 guibg=#875f00
-hi SyntasticErrorLine               ctermbg=88               guibg=#870000
-hi SyntasticWarningLine             ctermbg=94               guibg=#875f00
+
+hi ColorColumn                      ctermbg=52               guibg=#5f0000
 
 " CtrlSpace:
 hi CtrlSpaceSelected term=bold cterm=bold gui=bold
