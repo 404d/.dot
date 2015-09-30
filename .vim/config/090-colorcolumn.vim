@@ -10,5 +10,4 @@ function! Update_ColorColumn()
     exe 'set colorcolumn='.l:width
 endfunction
 
-au VimEnter * execute Update_ColorColumn()
-au Syntax * execute Update_ColorColumn()
+au FileType * execute Update_ColorColumn()
