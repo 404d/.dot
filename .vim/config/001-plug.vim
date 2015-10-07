@@ -5,7 +5,7 @@ if !filereadable(VimPlugDir)
     echo ""
     silent !mkdir -p ~/.vim/autoload
     silent !mkdir -p ~/.vim/bundle
-    silent !wget --quiet -O ~/.vim/autoload/plug https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim || curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !wget --quiet -O ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim || curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let s:IWantPlug=0
 endif
 
