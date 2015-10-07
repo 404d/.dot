@@ -5,7 +5,7 @@ if !filereadable(VimPlugDir)
     echo ""
     silent !mkdir -p ~/.vim/autoload
     silent !mkdir -p ~/.vim/bundle
-    silent !curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !wget --quit -O ~/.vim/autoload/plug || curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let s:IWantPlug=0
 endif
 
@@ -36,6 +36,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'zhaocai/GoldenView.Vim'
 Plug 'jceb/vim-orgmode'
 Plug 'chrisbra/SudoEdit.vim'
+if has("gui_running")
+    Plug 'jeaye/color_coded'
+endif
 Plug 'jaxbot/github-issues.vim' | Plug 'tpope/vim-fugitive'
 
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
