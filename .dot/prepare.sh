@@ -48,6 +48,7 @@ lnk .tmux.conf
 lnk .powerline
 lnkc $HOME/.powerline $HOME/.config/powerline
 lnkc $HOME/.dot/systemd-user $HOME/.config/systemd/user
+lnkc $HOME/.dot/fontconfig $HOME/.config/fontconfig
 lnk .ncmpcpp
 lnk .vim
 lnk .vimrc
