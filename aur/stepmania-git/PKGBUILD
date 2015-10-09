@@ -1,0 +1,67 @@
+# Maintainer: Devin J. Pohly <djpohly+arch@gmail.com>
+# Contributor: sl1pkn07
+# Contributor: Ryan Peters <sloshy45 at sbcglobal dot net>
+# Contributor: Artefact2 <artefact2@gmail.com>
+# Contributor: Lauri Niskanen <ape@ape3000.com>
+# Contributor: Travis Nickles <ryoohki7@yahoo.com>
+# Contributor: Stefan Lohmaier <noneuss at gmail dot com>
+# Contributor: Simen Lybekk (404'd) <simen+aur@lybekk.no>
+pkgname=stepmania-git
+_shortname=stepmania
+pkgver=v5.0.9.r209.gde1313a
+pkgrel=1
+pkgdesc="Advanced cross-platform rhythm game designed for home and arcade use"
+arch=('i686' 'x86_64')
+url="http://www.stepmania.com/"
+license=('MIT')
+depends=('gtk2' 'libmad' 'glew' 'ffmpeg' 'jack' 'libpng' 'libjpeg' 'yasm')
+makedepends=('git')
+provides=('stepmania')
+conflicts=('stepmania')
+replaces=('sm-ssc-hg')
+install="$pkgname.install"
+source=("git+https://github.com/$_shortname/$_shortname.git"
+        "$_shortname.sh")
+md5sums=('SKIP'
+         '1cc95d5c33c9fac516ff1912be7e63c9')
+
+pkgver() {
+  cd "$srcdir/$_shortname"
+  git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "$srcdir/$_shortname/Build"
+}
+
+build() {
+  cd "$srcdir/$_shortname/Build"
+  cmake ..
+  make -j2
+}
+
+package() {
+  cd "$srcdir/$_shortname"
+
+  # Install program
+  install -d "$pkgdir/opt/$_shortname"/{RandomMovies,Packages}
+  install -t "$pkgdir/opt/$_shortname/" stepmania GtkModule.so
+  install -D "$srcdir/$_shortname.sh" "$pkgdir/usr/bin/$_shortname"
+  # Install ffmpeg libs
+  #cp -t "$pkgdir/opt/$_shortname" -d --parents bundle/ffmpeg/*/*.so{,.*}
+
+  # Install miscellaneous directories
+  cp -r -t "$pkgdir/opt/$_shortname/" Announcers BGAnimations BackgroundEffects \
+      BackgroundTransitions Characters Courses Data Docs NoteSkins Scripts \
+      Songs Themes
+
+  # Install auxiliary files
+  install -Dm644 stepmania.desktop "$pkgdir/usr/share/applications/stepmania.desktop"
+  install -d "$pkgdir/usr/share"
+  cp -r icons "$pkgdir/usr/share/icons"
+
+  # Install license
+  install -Dm644 "Docs/Licenses.txt" "$pkgdir/usr/share/licenses/$pkgname/Licenses.txt"
+}
+
+# vim:set ts=2 sw=2 et:
