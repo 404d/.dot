@@ -87,6 +87,8 @@ fi
 if [ `hostname` = "Maou" ]; then
     COMPOSITOR_SHADOW='0'
     COMPOSITOR_FADE='0'
+    # Get rid of that stupid context menu button
+    xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 fi
 
 if [ -z $COMPOSITOR_STARTED ]; then

@@ -2,6 +2,7 @@
 Description=Background Changer Script
 
 [Service]
+Type=oneshot
 ExecStart=/home/sl/.dot/bin/groundbreaker
 
 [Install]
