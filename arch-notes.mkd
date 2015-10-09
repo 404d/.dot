@@ -1,0 +1,117 @@
+- .dot (obviously)
+- AUR
+    - package-query
+    - yaourt
+    - skippy-xd-git
+    - pantheon greier
+        - pantheon-files
+        - gtk tema
+        - ikoner
+        - greeter
+- Pakker
+    - tmux
+    - cmake
+    - scim + anthy (scim, anthy, scim-anthy)
+    - lightdm
+    - ctags
+    - pulseaudio, pavucontrol
+        - Alle sinks er muted by default
+        - Output av `pacmd list-sinks` har blitt endret,
+          StatusCenter trenger en oppdatering.
+    - python3 + python2
+        - github: escrotum
+        - .dot/powerline
+        - requests
+        - Husk å installer både pip og virtualenv via pacman!
+          Hvis ikke kan du få versjonskollisjoner mot python2 og
+          python3.
+    - network-manager
+        - network-manager-applet
+        - dhclient (ipv6)
+        - networkmanager-openvpn
+        - gnome-keyring -- kreves for god og trygg lagring av blant annet WiFi passord, og er greit å ha uansett.
+    - ntp
+- Kompiler YouCompleteMe
+- StatusCenter
+- Oppsett av Xprofile
+    - .profile execution er litt rar på Arch, satte dash til shell og +x og ser ut til å funke bedre nå.
+      Fila heter forresten .xprofile og ser ut til å bli parset med noe som støtter "source"
+- Compositor er broken on login
+    - `--daemon` funket ikke av en eller annen grunn, byttet ut med `-b`
+- Sett opp path til å inkludere .dot/bin
+- mkdir -p ~/Pictures/Screenshots
+- `beep` trenger setuid
+- Om du har problemer med at kommandoer som kjøres via i3 keybinds ikke kan bli funnet i $PATH, husk at $PATH
+  må settes i .xprofile for at dette skal funke
+- For å aktivere brukerunits med systemd: systemctl --user enable groundbreaker.timer
+
+
+# Anthy + SCIM
+Installer pakkene:
+- scim
+- anthy
+- anthy-scim
+
+Legg til følgende i .xprofile:
+````bash
+export XMODIFIERS="@im=SCIM"
+export GTK_IM_MODULE="xim"
+export QT_IM_MODULE="xim"
+scim -d
+````
+
+Legg til følgende i ~/.scim/global: (fra ArchWiki artikkelen for scim, under "Locale-related files")
+````bash
+/SupportedUnicodeLocales = en_US.UTF-8,nb_NO.UTF-8
+````
+
+# dconf
+Etter installasjon krever dconf følgende:
+````bash
+mkdir -p /etc/dconf/db
+dconf update
+````
+
+# Fonts
+Bare å kopiere de inn i `~/.fonts`
+
+# urxvt
+Kopier over clipboard og font-size til /usr/lib/urxvt/perl
+
+# systemd
+## Timers
+Lag to units:
+
+- unit.service - det som skal kjøre
+- unit.timer - beskrivelse om når den skal kjøre
+````bash
+systemctl --user enable unit.timer
+systemctl --user enable unit.service
+systemctl --user start unit.timer
+````
+
+# PulseAudio
+## Network streaming
+I `/etc/pulse/default.pa`:
+
+`load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1;10.0.0.0/16 auth-anonymous=1`
+
+## Redirecting output to another PulseAudio host
+`pax11publish -e -S hostname`
+
+Revert: `pax11publish -e -r`
+
+# rsyslog
+rsyslogs rundir blir ikke skapt ved install. `mkdir -p /var/spool/rsyslog`
+
+Av en eller annen grunn vil rsyslog bruke det første hostnamet som blir definert for en ip i /etc/hosts. Dette kan løses ved å putte maskinens hostname helt først i 127.0.0.1 og ::1 definisjonene
+
+# Groundbreaker
+Groundbreaker rewriten bør bli strukturert slik at alle moduler skal kunne kjøres i en Twisted factory om ønsket.
+Dette kan f.eks. bli gjort slik som at Bones har en default manager, men i teorien kan få spesialtilpassede managere
+som UI-versjonen som benyttet seg av urwid.
+Dette vil simplifisere tankene om en Groundbreaker-daemon som pusher bakgrunner til klienter, og fortsatt bevare
+det gamle mønsteret med lokal klient.
+
+# xdg-open
+Chromium på Arch har et unormalt navn. Patch xdg-open (det er et shell-skript) eller sett BROWSER-environment variabelen.
