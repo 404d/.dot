@@ -109,9 +109,6 @@ if command_exists mpd; then
     if command_exists mpdscribble; then
         (mpdscribble &) || true
     fi
-    if command_exists urxvtc && command_exists ncmpcpp; then
-        (urxvtc -title "[scratchpad] ncmpcpp" -e ncmpcpp) || true
-    fi
 fi
 
 if command_exists redshift; then
