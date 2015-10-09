@@ -1,0 +1,51 @@
+allow_for_physical_item_deletion = yes
+ask_before_clearing_playlists = "yes"
+autocenter_mode = "no"
+browser_display_mode = "columns"
+clock_display_seconds = "yes"
+cyclic_scrolling = "no"
+color1 = 255
+color2 = 250
+main_window_highlight_color = 255
+window_border_color = 39
+active_window_border = 45
+screen_switcher_mode = playlist,search_engine,media_library,playlist_editor
+active_column_color = 32
+display_bitrate = "yes"
+empty_tag_color = "magenta"
+empty_tag_marker = "None"
+#fancy_scrolling = "yes"
+ask_for_locked_screen_width_part = no
+follow_now_playing_lyrics = yes
+header_text_scrolling = yes
+ignore_leading_the = "yes"
+jump_to_now_playing_song_at_start = "yes"
+#media_library_display_date = "no"
+#media_library_left_column = "A"
+media_library_primary_tag = album_artist
+mouse_list_scroll_whole_page = "no"
+#mpd_communication_mode = "notifications"
+#ncmpc_like_songs_adding = "yes"
+playlist_display_mode = "columns"
+playlist_separate_albums = "yes"
+playlist_shorten_total_times = "yes"
+playlist_show_mpd_host = "yes"
+progressbar_look = "─┤┄"
+progressbar_color = black
+main_window_color = 248
+progressbar_elapsed_color = white
+regular_expressions = extended
+search_engine_display_mode = "columns"
+song_columns_list_format = "(4f)[252]{P} (7f)[green]{l} (25)[cyan]{a|p|A|c} (40)[yellow]{t|f} (30)[red]{b}"
+user_interface = "alternative"
+visualizer_color = "white cyan blue green yellow magenta red"
+visualizer_output_name = "FIFO - Visualizer"
+visualizer_fifo_path = "/home/sl/.mpd/visualizer.fifo"
+visualizer_in_stereo = yes
+visualizer_sync_interval = 30
+
+## Dette lar meg låse playlist-skjermen ved oppstart, uten å ha en slaveskjerm
+#  på høyre side.
+startup_screen = playlist
+startup_slave_screen = playlist
+##

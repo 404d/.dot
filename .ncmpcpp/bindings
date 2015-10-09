@@ -1,0 +1,148 @@
+## Enable support for mouse events
+def_key "mouse"
+  mouse_event
+#
+## Delete
+def_key "d"
+    delete_playlist_items
+def_key "d"
+    delete_browser_items
+def_key "d"
+    delete_stored_playlist
+#
+## Goto
+# Position in song
+def_key "|"
+    jump_to_position_in_song
+## Screens
+# Song info
+def_key "i"
+    show_song_info
+## Selection
+# Select current
+def_key "space"
+    select_item
+def_key "space"
+    add_item_to_playlist
+def_key "space"
+    toggle_visualization_type
+def_key "ctrl-p"
+    set_selected_items_priority
+# Select all search results
+def_key "alt-space"
+    select_found_items
+## Search
+# Next result
+def_key "n"
+    next_found_item
+# Previous result
+def_key "N"
+    previous_found_item
+## Use vim-like arrow keys for movement
+# List scrolling
+def_key "j"
+    scroll_down
+def_key "k"
+    scroll_up
+def_key "down"
+    scroll_down
+def_key "up"
+    scroll_up
+# Album scroll
+def_key "J"
+    scroll_down_album
+def_key "K"
+    scroll_up_album
+# Other regular stuff
+def_key "home"
+    move_home
+def_key "end"
+    move_end
+def_key "page_up"
+    page_up
+def_key "page_down"
+    page_down
+# Column navigation in i.e. media library
+def_key "h"
+    previous_column
+def_key "l"
+    next_column
+def_key "left"
+    previous_column
+def_key "right"
+    next_column
+# Screen switching during a split
+def_key "h"
+    master_screen
+def_key "l"
+    slave_screen
+def_key "left"
+    master_screen
+def_key "right"
+    slave_screen
+#
+## Disable default bindings
+def_key "up"
+    dummy
+def_key "down"
+    dummy
+def_key "left"
+    dummy
+def_key "right"
+    dummy
+def_key "["
+    dummy
+def_key "]"
+    dummy
+def_key "{"
+    dummy
+def_key "}"
+    dummy
+def_key "ctrl-h"
+    dummy
+def_key "f"
+    dummy
+def_key "b"
+    dummy
+def_key "T"
+    dummy
+def_key "|"
+    dummy
+def_key "insert"
+    dummy
+def_key "ctrl-_"
+    dummy
+def_key "B"
+    dummy
+def_key "`"
+    dummy
+def_key "#"
+    dummy
+def_key "Y"
+    dummy
+def_key ","
+    dummy
+def_key "."
+    dummy
+def_key "w"
+    dummy
+def_key "G"
+    dummy
+def_key "~"
+    dummy
+def_key "P"
+    dummy
+def_key "\\"
+    dummy
+def_key "!"
+    dummy
+def_key "g"
+    dummy
+def_key "i"
+    dummy
+def_key "I"
+    dummy
+def_key "L"
+    dummy
+def_key "F"
+    dummy
