@@ -7,6 +7,8 @@ import mutagen
 MPD_PATH="/home/sl/Music"
 file = subprocess.Popen(["mpc", "--format", "%file%", "current"], stdout=subprocess.PIPE).communicate()[0]
 file = file.strip("\n")
+if not file:
+    raise SystemExit
 path = os.path.join(MPD_PATH, file)
 cover_index = 0
 
