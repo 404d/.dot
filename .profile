@@ -59,9 +59,7 @@ export COMPOSITOR_FADE='1'
 export COMPOSITOR_OPACITY='1'
 export COMPOSITOR_GLX='1'
 if [ `hostname` = "Yukiho" ]; then
-    xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --left-of VGA-0 --primary || true
-    xrandr --output HDMI-0 --left-of DVI-D-0 || true
-    xrandr --output DVI-D-0 --primary || true
+    .dot/bin/screen-manage single gamecorner
     xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
     # Compositor config
@@ -70,7 +68,7 @@ if [ `hostname` = "Yukiho" ]; then
     COMPOSITOR_STARTED='1'
 
     if command_exists conky; then
-        for file in .conky/yukiho/*; do
+        for file in .conky/yukiho-1screen/*; do
             (conky -c $file &) || true
         done
     fi

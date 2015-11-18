@@ -1,0 +1,38 @@
+#!/usr/bin/zsh
+function Yukiho-reset {
+    # Can't disable main monitor because i3 exits when there are 0 enabled
+    # monitors, will use --auto instead
+    #xrandr --output DVI-D-0 --off
+    xrandr --auto
+    xrandr --output HDMI-0 --off
+    xrandr --output VGA-0 --off
+}
+
+$HOST-reset
+if [ -e $1 ]; then
+    xrandr --auto
+    exit
+fi
+
+case $HOST in
+    "Yukiho")
+        case $1 in 
+            "triple")
+                xrandr --auto
+                xrandr --output DVI-D-0 --gamma 1.5:1.5:1.5 --left-of VGA-0 --primary
+                xrandr --output HDMI-0 --left-of DVI-D-0
+                xrandr --output DVI-D-0 --primary
+            ;;
+            "single")
+                xrandr --output DVI-D-0 --mode 1920x1200 --primary
+            ;;
+        esac
+        case x$2 in
+            "xgamecorner")
+                xrandr --output HDMI-0 --mode 1920x1200
+            ;;
+        esac
+    ;;
+esac
+
+pkill -1 conky
