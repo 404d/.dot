@@ -14,6 +14,7 @@ tracks = {}
 genres = {}
 track_errors = {}
 current_playlists = []
+persist_ids = {}
 
 playlist_prefixes = u"⚙♫♪☰"
 for playlist in os.listdir(output_path):
@@ -24,6 +25,8 @@ for playlist in os.listdir(output_path):
         current_playlists.append(playlist)
 
 for track_id in itunes["Tracks"]:
+    persist_ids[track_id] = itunes["Tracks"][track_id]["Persistent ID"]
+
     try:
         if "Genre" in itunes["Tracks"][track_id] and itunes["Tracks"][track_id]["Genre"]:
             genre = itunes["Tracks"][track_id]["Genre"]
@@ -42,7 +45,10 @@ for track_id in itunes["Tracks"]:
             print loc
             sys.stdout.write(".")
     except Exception, e:
-        print "Error processing track %s:" % track_id,
+        error_trackid = track_id
+        if error_trackid in persist_ids:
+            error_trackid = persist_ids[error_trackid]
+        print "Error processing track %s:" % error_trackid,
         if "Location" not in itunes["Tracks"][track_id]:
             print "Song is likely an online iCloud or iTunes Store song."
             track_errors[track_id] = "No location field, likely online iCloud/iTunes Store song."
@@ -85,7 +91,11 @@ def checkPlaylist(id, level=0, topPath=[]):
                 track = tracks[str(trackID["Track ID"])]
                 playlistTracks.append(track)
             except KeyError:
-                msg = "# Unknown track ID %s" % trackID["Track ID"]
+                if trackID["Track ID"] in persist_ids:
+                    errormsg_id = persist_ids[trackID["Track ID"]]
+                else:
+                    errormsg_id = trackID["Track ID"]
+                msg = "# Unknown track ID %s" % errormsg_id
                 if str(trackID["Track ID"]) in track_errors:
                     msg += ": %s" % track_errors[str(trackID["Track ID"])]
                 playlistTracks.append(msg)
@@ -130,7 +140,7 @@ for genre in genres:
         output = ""
         for track in genres[genre]:
             if track not in tracks:
-                output += "# Unknown track ID %s" % track
+                output += "# Unknown track ID %s" % persist_ids[track]
                 if track in track_errors:
                     output += ": %s" % track_errors[track]
                 output += "\n"
