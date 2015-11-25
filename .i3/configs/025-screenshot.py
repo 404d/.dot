@@ -3,7 +3,7 @@ import platform
 host = platform.node().lower()
 
 keys = {}
-class Key:
+class Key(object):
     def __init__(self, name, action, release=False):
         self.name = name
         self.action = action
@@ -11,7 +11,7 @@ class Key:
         keys[name] = self
 
 mappings = {}
-class Mapping:
+class Mapping(object):
     def __init__(self, name, code=None, sym=None):
         self.name = name
         self.code = code
@@ -29,6 +29,8 @@ if host == "yukiho":
     keyboard = "g710+"
 elif host == "katsumi":
     keyboard = "apple-mbp"
+elif host == "maou":
+    keyboard = "hp-probook"
 
 if keyboard == "apple":
     Mapping(name="ablaze screen", code="$mod+192")
@@ -52,6 +54,14 @@ elif keyboard == "g710+":
     Mapping(name="ablaze public window", code="$mod+Shift+174")
     Mapping(name="ablaze public screen", code="$mod+Shift+173")
 
+elif keyboard == "hp-probook":
+    Mapping(name="ablaze region", code="$mod+173")
+    Mapping(name="ablaze window", code="$mod+172")
+    Mapping(name="ablaze screen", code="$mod+171")
+    Mapping(name="ablaze public region", code="$mod+Shift+173")
+    Mapping(name="ablaze public window", code="$mod+Shift+172")
+    Mapping(name="ablaze public screen", code="$mod+Shift+171")
+
 for name in mappings:
     if name in keys:
         key = keys[name]
@@ -60,6 +70,6 @@ for name in mappings:
         if key.release:
             prefix = " --release"
         if mapping.code:
-            print "bindcode%s %s %s" % (prefix, mapping.code, key.action)
+            print("bindcode%s %s %s" % (prefix, mapping.code, key.action))
         elif mapping.sym:
-            print "bindsym%s %s %s" % (prefix, mapping.sym, key.action)
+            print("bindsym%s %s %s" % (prefix, mapping.sym, key.action))

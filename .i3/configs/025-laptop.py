@@ -3,24 +3,24 @@ import platform
 host = platform.node().lower()
 
 keys = {}
-class Key:
+class Key(object):
     def __init__(self, name, action):
         self.name = name
         self.action = action
         keys[name] = self
 
 mappings = {}
-class Mapping:
+class Mapping(object):
     def __init__(self, name, code=None, sym=None):
         self.name = name
         self.code = code
         self.sym = sym
         mappings[name] = self
 
-Key(name="brightness up", action="exec zsh $basedir/bin/brightness-up.zsh")
-Key(name="brightness down", action="exec zsh $basedir/bin/brightness-down.zsh")
-Key(name="backlight up", action="exec zsh $basedir/bin/backlight-up.zsh")
-Key(name="backlight down", action="exec zsh $basedir/bin/backlight-down.zsh")
+Key(name="brightness up", action="exec zsh $basedir/bin/backlight.zsh $backlight_screen_path +")
+Key(name="brightness down", action="exec zsh $basedir/bin/backlight.zsh $backlight_screen_path -")
+Key(name="backlight up", action="exec zsh $basedir/bin/backlight.zsh $backlight_keyboard_path +")
+Key(name="backlight down", action="exec zsh $basedir/bin/backlight.zsh $backlight_keyboard_path -")
 
 Mapping(name="brightness down", code="232")
 Mapping(name="brightness up", code="233")
@@ -32,6 +32,6 @@ for name in mappings:
         key = keys[name]
         mapping = mappings[name]
         if mapping.code:
-            print "bindcode %s %s" % (mapping.code, key.action)
+            print("bindcode %s %s" % (mapping.code, key.action))
         elif mapping.sym:
-            print "bindsym %s %s" % (mapping.sym, key.action)
+            print("bindsym %s %s" % (mapping.sym, key.action))

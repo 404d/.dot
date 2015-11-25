@@ -3,14 +3,14 @@ import platform
 host = platform.node().lower()
 
 keys = {}
-class Key:
+class Key(object):
     def __init__(self, name, action):
         self.name = name
         self.action = action
         keys[name] = self
 
 mappings = {}
-class Mapping:
+class Mapping(object):
     def __init__(self, name, code=None, sym=None):
         self.name = name
         self.code = code
@@ -30,6 +30,8 @@ Key(name="volume mute", action="exec pulseaudio-ctl mute")
 
 if host == "yukiho":
     keyboard = "g710+"
+elif host == "maou":
+    keyboard = "hp-probook"
 else:
     keyboard = "apple"
 
@@ -45,7 +47,7 @@ if keyboard == "apple":
 
     Mapping(name="eject", sym="XF86Eject")
 
-elif keyboard == "g710+":
+elif keyboard in ["g710+", "hp-probook"]:
     Mapping(name="play", code="172")
     Mapping(name="stop", code="174")
     Mapping(name="previous", code="173")
@@ -56,6 +58,6 @@ for name in mappings:
         key = keys[name]
         mapping = mappings[name]
         if mapping.code:
-            print "bindcode %s %s" % (mapping.code, key.action)
+            print("bindcode %s %s" % (mapping.code, key.action))
         elif mapping.sym:
-            print "bindsym %s %s" % (mapping.sym, key.action)
+            print("bindsym %s %s" % (mapping.sym, key.action))

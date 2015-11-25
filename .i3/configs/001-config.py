@@ -4,21 +4,26 @@ import os
 host = platform.node().lower()
 
 if host == "yukiho":
-    print """
+    print("""
 # Host-specific configuration variables
 set $screen_primary DVI-D-0
 set $screen_secondary HDMI-0
 set $screen_auxiliary VGA-0
-"""
-elif host == "katsumi":
-    print """
+""")
+elif host in ["katsumi", "maou"]:
+    print("""
 # Host-specific configuration variables
 set $screen_primary LVDS1
 set $screen_secondary LVDS1
 set $screen_auxiliary LVDS1
-"""
+""")
 
-print """
+if host == "maou":
+    print("""
+set $backlight_screen_path /sys/class/backlight/intel_backlight
+""")
+
+print("""
 set $basedir %s
-""" % os.path.join(os.path.expanduser("~"), ".i3")
+""" % os.path.join(os.path.expanduser("~"), ".i3"))
 

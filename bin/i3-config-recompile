@@ -1,0 +1,4 @@
+#!/usr/bin/zsh
+cd $HOME/.i3
+$HOME/.dot/config-compile configs config
+i3-msg restart

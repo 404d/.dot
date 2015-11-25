@@ -47,7 +47,8 @@ init_compositor() {
             # Copy unmodified regions from front buffer instead of redrawing them all.
             compositor_options_glx='--backend glx --glx-no-stencil --glx-copy-from-front'
         fi
-        export CMD_COMPOSITOR="compton --config ~/.compton.conf --daemon --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
+        # -b -- Daemonize
+        export CMD_COMPOSITOR="compton --config ~/.compton.conf -b --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
         ((eval $CMD_COMPOSITOR) &) || true
         export COMPOSITOR=compton
     fi
@@ -81,8 +82,14 @@ if [ `hostname` = "Katsumi" ]; then
     fi
     compositor_options_extra='--vsync opengl-mswc'
 fi
+if [ `hostname` = "Maou" ]; then
+    COMPOSITOR_SHADOW='0'
+    COMPOSITOR_FADE='0'
+    # Get rid of that stupid context menu button
+    xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
+fi
 
-if [ $COMPOSITOR_STARTED != 1 ]; then
+if [ -z $COMPOSITOR_STARTED ]; then
     init_compositor
 fi
 
@@ -100,16 +107,13 @@ if command_exists mpd; then
     if command_exists mpdscribble; then
         (mpdscribble &) || true
     fi
-    if command_exists urxvtc && command_exists ncmpcpp; then
-        (urxvtc -title "[scratchpad] ncmpcpp" -e ncmpcpp) || true
-    fi
 fi
 
 if command_exists redshift; then
     (redshift -t 6500K:3700K &) || true
 fi
 
-setxkbmap -option 'ctrl:swapcaps' || true
+setxkbmap -option 'ctrl:nocaps' || true
 
 if command_exists dropbox; then
     (dropbox start &) || true
