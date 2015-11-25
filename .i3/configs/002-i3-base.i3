@@ -14,7 +14,6 @@ bindsym $mod+Shift+W kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
-bindsym $mod+Shift+d exec i3-dmenu-desktop
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal

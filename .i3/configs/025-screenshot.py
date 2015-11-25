@@ -23,8 +23,7 @@ Key(name="ablaze window", action="exec zsh $basedir/bin/i3-screenshot.zsh 0 -u")
 Key(name="ablaze region", release=True, action="exec zsh $basedir/bin/i3-screenshot.zsh 0 -s")
 Key(name="ablaze public screen", action="exec zsh $basedir/bin/i3-screenshot.zsh -p 0")
 Key(name="ablaze public window", action="exec zsh $basedir/bin/i3-screenshot.zsh -p -u")
-Key(name="noop ablaze region", action="exec true")
-Key(name="noop ablaze public region", action="exec true")
+Key(name="ablaze public region", release=True, action="exec zsh $basedir/bin/i3-screenshot.zsh -p -s")
 
 if host == "yukiho":
     keyboard = "g710+"
@@ -40,31 +39,25 @@ if keyboard == "apple":
     Mapping(name="ablaze public window", code="$mod+Shift+193")
 
 elif keyboard == "apple-mbp":
-    Mapping(name="noop ablaze region", code="Shift+121")
     Mapping(name="ablaze region", code="Shift+121")
     Mapping(name="ablaze window", code="Shift+122")
     Mapping(name="ablaze screen", code="Shift+123")
-    Mapping(name="noop ablaze public region", code="$mod+121")
     Mapping(name="ablaze public region", code="$mod+121")
     Mapping(name="ablaze public window", code="$mod+122")
     Mapping(name="ablaze public screen", code="$mod+123")
 
 elif keyboard == "g710+":
-    Mapping(name="noop ablaze region", code="$mod+172")
     Mapping(name="ablaze region", code="$mod+172")
     Mapping(name="ablaze window", code="$mod+174")
     Mapping(name="ablaze screen", code="$mod+173")
-    Mapping(name="noop ablaze public region", code="$mod+Shift+172")
     Mapping(name="ablaze public region", code="$mod+Shift+172")
     Mapping(name="ablaze public window", code="$mod+Shift+174")
     Mapping(name="ablaze public screen", code="$mod+Shift+173")
 
 elif keyboard == "hp-probook":
-    Mapping(name="noop ablaze region", code="$mod+173")
     Mapping(name="ablaze region", code="$mod+173")
     Mapping(name="ablaze window", code="$mod+172")
     Mapping(name="ablaze screen", code="$mod+171")
-    Mapping(name="noop ablaze public region", code="$mod+Shift+173")
     Mapping(name="ablaze public region", code="$mod+Shift+173")
     Mapping(name="ablaze public window", code="$mod+Shift+172")
     Mapping(name="ablaze public screen", code="$mod+Shift+171")
