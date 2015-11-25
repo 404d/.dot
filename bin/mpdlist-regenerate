@@ -1,5 +1,5 @@
 #!/bin/sh
 cd /home/sl/.mpd/playlists
 echo "Copying from server"
-scp 10.0.1.16:/Users/sl/Music/iTunes/"iTunes\ Music\ Library.xml" lib.xml
+scp 192.168.0.123:/Users/sl/Music/iTunes/"iTunes\ Music\ Library.xml" lib.xml
 mpdlist

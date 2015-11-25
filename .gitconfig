@@ -1,6 +1,7 @@
 [user]
 	name = Simen Lybekk
 	email = simen@lybekk.no
+	signingkey = 6F628817
 
 [gitweb]
     owner = Simen Lybekk
@@ -61,3 +62,5 @@
 	trustExitCode = true
 [core]
 	excludesfile = /home/sl/.gitignore
+[commit]
+	gpgsign = true
