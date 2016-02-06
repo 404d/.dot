@@ -27,6 +27,8 @@ Key(name="eject", action="exec eject")
 Key(name="volume up", action="exec pulseaudio-ctl up")
 Key(name="volume down", action="exec pulseaudio-ctl down")
 Key(name="volume mute", action="exec pulseaudio-ctl mute")
+Key(name="media volume up", action="exec zsh $basedir/bin/statuscenter-signal.zsh volume + 5")
+Key(name="media volume down", action="exec zsh $basedir/bin/statuscenter-signal.zsh volume - 5")
 
 if host == "yukiho":
     keyboard = "g710+"
@@ -34,6 +36,9 @@ elif host == "maou":
     keyboard = "hp-probook"
 else:
     keyboard = "apple"
+
+Mapping(name="media volume up", code="shift+123")
+Mapping(name="media volume down", code="shift+122")
 
 Mapping(name="volume up", code="123")
 Mapping(name="volume down", code="122")
