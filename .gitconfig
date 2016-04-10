@@ -62,5 +62,3 @@
 	trustExitCode = true
 [core]
 	excludesfile = /home/sl/.gitignore
-[commit]
-	gpgsign = true

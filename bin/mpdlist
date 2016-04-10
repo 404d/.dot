@@ -81,7 +81,7 @@ def checkPlaylist(id, level=0, topPath=[]):
         playlistPrefix[id] = u"⚙"
     if "Folder" in playlists[id]:
         playlistPrefix[id] = u"☰"
-    if path[-1] in ["Musikk", "####!####", "Bibliotek", "iTunes U", "Filmer", "Bøker", "Podcaster", "TV-programmer"]:
+    if path[-1] in ["Musikk", "Bibliotek", "iTunes U", "Filmer", "Bøker", "Podcaster", "TV-programmer"]:
         return []
     print u"%s %s: %s" % (u"+"*level, id, u"／".join(path))
 
