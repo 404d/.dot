@@ -27,7 +27,7 @@ Plug 'vim-scripts/Gundo'
 Plug 'myusuf3/numbers.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer', 'frozen': 1}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'junegunn/vim-github-dashboard', {'on': ['GHDashboard', 'GHActivity']}
 Plug 'goldfeld/vim-seek'
 Plug 'haya14busa/incsearch.vim'
@@ -39,7 +39,9 @@ Plug 'chrisbra/SudoEdit.vim'
 if has("gui_running")
     Plug 'jeaye/color_coded'
 endif
-Plug 'jaxbot/github-issues.vim' | Plug 'tpope/vim-fugitive'
+"Plug 'jaxbot/github-issues.vim' | Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+"Plug 'tybenz/vimdeck', {'do': 'gem install vimdeck'} | Plug 'vim-scripts/SyntaxRange'
 
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
@@ -47,7 +49,7 @@ Plug 'tpope/vim-markdown', {'for' : 'markdown'}
 
 Plug 'PotatoesMaster/i3-vim-syntax', {'for' : 'i3'}
 
-Plug 'kovisoft/paredit', {'for' : 'hy'}
+Plug 'kovisoft/paredit', {'for' : ['hy', 'lisp']}
 Plug 'hylang/vim-hy', {'for' : 'hy'}
 Plug 'tpope/vim-fireplace', {'for' : ['clojure', 'hy']}
 
@@ -60,7 +62,7 @@ Plug 'marijnh/tern_for_vim', {'for' : ['javascript', 'coffee']}
 
 Plug 'syngan/vim-vimlint', {'for':  'vim'} | Plug 'ynkdir/vim-vimlparser'
 
-Plug 'git://git.code.sf.net/p/vim-latex/vim-latex', {'for': 'tex'}
+Plug 'lervag/vimtex', {'for': 'tex'}
 
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 

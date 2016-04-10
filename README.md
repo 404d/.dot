@@ -18,6 +18,11 @@ Rather than using this script, you should copy the parts that you need/are going
 ### MacBook Pro Trackpad
 <http://www.chris-reilly.org/blog/technotes/macbook-trackpad-in-ubuntu/>
 
+### YCM complaining about C++ STL not working
+Example being it doesn't recognize the string class.
+
+Solution: <http://stackoverflow.com/questions/33793281/unistd-h-file-not-found-clang-and-os-x#comment56411171_33793281>
+
 ### Python under OS X
 Lemme make this brief: **DO NOT INSTALL HOMEBREW PYTHON**
 

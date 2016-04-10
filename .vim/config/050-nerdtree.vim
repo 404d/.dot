@@ -3,5 +3,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd vimenter * if !argc() | NERDTree | endif
 nmap <silent> <F8> :NERDTreeToggle<CR>
 nmap <silent> <leader>f :NERDTreeFind<CR>
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '\.pdf$', '\.aux$', '\.synctex.gz$', '\.out$']
 ""

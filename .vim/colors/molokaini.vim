@@ -18,7 +18,7 @@ if version > 580
         syntax reset
     endif
 endif
-let g:colors_name="molokai"
+let g:colors_name="molokaini"
 
 if exists("g:molokai_original")
     let s:molokai_original = g:molokai_original
@@ -40,7 +40,8 @@ hi Debug           guifg=#BCA3A3               gui=bold
 hi Define          guifg=#66D9EF guibg=#06333c
 hi Delimiter       guifg=#8F8F8F
 hi DiffAdd                       guibg=#13354A
-hi DiffChange      guifg=#89807D guibg=#4C4745
+"DiffChange guifg=#89807D  
+hi DiffChange                    guibg=#4C4745 
 hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
@@ -53,6 +54,7 @@ hi FoldColumn      guifg=#465457 guibg=#000000
 hi Folded          guifg=#465457 guibg=#000000
 hi Function        guifg=#A6E22E guibg=#2f4309
 hi Identifier      guifg=#FD971F guibg=#442501
+hi Namespace       guifg=#FD971F guibg=#442501
 hi Ignore          guifg=#808080 guibg=bg
 hi IncSearch       guifg=#C4BE89 guibg=#000000
 
@@ -140,7 +142,8 @@ if &t_Co > 255
    hi Delimiter       ctermfg=241
 
    hi DiffAdd                     ctermbg=24
-   hi DiffChange      ctermfg=181 ctermbg=239
+   " DiffChange ctermfg=181
+   hi DiffChange                  ctermbg=239
    hi DiffDelete      ctermfg=162 ctermbg=53
    hi DiffText                    ctermbg=102 cterm=bold
 
@@ -153,6 +156,7 @@ if &t_Co > 255
    hi Folded          ctermfg=67  ctermbg=16
    hi Function        ctermfg=118
    hi Identifier      ctermfg=208               cterm=none
+   hi Namespace       ctermfg=208               cterm=none
    hi Ignore          ctermfg=244 ctermbg=232
    hi IncSearch       ctermfg=193 ctermbg=16
 
@@ -219,10 +223,22 @@ hi SyntasticWarningLine             ctermbg=58               guibg=#5f5f00
 hi SyntasticErrorSign   ctermfg=196 ctermbg=88 guifg=#ff0000 guibg=#870000
 hi SyntasticWarningSign ctermfg=220 ctermbg=94 guifg=#ffdf00 guibg=#875f00
 
-hi ColorColumn                      ctermbg=52               guibg=#5f0000
+hi ColorColumn          ctermbg=235 guibg=#262626
 
 " CtrlSpace:
 hi CtrlSpaceSelected term=bold cterm=bold gui=bold
 hi CtrlSpaceNormal ctermfg=15 guibg=#252625
 hi CtrlSpaceSearch term=bold ctermfg=166 gui=bold guifg=#ef5939
 hi CtrlSpaceStatus ctermfg=81 ctermbg=15 guifg=#66D9EF guibg=White
+
+
+hi link Member Ignore " Any non-static member variable
+"hi link Variable 
+hi link EnumConstant Constant
+hi clear Structure
+hi link Structure Statement
+
+hi link StructDecl Type
+hi link UnionDecl Type
+hi link ClassDecl Type
+hi link EnumDecl Type
