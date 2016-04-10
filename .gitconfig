@@ -1,6 +1,7 @@
 [user]
 	name = Simen Lybekk
 	email = simen@lybekk.no
+	signingkey = 76934E49
 
 [gitweb]
     owner = Simen Lybekk
