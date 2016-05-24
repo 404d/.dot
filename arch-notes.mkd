@@ -115,3 +115,8 @@ det gamle mønsteret med lokal klient.
 
 # xdg-open
 Chromium på Arch har et unormalt navn. Patch xdg-open (det er et shell-skript) eller sett BROWSER-environment variabelen.
+
+# KVM
+Routed network krever firewalld og dnsmasq pakkene.
+
+KVM-libvirt er by default satt opp til å bruke "wheel" som admin-gruppe.
