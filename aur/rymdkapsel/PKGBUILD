@@ -1,0 +1,30 @@
+# Maintainer: Simen Lybekk (404'd) <simen+aur@lybekk.no>
+pkgname=rymdkapsel
+_shortname=$pkgname
+pkgver=3.0.1_2014_01_31
+pkgrel=1
+pkgdesc="A game or smth idek"
+arch=('i686' 'x86_64')
+url=""
+license=('Proprietary')
+depends=()
+makedepends=()
+provides=('rymdkapsel')
+install="$pkgname.install"
+source=("$pkgname.deb")
+md5sums=('f19110f945625a39d154401e1083662e')
+
+build() {
+  cd "$srcdir/"
+  ar x "../$pkgname.deb"
+  tar xf "data.tar.gz"
+
+  mkdir "$_shortname"
+  mv usr "$_shortname"
+}
+
+package() {
+  cp -r "$srcdir/$_shortname/usr" "$pkgdir/usr"
+}
+
+# vim:set ts=2 sw=2 et:
