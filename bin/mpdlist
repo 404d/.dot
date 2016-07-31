@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- encoding: utf-8 -*-
 import copy
 import sys
@@ -38,9 +38,9 @@ for track_id in itunes["Tracks"]:
         genres[genre].append(track_id)
 
         loc = itunes["Tracks"][track_id]["Location"]
-        loc = loc.split("iTunes/")
+        loc = loc.split("iTunes/Music%20Library/")
         if len(loc) >= 2:
-            tracks[track_id] = urllib.unquote("itunes/%s" % "iTunes/".join(loc[1:]))
+            tracks[track_id] = urllib.unquote("itunes/%s" % "iTunes/Music%20Library/".join(loc[1:]))
         else:
             print loc
             sys.stdout.write(".")
