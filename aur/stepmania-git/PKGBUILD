@@ -8,7 +8,7 @@
 # Contributor: Simen Lybekk (404'd) <simen+aur@lybekk.no>
 pkgname=stepmania-git
 _shortname=stepmania
-pkgver=v5.0.9.r209.gde1313a
+pkgver=v5.1.0a3.r72.g70ed6ac
 pkgrel=1
 pkgdesc="Advanced cross-platform rhythm game designed for home and arcade use"
 arch=('i686' 'x86_64')
@@ -31,13 +31,14 @@ pkgver() {
 }
 
 prepare() {
-  cd "$srcdir/$_shortname/Build"
+  cd "$srcdir/$_shortname"
+  git submodule update --init
 }
 
 build() {
   cd "$srcdir/$_shortname/Build"
   cmake ..
-  make -j2
+  make -j$(nproc)
 }
 
 package() {
