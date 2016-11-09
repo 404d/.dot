@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import platform
 import os
-host = platform.node().lower()
+host = platform.node().lower().split(".")[0]
 
 if host == "yukiho":
     print("""

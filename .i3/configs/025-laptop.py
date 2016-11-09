@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import platform
-host = platform.node().lower()
+host = platform.node().lower().split(".")[0]
 
 keys = {}
 class Key(object):

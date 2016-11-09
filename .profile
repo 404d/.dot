@@ -2,6 +2,11 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
     return $?
 }
+host_is() {
+    host=`hostname | sed 's/\..*$//' | tr A-Z a-z`
+    we_want=`echo $1 | tr A-Z a-z`
+    return `[ "x$host" = "x$we_want" ]`
+}
 init_compositor() {
     if command_exists compton; then
         if [ "$COMPOSITOR_BLURBACKGROUND" = '1' ]; then
@@ -59,8 +64,8 @@ export COMPOSITOR_SHADOW='1'
 export COMPOSITOR_FADE='1'
 export COMPOSITOR_OPACITY='1'
 export COMPOSITOR_GLX='1'
-if [ `hostname` = "Yukiho" ]; then
-    .dot/bin/screen-manage single gamecorner
+if host_is "Yukiho"; then
+    .dot/bin/screen-manage dual-hybel gamecorner
     xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
     # Compositor config
@@ -69,12 +74,12 @@ if [ `hostname` = "Yukiho" ]; then
     COMPOSITOR_STARTED='1'
 
     if command_exists conky; then
-        for file in .conky/yukiho-1screen/*; do
+        for file in .conky/yukiho/*; do
             (conky -c $file &) || true
         done
     fi
 fi
-if [ `hostname` = "Katsumi" ]; then
+if host_is "Katsumi"; then
     if command_exists conky; then
         for file in .conky/katsumi/*; do
             (conky -c $file &) || true
@@ -82,7 +87,7 @@ if [ `hostname` = "Katsumi" ]; then
     fi
     compositor_options_extra='--vsync opengl-mswc'
 fi
-if [ `hostname` = "Maou" ]; then
+if host_is "Maou"; then
     COMPOSITOR_SHADOW='0'
     COMPOSITOR_FADE='0'
     # Get rid of that stupid context menu button

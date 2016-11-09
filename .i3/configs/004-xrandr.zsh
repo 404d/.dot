@@ -1,13 +1,16 @@
 #!/usr/bin/zsh
+hostname="$(echo $HOST | sed 's/\..*$//' | tr A-Z a-z)"
 echo 'mode "xrandr" {
 bindsym Escape mode "default"
 bindsym Return mode "default"
 '
 
-if [[ x$HOST == "xYukiho" ]]; then
+if [[ x$hostname == "xyukiho" ]]; then
     cat <<HERE
 bindsym s exec ~/.dot/bin/screen-manage single
-bindsym g exec ~/.dot/bin/screen-manage single gamecorner
+bindsym w exec ~/.dot/bin/screen-manage single gamecorner
+bindsym d exec ~/.dot/bin/screen-manage dual-hybel
+bindsym e exec ~/.dot/bin/screen-manage dual-hybel gamecorner
 bindsym t exec ~/.dot/bin/screen-manage triple
 HERE
 fi

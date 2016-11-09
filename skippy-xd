@@ -48,6 +48,7 @@ movePointerOnStart = true
 movePointerOnSelect = true
 movePointerOnRaise = true
 switchDesktopOnActivate = false
+avoidThumbnailsFromOtherScreens = true
 useNameWindowPixmap = false
 forceNameWindowPixmap = false
 includeFrame = true

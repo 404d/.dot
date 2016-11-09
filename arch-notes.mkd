@@ -120,3 +120,6 @@ Chromium på Arch har et unormalt navn. Patch xdg-open (det er et shell-skript) 
 Routed network krever firewalld og dnsmasq pakkene.
 
 KVM-libvirt er by default satt opp til å bruke "wheel" som admin-gruppe.
+
+# ViM - YouCompleteMe
+YouCompleteMe krever en eldgammel versjon av libtinfo.so, hvilket ofc. ikke er tiljengelig via noe annet enn AUR og den shadye pakken libtinfo-5.

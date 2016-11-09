@@ -13,6 +13,7 @@ set rtp+=$HOME/.vim/autoload/plug.vim
 
 call plug#begin('~/.vim/bundle')
 Plug 'junegunn/vim-plug'
+Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -27,7 +28,7 @@ Plug 'vim-scripts/Gundo'
 Plug 'myusuf3/numbers.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer', 'for': ['c', 'cpp']}
 Plug 'junegunn/vim-github-dashboard', {'on': ['GHDashboard', 'GHActivity']}
 Plug 'goldfeld/vim-seek'
 Plug 'haya14busa/incsearch.vim'
@@ -71,6 +72,8 @@ Plug 'jdonaldson/vaxe', {'for': 'haxe'}
 Plug 'klen/python-mode', {'for': 'python'}
 
 Plug 'jeroenbourgois/vim-actionscript', {'for': 'actionscript'}
+
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 Plug 'alisdair/vim-armasm', {'for': 'asm'}
 call plug#end()

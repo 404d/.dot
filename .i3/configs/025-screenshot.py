@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import platform
-host = platform.node().lower()
+host = platform.node().lower().split(".")[0]
 
 keys = {}
 class Key(object):
@@ -25,7 +25,7 @@ Key(name="ablaze public screen", action="exec zsh $basedir/bin/i3-screenshot.zsh
 Key(name="ablaze public window", action="exec zsh $basedir/bin/i3-screenshot.zsh -p -u")
 Key(name="ablaze public region", release=True, action="exec zsh $basedir/bin/i3-screenshot.zsh -p -s")
 
-if host == "yukiho":
+if host.startswith("yukiho"):
     keyboard = "g710+"
 elif host == "katsumi":
     keyboard = "apple-mbp"

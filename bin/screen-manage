@@ -26,10 +26,21 @@ case $HOST in
             "single")
                 xrandr --output DVI-D-0 --mode 1920x1200 --primary
             ;;
+            "dual-hybel")
+                xrandr --output DVI-D-0 --mode 1920x1200 --primary
+                xrandr --output VGA-0 --mode 1680x1050 --right-of DVI-D-0
+            ;;
         esac
         case x$2 in
             "xgamecorner")
-                xrandr --output HDMI-0 --mode 1920x1200
+                case x$1 in
+                    "xdual-hybel")
+                        xrandr --output HDMI-0 --mode 1920x1200 --panning 1920x1200+0+0/1920x1200+0+0
+                    ;;
+                    *)
+                        xrandr --output HDMI-0 --mode 1920x1200
+                    ;;
+                esac
             ;;
         esac
     ;;
