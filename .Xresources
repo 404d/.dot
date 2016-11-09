@@ -1,7 +1,8 @@
 URxvt*skipBuiltinGlyphs: true
 URxvt*keysym.Shift-Insert: perl:clipboard:paste
 URxvt*keysym.Meta-Shift-Up: perl:clipboard:paste
-URxvt*perl-ext: default,matcher,clipboard,font-size
+URxvt*perl-ext: default,matcher,clipboard,font-size,xim-onthespot
+URxvt*preeditType: OnTheSpot
 URxvt*matcher.button: 1
 URxvt*url-launcher: xdg-open
 URxvt*scrollBar: false
@@ -12,7 +13,7 @@ URxvt*background: rgba:0a00/2000/2c00/bf00
 URxvt*foreground: rgb:ffff/ffff/ffff
 URxvt*internalBorder: 0
 URxvt*depth: 32
-urxvt*font: xft:Inconsolata\ for\ Powerline:pixelsize=12,xft:VL\ Gothic:pixelsize=12,xft:Arial\ Unicode\ MS:antialias=true:pixelsize=12,xft:Apple\ Symbols:antialias=true:pixelsize=12,xft:Font\ Awesome:antialias=true:pixelsize=12
+urxvt*font: xft:Inconsolata\ for\ Powerline:pixelsize=12,xft:VL\ Gothic:pixelsize=12,xft:Arial\ Unicode\ MS:antialias=true:pixelsize=12,xft:Apple\ Symbols:antialias=true:pixelsize=12,xft:Font\ Awesome:antialias=true:pixelsize=12,xft:Quivira:antialias=true:pixelsize=12
 URxvt*borderLess: false
 urxvt*inputMethod: SCIM
 urxvt*imLocale: nb_NO.utf8
