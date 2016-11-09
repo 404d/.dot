@@ -1,0 +1,9 @@
+[Unit]
+Description=Torrent RSS checker
+
+[Service]
+Type=oneshot
+ExecStart=/home/sl/dev/rTiMan/rss.sh
+
+[Install]
+WantedBy=rTiMan-rss.timer

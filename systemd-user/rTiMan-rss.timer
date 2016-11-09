@@ -1,0 +1,9 @@
+[Unit]
+Description=Torrent RSS checker
+
+[Timer]
+OnCalendar=*:*:0
+Persistent=true
+
+[Install]
+WantedBy=timers.target

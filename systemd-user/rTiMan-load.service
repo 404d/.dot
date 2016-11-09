@@ -1,0 +1,9 @@
+[Unit]
+Description=Torrent loader
+
+[Service]
+Type=oneshot
+ExecStart=/home/sl/dev/rTiMan/load.sh
+
+[Install]
+WantedBy=rTiMan-load.timer
