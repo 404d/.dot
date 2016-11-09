@@ -1,5 +1,5 @@
 rofi.modi: window,run,drun,ssh,virsh:rofi-virsh
-!rofi.opacity: 80
+rofi.opacity: 80
 rofi.bw: 0
 ! rofi.font: mono 12
 rofi.display-drun: desktop
@@ -45,3 +45,8 @@ rofi.kb-page-prev: Control+h
 rofi.kb-page-next: Control+l
 rofi.kb-row-first: Control+g
 ! rofi.kb-row-last: Control+Shift+g
+rofi.color-urgent: argb:80303f3f,#8c7769,argb:80303f3f,#8c7769,#fdf6e3
+rofi.color-normal: argb:80303f3f,#8c7769,argb:80303f3f,#8c7769,argb:80303f3f
+rofi.color-window: argb:80303f3f,#8c7769,#8c7769
+rofi.color-active: argb:80303f3f,#8c7769,argb:80303f3f,#8c7769,#fdf6e3
+rofi.color-enabled: true
