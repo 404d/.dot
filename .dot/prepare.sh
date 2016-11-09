@@ -49,6 +49,7 @@ lnk .powerline
 lnkc $HOME/.powerline $HOME/.config/powerline
 lnkc $HOME/.dot/systemd-user $HOME/.config/systemd/user
 lnkc $HOME/.dot/fontconfig $HOME/.config/fontconfig
+lnkc $HOME/.dot/rofi $HOME/.config/rofi
 lnk .ncmpcpp
 lnk .vim
 lnk .vimrc

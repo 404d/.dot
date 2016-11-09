@@ -1,0 +1,88 @@
+rofi.modi: window,run,drun,ssh,virsh:rofi-virsh
+!rofi.opacity: 80
+rofi.bw: 0
+! rofi.font: mono 12
+rofi.display-drun: desktop
+rofi.sidebar-mode: true
+
+rofi.terminal: urxvtc
+! "Run command to execute" Set from: Default
+! rofi.run-command: {cmd}
+! "Command to get extra run targets" Set from: Default
+! rofi.run-list-command: 
+! "Run command to execute that runs in shell" Set from: Default
+! rofi.run-shell-command: {terminal} -e {cmd}
+! "Command executed on accep-entry-custom for window modus" Set from: Default
+! rofi.window-command: xkill -id {window}
+! "Disable history in run/ssh" Set from: Default
+! rofi.disable-history: false
+
+rofi.levenshtein-sort: true
+rofi.case-sensitive: false
+! "Cycle through the results list" Set from: Default
+! rofi.cycle: true
+! "Enable sidebar-mode" Set from: Default
+! "Enable auto select mode" Set from: Default
+! rofi.auto-select: false
+! "Use glob matching" Set from: Default
+rofi.glob: true
+! rofi.regex: false
+rofi.tokenize: true
+rofi.separator-style: none
+rofi.scroll-method: 1
+
+rofi.parse-known-hosts: true
+
+!rofi.kb-mode-next: Super+l
+!rofi.kb-mode-previous: Super+h
+rofi.kb-mode-next: Control+Tab
+rofi.kb-mode-previous: Control+Shift+Tab
+rofi.kb-row-up: Control+k
+ rofi.kb-row-down: Control+j
+! "Go to next row, if one left, accept it, if no left next mode." Set from: Default
+! rofi.kb-row-tab: Tab
+rofi.kb-page-prev: Control+h
+rofi.kb-page-next: Control+l
+rofi.kb-row-first: Control+g
+! rofi.kb-row-last: Control+Shift+g
+
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color_enabled: true
+rofi.color-urgent: argb:800a213f,#31b0fb,argb:800a213f,#31b0fb,#fdf6e3
+rofi.color-normal: argb:800a213f,#31b0fb,argb:800a213f,#31b0fb,argb:800a213f
+rofi.color-window: argb:800a213f,#31b0fb,#31b0fb
+rofi.color_enabled: true
+rofi.color-active: argb:800a213f,#31b0fb,argb:800a213f,#31b0fb,#fdf6e3

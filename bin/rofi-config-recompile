@@ -1,0 +1,2 @@
+#!/usr/bin/zsh
+cd ~/.config/rofi && cp config config.old && (grep -vie '^rofi.color-' config.old && cat colors) > config

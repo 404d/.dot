@@ -13,7 +13,8 @@ bindsym $mod+Shift+E exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+Shift+W kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show run || dmenu_run
+bindsym $mod+shift+d exec i3-dmenu-desktop
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal

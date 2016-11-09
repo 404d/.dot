@@ -1,0 +1,31 @@
+#!/usr/bin/zsh
+servers=(yukiho.apt.sexy miki.apt.sexy)
+
+host_is() {
+    host=`hostname | sed 's/\..*$//' | tr A-Z a-z`
+    we_want=`echo $1 | tr A-Z a-z`
+    return `[ "x$host" = "x$we_want" ]`
+}
+
+if [ -z $@ ]; then
+    (for srv in $servers; do
+        echo $srv
+    done) | sort
+
+else
+    srv=$(echo $@ | cut -d' ' -f 1)
+
+    if host_is $srv; then
+        URI="qemu:///system"
+    else
+        URI="qemu+ssh://$srv/system"
+    fi
+
+    if (echo $@ | grep ' ' >/dev/null); then
+        args=$(echo $@ | cut -d' ' -f 2-)
+        virsh --connect "$URI" $args
+    else
+        args=""
+        EDITOR="vim" urxvtc -e virsh --connect "$URI" &!
+    fi
+fi
