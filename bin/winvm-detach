@@ -1,0 +1,4 @@
+for f in $HOME/.dot/kvm/usb-*.xml; do
+    cmds="${cmds}detach-device cthulhu $f\n"
+done
+echo -e "$cmds" | virsh --connect qemu:///system
