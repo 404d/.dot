@@ -1,0 +1,43 @@
+#!/usr/bin/zsh
+servers=$(cut -d',' -f 1 ~/.ssh/known_hosts | grep -v ' ')
+
+
+host_is() {
+    host=`hostname | sed 's/\..*$//' | tr A-Z a-z`
+    we_want=`echo $1 | tr A-Z a-z`
+    return `[ "x$host" = "x$we_want" ]`
+}
+
+if [ -z "$@" ]; then
+    (for srv in $servers; do
+        echo $srv
+    done) | grep -e '\.apt\.sexy$'  | sort
+# | grep -ev '^(yukiho|yurika|miki|haruka)\.'
+
+else
+    vm=$(echo $@ | cut -d' ' -f 1)
+    virt-hv $vm >/dev/null  || (echo 'Not a VM' && return)
+    srv=$(virt-hv $vm)
+
+    domain=`echo $vm | sed 's/\..*$//' | tr A-Z a-z`
+
+    if host_is $srv; then
+        URI="qemu:///system"
+    else
+        URI="qemu+ssh://$srv/system"
+    fi
+
+    if (echo $@ | grep ' ' >/dev/null); then
+        cmd=$(echo $@ | cut -d' ' -f 2)
+        args=$(echo $@ | cut -d' ' -f 3-)
+
+        if [[ "x$args" = "x$cmd" ]]; then
+            args=""
+        fi
+
+        virsh --connect "$URI" $cmd $domain $args 2>&1
+    else
+        args=""
+        EDITOR="vim" urxvtc -e virsh --connect "$URI" &!
+    fi
+fi

@@ -1,5 +1,5 @@
-rofi.color-urgent: argb:803c0d25,#da8ea7,argb:803c0d25,#da8ea7,#fdf6e3
-rofi.color-normal: argb:803c0d25,#da8ea7,argb:803c0d25,#da8ea7,argb:803c0d25
-rofi.color-window: argb:803c0d25,#da8ea7,#da8ea7
-rofi.color_enabled: true
-rofi.color-active: argb:803c0d25,#da8ea7,argb:803c0d25,#da8ea7,#fdf6e3
+rofi.color-urgent: argb:80383d3f,#12548c,argb:80383d3f,#12548c,#fdf6e3
+rofi.color-normal: argb:80383d3f,#12548c,argb:80383d3f,#12548c,argb:80383d3f
+rofi.color-window: argb:80383d3f,#12548c,#12548c
+rofi.color-active: argb:80383d3f,#12548c,argb:80383d3f,#12548c,#fdf6e3
+rofi.color-enabled: true

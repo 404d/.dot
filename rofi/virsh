@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
-servers=(yukiho.apt.sexy miki.apt.sexy)
+servers=(yukiho.apt.sexy miki.apt.sexy makina.apt.sexy)
 
 host_is() {
     host=`hostname | sed 's/\..*$//' | tr A-Z a-z`
