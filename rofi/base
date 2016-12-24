@@ -45,8 +45,3 @@ rofi.kb-page-prev: Control+h
 rofi.kb-page-next: Control+l
 rofi.kb-row-first: Control+g
 ! rofi.kb-row-last: Control+Shift+g
-rofi.color-urgent: argb:80383d3f,#12548c,argb:80383d3f,#12548c,#fdf6e3
-rofi.color-normal: argb:80383d3f,#12548c,argb:80383d3f,#12548c,argb:80383d3f
-rofi.color-window: argb:80383d3f,#12548c,#12548c
-rofi.color-active: argb:80383d3f,#12548c,argb:80383d3f,#12548c,#fdf6e3
-rofi.color-enabled: true
