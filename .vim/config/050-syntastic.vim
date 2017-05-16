@@ -7,4 +7,4 @@ let g:syntastic_lua_checkers = ["luac", "luacheck"]
 let g:syntastic_lua_luacheck_args = "--no-unused-args"
 
 let g:syntastic_python_checkers=['flake8', 'python', 'mypy']
-let g:syntastic_python_flake8_args = "--max-complexity 12 --ignore=E701"
+let g:syntastic_python_flake8_args = "--max-complexity 12"
