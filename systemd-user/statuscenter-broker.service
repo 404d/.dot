@@ -1,0 +1,9 @@
+[Unit]
+Description=StatusCenter message broker
+
+[Service]
+Type=simple
+ExecStart=/home/sl/dev/StatusCenter/broker.sh
+
+[Install]
+WantedBy=default.target

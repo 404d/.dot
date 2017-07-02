@@ -1,0 +1,9 @@
+[Unit]
+Description=StatusCenter block daemon
+
+[Service]
+Type=simple
+ExecStart=/home/sl/dev/StatusCenter/daemon.sh
+
+[Install]
+WantedBy=default.target
