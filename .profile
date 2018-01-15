@@ -65,7 +65,7 @@ export COMPOSITOR_FADE='1'
 export COMPOSITOR_OPACITY='1'
 export COMPOSITOR_GLX='1'
 if host_is "Yukiho"; then
-    .dot/bin/screen-manage dual-hybel gamecorner
+    #.dot/bin/screen-manage dual-hybel gamecorner
     xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
     # Compositor config
@@ -90,6 +90,7 @@ fi
 if host_is "Maou"; then
     COMPOSITOR_SHADOW='0'
     COMPOSITOR_FADE='0'
+    COMPOSITOR_GLX='0'
     # Get rid of that stupid context menu button
     xmodmap -e "keycode 135 = Super_R NoSymbol Super_R"
 fi

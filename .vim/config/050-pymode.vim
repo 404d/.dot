@@ -6,7 +6,11 @@
 " Python-mode; disable linting, use syntastic
 let g:pymode_lint = 0
 " Aaand the rope stuff conflicts with jedi, surprise
-let g:pymode_rope = 0
+" Rather, it used to at least but it seems to work with something I'm doing
+" now qUcyy
+let g:pymode_rope = 1
+" mumble mumble
+let g:pymode_python = 'python3'
 " Rope is fucking idiotic and keeps recursively reading my entire home
 " directory.  This at least tells it not to search upwards looking for a
 " .ropeproject marker.

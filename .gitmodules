@@ -1,6 +1,6 @@
 [submodule "powerline"]
 	path = powerline
 	url = https://github.com/Lokaltog/powerline.git
-[submodule "ctags/bin/markdown2ctag"]
-	path = ctags/bin/markdown2ctag
+[submodule "ctags/bin/markdown2ctags"]
+	path = ctags/bin/markdown2ctags
 	url = https://github.com/jszakmeister/markdown2ctags
