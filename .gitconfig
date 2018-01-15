@@ -61,3 +61,5 @@
 	trustExitCode = true
 [core]
 	excludesfile = /home/sl/.gitignore
+[rerere]
+	enabled = true

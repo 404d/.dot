@@ -27,7 +27,7 @@ Plug 'tpope/vim-speeddating'
 Plug 'vim-scripts/Gundo'
 Plug 'myusuf3/numbers.vim'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer', 'for': ['c', 'cpp']}
 Plug 'junegunn/vim-github-dashboard', {'on': ['GHDashboard', 'GHActivity']}
 Plug 'goldfeld/vim-seek'
@@ -44,6 +44,7 @@ endif
 Plug 'tpope/vim-fugitive'
 "Plug 'tybenz/vimdeck', {'do': 'gem install vimdeck'} | Plug 'vim-scripts/SyntaxRange'
 
+"Plug '~/.vim/bundle/vim-nose', {'for': 'python'}
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 Plug 'tpope/vim-markdown', {'for' : 'markdown'}
@@ -59,7 +60,7 @@ Plug 'fatih/vim-go', {'for' : 'go'}
 Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'lukaszkorecki/CoffeeTags', {'for': 'coffee'}
 
-Plug 'marijnh/tern_for_vim', {'for' : ['javascript', 'coffee']}
+"Plug 'marijnh/tern_for_vim', {'for' : ['javascript', 'coffee']}
 
 Plug 'syngan/vim-vimlint', {'for':  'vim'} | Plug 'ynkdir/vim-vimlparser'
 
@@ -74,6 +75,8 @@ Plug 'klen/python-mode', {'for': 'python'}
 Plug 'jeroenbourgois/vim-actionscript', {'for': 'actionscript'}
 
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+
+Plug 'puppetlabs/puppet-syntax-vim'
 
 Plug 'alisdair/vim-armasm', {'for': 'asm'}
 call plug#end()
