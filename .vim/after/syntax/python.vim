@@ -31,4 +31,4 @@ hi link pyNiceKeyword Keyword
 hi link pyNiceBuiltin Builtin
 hi! link Conceal Operator
 
-setlocal conceallevel=2
+"setlocal conceallevel=2

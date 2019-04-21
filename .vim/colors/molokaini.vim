@@ -217,11 +217,30 @@ if &t_Co > 255
 end
 
 hi SyntasticError                   ctermbg=88               guibg=#870000
-hi SyntasticWarning                 ctermbg=94               guibg=#875f00
 hi SyntasticErrorLine               ctermbg=52               guibg=#5f0000
-hi SyntasticWarningLine             ctermbg=58               guibg=#5f5f00
 hi SyntasticErrorSign   ctermfg=196 ctermbg=88 guifg=#ff0000 guibg=#870000
+hi SyntasticWarning                 ctermbg=94               guibg=#875f00
+hi SyntasticWarningLine             ctermbg=58               guibg=#5f5f00
 hi SyntasticWarningSign ctermfg=220 ctermbg=94 guifg=#ffdf00 guibg=#875f00
+
+hi link ALEError SyntasticError
+hi link ALEErrorLine SyntasticErrorLine
+hi link ALEErrorSign SyntasticErrorSign
+hi link ALEWarning SyntasticWarning
+hi link ALEWarningLine SyntasticWarningLine
+hi link ALEWarningSign SyntasticWarningSign
+
+"" Bad colors and doesn't trigger for pep8 anyways
+" Actually the warningline takes priority over stylewarningline but
+" the in-line stylewarning marker works as it should (the one selecting the
+" column)
+"hi ALEStyleWarning ctermbg=03 guibg=#808000
+"hi ALEStyleWarningLine ctermbg=03 guibg=#808000
+"hi link ALEStyleWarningSign ALEWarningSign
+
+hi ALEInfo                   ctermbg=18               guibg=#000087
+hi ALEInfoLine               ctermbg=17               guibg=#00005f
+hi ALEInfoSign    ctermfg=21 ctermbg=18 guifg=#0000ff guibg=#000087
 
 hi ColorColumn          ctermbg=235 guibg=#262626
 

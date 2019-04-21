@@ -8,7 +8,8 @@ let g:pymode_lint = 0
 " Aaand the rope stuff conflicts with jedi, surprise
 " Rather, it used to at least but it seems to work with something I'm doing
 " now qUcyy
-let g:pymode_rope = 1
+" Nevermind it's lagging massively now
+let g:pymode_rope = 0
 " mumble mumble
 let g:pymode_python = 'python3'
 " Rope is fucking idiotic and keeps recursively reading my entire home

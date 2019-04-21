@@ -13,36 +13,40 @@ set rtp+=$HOME/.vim/autoload/plug.vim
 
 call plug#begin('~/.vim/bundle')
 Plug 'junegunn/vim-plug'
-Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug '404d/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
-Plug 'szw/vim-ctrlspace'
+"Plug 'szw/vim-ctrlspace'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-speeddating'
 Plug 'vim-scripts/Gundo'
 Plug 'myusuf3/numbers.vim'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer', 'for': ['c', 'cpp']}
-Plug 'junegunn/vim-github-dashboard', {'on': ['GHDashboard', 'GHActivity']}
+"Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer', 'for': ['c', 'cpp', 'python']}
 Plug 'goldfeld/vim-seek'
 Plug 'haya14busa/incsearch.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 Plug 'zhaocai/GoldenView.Vim'
-Plug 'jceb/vim-orgmode'
-Plug 'chrisbra/SudoEdit.vim'
+"Plug 'jceb/vim-orgmode'
+"Plug 'chrisbra/SudoEdit.vim'
+if has("nvim")
+    Plug 'vim-airline/vim-airline'
+endif
 if has("gui_running")
     Plug 'jeaye/color_coded'
 endif
 "Plug 'jaxbot/github-issues.vim' | Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 "Plug 'tybenz/vimdeck', {'do': 'gem install vimdeck'} | Plug 'vim-scripts/SyntaxRange'
+"Plug 'puppetlabs/puppet-syntax-vim', {'for': 'puppet'}
+Plug 'rodjek/vim-puppet', {'for': 'puppet'}
 
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
@@ -69,13 +73,16 @@ Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 
 Plug 'jdonaldson/vaxe', {'for': 'haxe'}
 
-Plug 'klen/python-mode', {'for': 'python'}
+"Plug 'klen/python-mode', {'for': 'python'}
 
 Plug 'jeroenbourgois/vim-actionscript', {'for': 'actionscript'}
 
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 
 Plug 'alisdair/vim-armasm', {'for': 'asm'}
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 if s:IWantPlug == 0
