@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Regular launch using custom interpreter through settings.json
+cd $HOME/binaryninja/binaryninja
+./binaryninja
+exit
+
+# Docker
+cd $HOME/dev/replica/docker-binaryninja
+if [[ ! -f /tmp/.docker.xauth ]]; then
+    bash xsetup
+fi
+bash run
+exit
+
+# Original workaround
+cd $HOME/binaryninja/binaryninja
+ln -s /usr/lib/libpython2.7.so.1.0 libpython2.7.so.1
+LD_PRELOAD=/usr/lib/libcurl.so.3 ./binaryninja --debug --stderr-log

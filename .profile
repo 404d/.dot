@@ -22,9 +22,6 @@ init_compositor() {
             ## --no-dnd-shadow | -G
             # Don’t draw shadows on drag-and-drop windows.
 
-            ## --clear-shadow | -z
-            # Zero the part of the shadow’s mask behind the window. Note this may not work properly on ARGB windows with fully transparent areas.
-
             ## --no-dock-shadow | -C
             # Avoid drawing shadows on dock/panel windows.
 
@@ -32,7 +29,7 @@ init_compositor() {
             #  Do not paint shadows on shaped windows. Note shaped windows here means windows setting its shape through X Shape extension. Those using ARGB background is beyond our control.
 
             # Sett opp shadow-exclude mot blant annet Slingshot og notifyosd
-            compositor_options_shadow="--shadow --no-dnd-shadow --clear-shadow --no-dock-shadow --shadow-ignore-shaped"
+            compositor_options_shadow="--shadow --no-dnd-shadow --no-dock-shadow --shadow-ignore-shaped"
         fi
         if [ "$COMPOSITOR_OPACITY" = '1' ]; then
             ## --inactive-opacity=OPACITY | -i
@@ -50,23 +47,22 @@ init_compositor() {
 
             ## --glx-copy-from-front
             # Copy unmodified regions from front buffer instead of redrawing them all.
-            compositor_options_glx='--backend glx --glx-no-stencil --glx-copy-from-front'
+            compositor_options_glx='--backend glx --glx-no-stencil ' # --glx-copy-from-front'
         fi
         # -b -- Daemonize
         export CMD_COMPOSITOR="compton --config ~/.compton.conf -b --mark-wmwin-focused --mark-ovredir-focused --use-ewmh-active-win $compositor_options_opacity $compositor_options_blur $compositor_options_fade $compositor_options_shadow $compositor_options_glx $compositor_options_extra"
-        ((eval $CMD_COMPOSITOR) &) || true
+        ( (eval $CMD_COMPOSITOR) &) || true
         export COMPOSITOR=compton
     fi
     return 0
 }
 
 export COMPOSITOR_SHADOW='1'
-export COMPOSITOR_FADE='1'
+export COMPOSITOR_FADE='0'
 export COMPOSITOR_OPACITY='1'
 export COMPOSITOR_GLX='1'
 if host_is "Yukiho"; then
     #.dot/bin/screen-manage dual-hybel gamecorner
-    xinput set-button-map 8 1 2 3 4 5 6 7 2 9 10 11 12 13 || true
 
     # Compositor config
     export COMPOSITOR_BLURBACKGROUND='1'
@@ -78,6 +74,8 @@ if host_is "Yukiho"; then
             (conky -c $file &) || true
         done
     fi
+    # Worked fine without until recently
+    compositor_options_extra='--vsync opengl-mswc'
 fi
 if host_is "Katsumi"; then
     if command_exists conky; then
@@ -97,6 +95,13 @@ fi
 
 if [ -z $COMPOSITOR_STARTED ]; then
     init_compositor
+fi
+
+if command_exists ssh-agent; then
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+        eval `ssh-agent`
+        trap "kill $SSH_AGENT_PID" 0
+    fi
 fi
 
 if command_exists urxvtd; then
@@ -122,7 +127,7 @@ fi
 setxkbmap -option 'ctrl:nocaps' || true
 
 if command_exists dropbox; then
-    (dropbox start &) || true
+    #(dropbox start &) || true
 fi
 
 if command_exists pulseaudio; then
@@ -140,13 +145,4 @@ fi
 
 if command_exists zsh; then
     ($HOME/.dot/config-compile $HOME/.dot/.i3/configs $HOME/.dot/.i3/config) || true
-fi
-
-if command_exists ssh-agent; then
-    SSHAGENT="$(which ssh-agent)"
-    SSHAGENTARGS="-s"
-    if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-        eval `$SSHAGENT $SSHAGENTARGS`
-        trap "kill $SSH_AGENT_PID" 0
-    fi
 fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+i=0
+while read -r _ _ event devpath _; do
+    read -r _ _ event devpath _
+    if [[ $event == remove ]]; then
+        winvm-cardio detach
+    elif [[ $event == add ]]; then
+        sleep 3
+        winvm-cardio attach
+    fi
+done < <(stdbuf -o L udevadm monitor --udev -s usb)
