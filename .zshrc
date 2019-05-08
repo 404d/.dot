@@ -44,3 +44,5 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 if [[ -r $HOME/.zlocal ]]; then
     source $HOME/.zlocal
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

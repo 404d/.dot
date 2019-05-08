@@ -37,11 +37,11 @@ rofi.parse-known-hosts: true
 !rofi.kb-mode-previous: Super+h
 rofi.kb-mode-next: Control+Tab
 rofi.kb-mode-previous: Control+Shift+Tab
-rofi.kb-row-up: Control+k
- rofi.kb-row-down: Control+j
+!rofi.kb-row-up: Control+k
+! rofi.kb-row-down: Control+j
 ! "Go to next row, if one left, accept it, if no left next mode." Set from: Default
 ! rofi.kb-row-tab: Tab
-rofi.kb-page-prev: Control+h
+!rofi.kb-page-prev: Control+h
 rofi.kb-page-next: Control+l
-rofi.kb-row-first: Control+g
+!rofi.kb-row-first: Control+g
 ! rofi.kb-row-last: Control+Shift+g

@@ -9,3 +9,6 @@ away.log
 /.vim/undo
 /.vim/tmp
 /.i3/config
+/rofi/colors
+/rofi/config
+/.zsh/cache

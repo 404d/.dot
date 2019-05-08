@@ -1,0 +1,9 @@
+[Unit]
+Description=iTunes Library hardlink-"backup"
+
+[Service]
+Type=oneshot
+ExecStart=/media/Are/Music/iTunes/make-backup.sh
+
+[Install]
+WantedBy=itunes-backup.timer
