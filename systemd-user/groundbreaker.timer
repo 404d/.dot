@@ -2,7 +2,7 @@
 Description=Background Changer Script
 
 [Timer]
-OnCalendar=*:0,30
+OnCalendar=*:0
 Persistent=true
 
 [Install]
