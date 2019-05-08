@@ -1,12 +1,6 @@
 #!/bin/bash
 typeset -A devices
 #devices["/devices/pci0000:00/0000:00:14.0/usb2/2-13/2-13:1.0"]="090-usb-cardio.xml"
-#devices["/devices/pci0000:00/0000:00:14.0/usb2/2-9/2-9:1.0"]="bs/099-usb-s2240t.xml"
-devices["/devices/pci0000:00/0000:00:14.0/usb2/2-13/2-13:1.0"]="bs/099-usb-s2240t.xml"
-devices["/devices/pci0000:00/0000:00:14.0/usb2/2-13"]="bs/099-usb-s2240t.xml"
-devices["/devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.1/2-3.1.3/2-3.1.3:1.0"]="090-usb-cardio.xml"
-devices["/devices/pci0000:00/0000:00:14.0/usb2/2-3/2-3.1/2-3.1.3"]="090-usb-cardio.xml"
-devices["/devices/pci0000:00/0000:00:14.0/usb2/2-13/2-13:1.1"]="090-usb-cardio.xml"
 i=0
 while read -r a b event devpath c; do
     read -r a b event devpath c

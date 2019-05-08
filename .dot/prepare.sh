@@ -40,9 +40,6 @@ lnk .compton.conf
 lnk .gitconfig
 lnk .gtkrc-2.0
 lnk .i3
-lnk .irssi
-lnk .hgrc
-lnk .htoprc
 lnk .tmux
 lnk .tmux.conf
 lnk .powerline

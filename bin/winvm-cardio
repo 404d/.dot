@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/bin/virsh $1-device cthulhu /home/sl/.dot/kvm/090-usb-cardio.xml

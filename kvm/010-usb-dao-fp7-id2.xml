@@ -1,7 +1,0 @@
-<hostdev mode='subsystem' type='usb' managed='yes'>
-    <source>
-        <vendor id='0x1ccf'/>
-        <product id='0x8048'/>
-    </source>
-    <alias name='djdao'/>
-</hostdev>
