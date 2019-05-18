@@ -9,29 +9,70 @@ try:
 except: pass
 
 public = False
+retry = True
 base = "meta:firestarter auto_tagged tag_me"
 tags = base
 
 
-for file in sys.argv[1:]:
-    if os.path.isdir(file):
-        print("Skipping directory '%s'" % file)
-        continue
+def upload(files):
+    failed = []
 
-    if file == "-p":
-        public = True
-    elif file == "-s":
-        tags = "%s meta:screenshot" % base
-    else:
+    for file in files:
         print(file)
-        response = requests.post("http://ablaze.web/api/media/upload", files={"file": open(file, "rb").read()}, params={"tags": tags})
+        response = requests.post("http://ablaze.apt.sexy/api/media/upload", files={"file": open(file, "rb").read()}, params={"tags": tags})
         content = response.content.decode("utf-8")
         print(content)
+
+        data = None
         try:
             data = json.loads(content)
-            if public:
-                requests.get("http://ablaze.web/api/media/%i/public" % data["id"])
-                data["url"] = data["url"].replace("ablaze.cdn/cdn","flymr.liquidcode.net")
-            proc = subprocess.Popen(["xclip","-selection","c"], stdin=subprocess.PIPE)
-            proc.communicate(data["url"].encode("utf-8"))
-        except: pass
+        except:
+            print("Failed reading as JSON")
+            pass
+
+        if not data or data["code"] not in [200,201]:
+            if retry:
+                failed.append(file)
+            else:
+                os.exit(-1)
+            continue
+
+        if public:
+            pass
+            #requests.get("http://ablaze.apt.sexy/api/media/%i/public" % data["id"])
+            #data["url"] = data["url"].replace("cdn.ablaze.apt.sexy/cdn","flymr.liquidcode.net")
+        #proc = subprocess.Popen(["xclip","-selection","c"], stdin=subprocess.PIPE)
+        #proc.communicate(data["url"].encode("utf-8"))
+
+    return failed
+
+if __name__ == "__main__":
+    files = []
+
+    reading_tag = False
+
+    for file in sys.argv[1:]:
+        if reading_tag:
+            tags += " " + file
+            reading_tag = False
+            continue
+        elif file == "-t":
+            reading_tag = True
+            continue
+
+        if os.path.isdir(file):
+            print("Skipping directory '%s'" % file)
+            continue
+
+        if file == "-p":
+            public = True
+        elif file == "-s":
+            tags = "%s meta:screenshot" % base
+        elif file == "-r":
+            retry = True
+
+        else:
+            files.append(file)
+
+    while files:
+        files = upload(files)

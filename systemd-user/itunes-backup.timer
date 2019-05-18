@@ -1,8 +1,8 @@
 [Unit]
-Description=Background Changer Script
+Description=iTunes Library "hardlink"-backup
 
 [Timer]
-OnCalendar=*:0
+OnCalendar=daily
 Persistent=true
 
 [Install]

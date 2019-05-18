@@ -1,0 +1,3 @@
+The config file itself gets created regularly by Groundbreaker, which
+simply concatenates the "base" and the "colors" files after updating
+the colorscheme

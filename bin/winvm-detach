@@ -1,4 +1,9 @@
-for f in $HOME/.dot/kvm/usb-*.xml; do
+dir=""
+if [ $1x != x ]; then
+    dir=$1/
+fi
+
+for f in $HOME/.dot/kvm/$dir???-usb-*.xml; do
     cmds="${cmds}detach-device cthulhu $f\n"
 done
 echo -e "$cmds" | virsh --connect qemu:///system

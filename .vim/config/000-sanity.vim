@@ -14,3 +14,4 @@ endif
 " Make vim more responsive by sacrificing swap files
 " and decreasing updatetime
 set noswapfile updatetime=200
+set conceallevel=0

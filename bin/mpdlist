@@ -5,6 +5,7 @@ import sys
 import os
 import urllib
 import plistlib
+import unicodedata
 output_path = os.path.abspath(".")
 
 itunes_library = "./lib.xml"
@@ -37,13 +38,19 @@ for track_id in itunes["Tracks"]:
             genres[genre] = []
         genres[genre].append(track_id)
 
-        loc = itunes["Tracks"][track_id]["Location"]
+        loc = unicodedata.normalize('NFC', itunes["Tracks"][track_id]["Location"].decode("utf-8")).encode("utf-8")
         loc = loc.split("iTunes/Music%20Library/")
         if len(loc) >= 2:
             tracks[track_id] = urllib.unquote("itunes/%s" % "iTunes/Music%20Library/".join(loc[1:]))
         else:
-            print loc
-            sys.stdout.write(".")
+            loc = unicodedata.normalize('NFC', itunes["Tracks"][track_id]["Location"].decode("utf-8")).encode("utf-8")
+            loc = loc.split("iTunes/iTunes%20Media/")
+
+            if len(loc) >= 2:
+                tracks[track_id] = urllib.unquote("itunes/%s" % "iTunes/iTunes%20Media/".join(loc[1:]))
+            else:
+                print loc
+                sys.stdout.write(".")
     except Exception, e:
         error_trackid = track_id
         if error_trackid in persist_ids:
@@ -90,9 +97,9 @@ def checkPlaylist(id, level=0, topPath=[]):
             try:
                 track = tracks[str(trackID["Track ID"])]
                 playlistTracks.append(track)
-            except KeyError:
-                if trackID["Track ID"] in persist_ids:
-                    errormsg_id = persist_ids[trackID["Track ID"]]
+            except KeyError, e:
+                if str(trackID["Track ID"]) in persist_ids:
+                    errormsg_id = persist_ids[str(trackID["Track ID"])]
                 else:
                     errormsg_id = trackID["Track ID"]
                 msg = "# Unknown track ID %s" % errormsg_id
@@ -116,7 +123,7 @@ def checkPlaylist(id, level=0, topPath=[]):
         if playlistPrefix[id] != u"♪":
             playlistTracks.sort()
         for track in playlistTracks:
-            file.write("%s\n" % track)
+            file.write("%s\n" % unicodedata.normalize("NFC", track.decode("utf-8")).encode("utf-8"))
         file.close()
     if playlist_path in current_playlists:
         current_playlists.remove(playlist_path)
@@ -149,7 +156,7 @@ for genre in genres:
             track_count += 1
         output = output.split("\n")
         output = "\n".join(sorted([line for line in output if line]))
-        file.write(output)
+        file.write(unicodedata.normalize("NFC", output.decode("utf-8")).encode("utf-8"))
         file.close()
     if playlist_path in current_playlists:
         current_playlists.remove(playlist_path)

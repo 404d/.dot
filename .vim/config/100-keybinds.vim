@@ -35,3 +35,7 @@ nnoremap æ :lne<CR>
 
 " Fuck you latex IMAP shit
 nnoremap <Leader>ij <Plug>IMAP_JumpForward
+
+" Python versions for syntactic
+nnoremap <Leader>p2 :let g:syntastic_python_python_exec = '/Library/Frameworks/Python.framework/Versions/2.7/bin/python2'<cr>
+nnoremap <Leader>p3 :let g:syntastic_python_python_exec = '/Library/Frameworks/Python.framework/Versions/3.5/bin/python3'<cr>

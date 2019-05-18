@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Regular launch using custom interpreter through settings.json
+cd $HOME/binaryninja/binaryninja
+./binaryninja

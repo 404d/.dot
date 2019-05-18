@@ -8,5 +8,5 @@ nnoremap / /\v
 vnoremap / /\v
 
 set list
-set listchars=tab:▸\ ,eol:¬,extends:⇉,precedes:⇇,nbsp:␠,trail:␠,nbsp:␣
+set listchars=tab:▸\ ,extends:⇉,precedes:⇇,nbsp:␠,trail:␠,nbsp:␣
 

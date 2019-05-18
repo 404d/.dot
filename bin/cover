@@ -31,4 +31,4 @@ if not covers:
 
 #with open("/tmp/mpd-track-cover", "w") as fp:
 #    fp.write(covers[cover_index])
-print covers[cover_index]
+sys.stdout.write(covers[cover_index])

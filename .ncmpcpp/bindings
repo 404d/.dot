@@ -26,6 +26,8 @@ def_key "space"
     add_item_to_playlist
 def_key "space"
     toggle_visualization_type
+def_key "B"
+    select_album
 def_key "ctrl-p"
     set_selected_items_priority
 # Select all search results
@@ -145,4 +147,8 @@ def_key "I"
 def_key "L"
     dummy
 def_key "F"
+    dummy
+def_key "4"
+    dummy
+def_key "6"
     dummy

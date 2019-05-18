@@ -6,12 +6,23 @@ clock_display_seconds = "yes"
 cyclic_scrolling = "no"
 color1 = 255
 color2 = 250
+
+# Deprecated and replaced:
 main_window_highlight_color = 255
+#current_item_prefix = "$(255)$r"
+#current_item_suffix = "$/r$(end)"
+
 window_border_color = 39
 active_window_border = 45
 song_window_title_format = ncmpcpp d-.-b %a - %t
-screen_switcher_mode = playlist,search_engine,media_library,playlist_editor
+#screen_switcher_mode = playlist,search_engine,media_library,playlist_editor
+screen_switcher_mode = playlist,search_engine,playlist_editor
+
+# Deprecated and replaced:
 active_column_color = 32
+#current_item_inactive_column_prefix = "$(32)$r"
+#current_item_inactive_column_suffix = "$/r$(end)
+
 display_bitrate = "yes"
 empty_tag_color = "magenta"
 empty_tag_marker = "None"
@@ -37,10 +48,12 @@ main_window_color = 248
 progressbar_elapsed_color = white
 regular_expressions = extended
 search_engine_display_mode = "columns"
-song_columns_list_format = "(4f)[252]{P} (7f)[green]{l} (25)[cyan]{a|p|A|c} (40)[yellow]{t|f} (30)[red]{b}"
+#song_columns_list_format = "(4f)[252]{P} (7f)[green]{l} (25)[cyan]{a|p|A|c} | (40)[yellow]{t|f} (30)[red]{b}"
+song_columns_list_format = (4f)[252]{P} (20)[]{a|p|A|c:Artist} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 user_interface = "alternative"
-visualizer_color = "248 37 44 45 39 38 31 "
-visualizer_output_name = "FIFO - Visualizer"
+# Broken qUcyy
+#visualizer_color = "248 37 44 45 39 38 31"
+visualizer_output_name = "FIFO"
 visualizer_fifo_path = "/home/sl/.mpd/mpd.fifo"
 visualizer_in_stereo = yes
 visualizer_sync_interval = 30

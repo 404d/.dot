@@ -18,7 +18,7 @@ if [[ "$2" == "-s" ]]; then
     d=""
 fi
 if [[ $U == 's' ]]; then
-    escrotum -s -e "beep -l 10 && ablaze -s$P \$f && beep -f 400 -l 100 -n -f 500 -l 100 && ((feh --title i3-screenshot \$f &) && sleep 1 && pkill feh) && mv \$f $SCREENSHOT_DIR"
+    escrotum -s -e "beep -l 10 && ablaze -s$P \$f && beep -f 400 -l 100 -n -f 500 -l 100 && ((feh --title i3-screenshot \$f &) ) && mv \$f $SCREENSHOT_DIR"
 else
     scrot -b$U -e "beep -l 10 && ablaze -s$P \$f && beep -f 400 -l 100 -n -f 500 -l 100 && ((feh --title i3-screenshot$t \$f &) && sleep 1$d && pkill feh) && mv \$f $SCREENSHOT_DIR" -q 100
 fi

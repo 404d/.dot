@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+from datetime import datetime
+import json
+import os
+import sys
+import subprocess
+import traceback
+import time
+
+#import magic
+
+IS_DRYRUN = "DRY_RUN" in os.environ
+
+journal_path = "~/.mediakit/journals/extfix/"
+
+if IS_DRYRUN:
+    journal_path = "/tmp/mediakit/extfix/"
+
+
+def prepare_journal():
+    path = os.path.expanduser(journal_path)
+
+    folder_path = []
+    for folder in path.split("/"):
+        folder_path.append(folder)
+
+        tmp_path = "/" + os.path.join(*folder_path)
+        # Skip the root
+        if not tmp_path:
+            continue
+        # Create non-existing paths
+        if not os.path.exists(tmp_path):
+            os.mkdir(tmp_path)
+        # Error if it's not a dir
+        elif not os.path.isdir(tmp_path):
+            raise RuntimeError("Unable to create journal: %r is not a "
+                               "directory." % tmp_path)
+
+
+def write_journal_entry(journal, data):
+    with open(journal, "a+") as fh:
+        fh.write(json.dumps(data) + "\n")
+
+
+def init_journal(input_):
+    filename = datetime.now().strftime("%Y-%m-%d-%H-%M_") + str(time.time())
+    filename += ".json"
+
+    path = os.path.join(os.path.expanduser(journal_path), filename)
+    header = {
+        "timestamp": time.time(),
+        "script": "extfix",
+        "workdir": os.getcwd(),
+        "input": input_,
+        "dryrun": IS_DRYRUN,
+    }
+
+    write_journal_entry(path, header)
+
+    return path
+
+
+mime_mapping = {
+    "text/plain": "txt",
+
+    "application/x-rar": "rar",
+
+    "audio/flac": "flac",
+
+    "video/mp4": "mp4",
+    "video/x-msvideo": "avi",
+    "video/x-matroska": "mkv",
+}
+
+
+def get_ext(filename):
+    result = subprocess.check_output(["file", "-b", "--mime-type", filename])
+    result = result.decode("utf-8").strip()
+
+    if result in mime_mapping:
+        return mime_mapping[result]
+
+    if result.startswith("image/"):
+        return result.split("/")[-1]
+
+    # fail safe; don't rename if not explicitly told to do it for this file
+    print("Unknown MIME %r for %r" % (result, filename))
+    return None
+
+
+def fix_file(txid, filename, journal):
+    if not os.path.isfile(filename):
+        return
+
+    if os.path.islink(filename):
+        return
+
+    ext = get_ext(filename)
+    if not ext:
+        return
+
+    target = ".".join(filename.split(".")[:-1] + [ext])
+
+    if target == filename:
+        return
+
+    write_journal_entry(journal, {
+        "tx": txid,
+        "type": "action",
+        "source": filename,
+        "target": target,
+    })
+
+    try:
+        if not IS_DRYRUN:
+            os.rename(filename, target)
+
+    except Exception as e:
+        success = False
+        traceback.print_exc()
+
+        cleanup_needed = os.path.exists(target)
+        source_intact = os.path.exists(filename)
+
+        write_journal_entry(journal, {
+            "tx": txid,
+            "type": "exception",
+            "traceback": traceback.format_exc(),
+            "clean": not cleanup_needed,
+            "intact": source_intact,
+        })
+
+    else:
+        success = True
+
+    finally:
+        if not IS_DRYRUN:
+            write_journal_entry(journal, {
+                "tx": txid,
+                "type": "result",
+                "success": success
+            })
+
+
+if __name__ == "__main__":
+    prepare_journal()
+
+    input_ = sys.argv[1:]
+    journal = init_journal(input_)
+
+    txid = 0
+    for filename in input_:
+        fix_file(txid, filename, journal)
+        txid += 1
+
+    if IS_DRYRUN:
+        with open(journal) as fh:
+            print(fh.read())
+
+        os.unlink(journal)

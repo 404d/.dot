@@ -1,8 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 pid=$(pgrep -u sl i3 | head -n 1)
-pgrep i3lock && echo "Detected i3lock, bailing" && exit
 export DBUS_SESSION_BUS_ADDRESS="$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$pid/environ | sed 's/DBUS_SESSION_BUS_ADDRESS=//' )"
 export DISPLAY="$(grep -z DISPLAY /proc/$pid/environ | sed 's/DISPLAY=//' )"
-cd $HOME/dev/Groundbreaker
-source bin/activate
-python -m groundbreaker
+
+echo -n "$@" | xclip -selection c

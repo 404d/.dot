@@ -1,0 +1,21 @@
+#!/bin/bash
+typeset -A devices
+#devices["/devices/pci0000:00/0000:00:14.0/usb2/2-13/2-13:1.0"]="090-usb-cardio.xml"
+i=0
+while read -r a b event devpath c; do
+    read -r a b event devpath c
+    dev=${devices[$devpath]}
+    if [[ x$dev == x && x$dev != x$devpath ]]; then
+        echo "Unknown device $devpath, ignoring"
+    else
+        dev=$HOME/.dot/kvm/$dev
+
+        echo $event event for $dev
+        if [[ $event == remove ]]; then
+            virsh detach-device cthulhu $dev
+        elif [[ $event == add ]]; then
+            sleep 3
+            virsh attach-device cthulhu $dev
+        fi
+    fi
+done < <(stdbuf -o L udevadm monitor --udev -s usb)
