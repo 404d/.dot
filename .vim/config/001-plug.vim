@@ -14,7 +14,7 @@ set rtp+=$HOME/.vim/autoload/plug.vim
 call plug#begin('~/.vim/bundle')
 Plug 'junegunn/vim-plug'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdtree'
 "Plug 'scrooloose/syntastic'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -36,7 +36,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'zhaocai/GoldenView.Vim'
 "Plug 'jceb/vim-orgmode'
 "Plug 'chrisbra/SudoEdit.vim'
-if has("nvim")
+if has("nvim") || !has("python3")
     Plug 'vim-airline/vim-airline'
 endif
 if has("gui_running")
