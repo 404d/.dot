@@ -74,7 +74,7 @@ set showbreak=↳\                " shown at the start of a wrapped line
 
 
 " gui stuff
-set ttymouse=xterm2             " force mouse support for screen
+"set ttymouse=xterm2             " force mouse support for screen
 set mouse=a                     " terminal mouse when possible
 set guifont=Source\ Code\ Pro\ 9
                                 " nice fixedwidth font
